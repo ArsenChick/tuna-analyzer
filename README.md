@@ -1,2 +1,2 @@
 # tuna-analyzer
-Web application for analyzing auido files
+Web application for analyzing audio files
