@@ -81,6 +81,10 @@ instance/
 # Sphinx documentation
 docs/_build/
 
+# Doxygen
+docs/html
+docs/latex
+
 # PyBuilder
 .pybuilder/
 target/
@@ -252,3 +256,6 @@ thumb
 sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask,react
+
+# vscode
+.vscode/
