@@ -82,8 +82,8 @@ instance/
 docs/_build/
 
 # Doxygen
-docs/html
-docs/latex
+backend/docs/html
+backend/docs/latex
 
 # PyBuilder
 .pybuilder/

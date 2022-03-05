@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Войти</h1>
+<p>Нет аккаунта? <a href="{{ url_for('auth.signup') }}">Создать аккаунт</a></p>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for m in messages %}
+    <li>{{ m }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<form method="post" action="{{ url_for('auth.login') }}">
+    <label for="username">
+        Имя пользователя
+        <input type="text" id="username" name="username" placeholder="Имя пользователя" required>
+    </label>
+
+    <label for="password">
+        Пароль
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+    </label>
+
+    <fieldset>
+        <label for="remember">
+            Запомнить меня
+            <input type="checkbox" id="remember" name="remember" role="switch">
+        </label>
+    </fieldset>
+
+    <button type="submit">Войти</button>
+</form>
+{% endblock %}

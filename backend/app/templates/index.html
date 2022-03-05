@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>
+    Tuna
+</h1>
+<h2>
+    Запустить анализ
+</h2>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for m in messages %}
+    <li>{{ m }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<!-- <a href="{{ url_for('files.upload_file') }}">Загрузить файл</a> -->
+<form method="post" action="{{ url_for('files.upload_file') }}">
+    <label for="file">Выбрать файл
+        <input type="file" id="file" name="file" required>
+    </label>
+
+    <fieldset>
+        <label for="save">
+            Сохранить файл
+            <input type="checkbox" id="save" name="save" role="switch">
+        </label>
+    </fieldset>
+
+    <button type="submit">Загрузить</button>
+</form>
+{% endblock %}
