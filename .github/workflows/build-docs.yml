@@ -24,11 +24,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: cd docs
+        run: cd ./docs
 
       - name: Doxygenize
         uses: langroodi/doxygenize@v1.6
         with:
-          working-directory: ./docs
           # Doxygen configuration file path
           doxygenconf: ./Doxyfile # default is ./Doxyfile
           # Generated HTML documents output folder
