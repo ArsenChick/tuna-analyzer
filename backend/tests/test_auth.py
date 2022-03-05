@@ -1,4 +1,3 @@
-from pydoc import cli
 from flask import url_for
 
 test_username = 'test_user'
