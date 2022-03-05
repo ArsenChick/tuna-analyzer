@@ -12,24 +12,24 @@ from . import db
 from .models import User
 
 ## "Чертёж" Flask
-file_manager = Blueprint('files', __name__)
+data_manager = Blueprint('data', __name__)
 
-@file_manager.route('/save_results', methods=['POST'])
+@data_manager.route('/save_results', methods=['POST'])
 @jwt_required()
 def save_results():
     return {"msg": "test"}
 
-@file_manager.route('/get_saves', methods=['GET'])
+@data_manager.route('/get_saves', methods=['GET'])
 @jwt_required()
 def get_saves_ids():
     return {"msg": "test"}
 
-@file_manager.route('/get_files', methods=['GET'])
+@data_manager.route('/get_files', methods=['GET'])
 @jwt_required()
 def get_file():
     return {"msg": "test"}
 
-@file_manager.route('/get_result', methods=['GET'])
+@data_manager.route('/get_result', methods=['GET'])
 @jwt_required()
 def get_result():
     return {"msg": "test"}
