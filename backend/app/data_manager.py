@@ -24,7 +24,7 @@ def save_results():
 def get_saves_ids():
     return {"msg": "test"}
 
-@data_manager.route('/get_files', methods=['GET'])
+@data_manager.route('/get_file', methods=['GET'])
 @jwt_required()
 def get_file():
     return {"msg": "test"}

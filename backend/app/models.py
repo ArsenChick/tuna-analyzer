@@ -13,8 +13,8 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True)
     ## Хэш пароля пользователя.
     password = db.Column(db.String(100))
-    
-    
+
+
 ## Модель тональностей
 #
 # Определяет представление тональностей в БД
@@ -24,7 +24,7 @@ class Tone(db.Model):
     ## Название тональности
     tone = db.Column(db.String(100), unique=True)
 
-    
+
 ## Модель результатов анализа
 #
 # Определяет представление результатов анализа в БД
