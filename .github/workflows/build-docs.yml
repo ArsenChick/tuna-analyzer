@@ -24,14 +24,17 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      
+      - name: cd docs
+        run: cd ./docs
 
       - name: Doxygenize
         uses: langroodi/doxygenize@v1.6
         with:
           # Doxygen configuration file path
-          doxygenconf: ./docs/Doxyfile # default is ./Doxyfile
+          doxygenconf: ./Doxyfile # default is ./Doxyfile
           # Generated HTML documents output folder
-          htmloutput: ./docs # default is ./docs/
+          htmloutput: ./docs/ # default is ./docs/
           # GitHub Pages branch name
           ghpagesbranch: gh-pages # default is gh-pages
           # GitHub Pages directory path
