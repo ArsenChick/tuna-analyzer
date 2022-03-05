@@ -52,7 +52,7 @@ def create_app(config='app.config.DefaultConfig'):
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from .file_manager import file_manager as fm_blueprint
+    from .data_manager import file_manager as fm_blueprint
     app.register_blueprint(fm_blueprint)
 
     # Создание таблиц, если они не существует
