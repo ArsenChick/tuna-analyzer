@@ -6,3 +6,5 @@
 [![Build docs](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-docs.yml/badge.svg)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-docs.yml)
 
 Web application for analyzing audio files
+
+[Tuna Docs](https://arsenchick.github.io/tuna-analyzer/)
