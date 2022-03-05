@@ -1,3 +1,4 @@
+from pydoc import cli
 from flask import url_for
 
 test_username = 'test_user'
@@ -14,3 +15,16 @@ def cut_endpoint(location: str):
 ## Пример тест
 def test_demo(client):
     assert 1 == 1
+
+def test_signup_post(client):
+    response = client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+
+    assert response.status_code == 200
+    print(response.json.keys())

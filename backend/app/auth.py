@@ -18,7 +18,7 @@ auth = Blueprint('auth', __name__)
 #  Обрабатывает форму для входа.
 #  Метод POST.
 @auth.route('/login', methods=['POST'])
-def login_post():
+def login():
     username = request.form.get('username')
     password = request.form.get('password')
     remember = True if request.form.get('remember') else False
@@ -37,7 +37,7 @@ def login_post():
 #  Обрабатывает форму для регистрации.
 #  Метод POST.
 @auth.route('/signup', methods=['POST'])
-def signup_post():
+def signup():
     username = request.form.get('username')
     password = request.form.get('password')
     password_confirm = request.form.get('password_confirm')
