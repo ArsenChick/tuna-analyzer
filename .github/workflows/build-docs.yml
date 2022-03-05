@@ -38,3 +38,9 @@ jobs:
           ghpagesdir: ./ # default is ./
           # Toggle dark mode CSS
           darkmode: false # optional
+      - name: Copy README
+        uses: planetoftheweb/copy-to-branches@v1
+        env:
+          files: README.md
+          branches: gh-pages
+          key: main
