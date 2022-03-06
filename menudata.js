@@ -24,6 +24,7 @@
 */
 var menudata={children:[
 {text:"Титульная страница",url:"index.html"},
+{text:"Описания",url:"pages.html"},
 {text:"Пакеты",url:"namespaces.html",children:[
 {text:"Пакеты",url:"namespaces.html"},
 {text:"Функции с областью видимости пакета",url:"namespacemembers.html",children:[

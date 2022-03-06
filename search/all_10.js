@@ -20,6 +20,8 @@ var searchData=
   ['test_5fusername_17',['test_username',['../namespacetest__auth.html#aaaaeab0de11120f4a11b15ca9ad7b97b',1,'test_auth']]],
   ['testing_18',['TESTING',['../classapp_1_1config_1_1Test.html#a4323e2f873a28952527e4ad226bf8e39',1,'app.config.Test.TESTING()'],['../classapp_1_1config_1_1DefaultConfig.html#a4323e2f873a28952527e4ad226bf8e39',1,'app.config.DefaultConfig.TESTING()']]],
   ['tone_19',['Tone',['../classapp_1_1models_1_1Tone.html',1,'app::models']]],
-  ['tone_20',['tone',['../classapp_1_1models_1_1Tone.html#aeb761eda34d47c3e64ca804875fd919f',1,'app.models.Tone.tone()'],['../classapp_1_1models_1_1Result.html#aeb761eda34d47c3e64ca804875fd919f',1,'app.models.Result.tone()']]],
-  ['tuna_20backend_21',['Tuna backend',['../index.html',1,'']]]
+  ['tone_20',['tone',['../classapp_1_1models_1_1Result.html#aeb761eda34d47c3e64ca804875fd919f',1,'app.models.Result.tone()'],['../classapp_1_1models_1_1Tone.html#aeb761eda34d47c3e64ca804875fd919f',1,'app.models.Tone.tone()']]],
+  ['tuna_20analyzer_21',['Tuna Analyzer',['../index.html',1,'']]],
+  ['tuna_20backend_22',['Tuna backend',['../md_backend_README.html',1,'']]],
+  ['tuna_20frontend_23',['Tuna frontend',['../md_frontend_README.html',1,'']]]
 ];
