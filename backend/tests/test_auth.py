@@ -15,7 +15,7 @@ def cut_endpoint(location: str):
 def test_signup_post(client):
     response = client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': test_password
@@ -38,7 +38,7 @@ def test_signup_post_empty(client):
 def test_signup_post_username_already_exists(client):
     client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': test_password
@@ -46,7 +46,7 @@ def test_signup_post_username_already_exists(client):
     )
     response = client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': 'test_password1',
             'password_confirm': 'test_password1'
@@ -59,7 +59,7 @@ def test_signup_post_username_already_exists(client):
 def test_signup_post_wrong_confirm(client):
     response = client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': 'wrong_password'
@@ -73,7 +73,7 @@ def test_signup_post_wrong_confirm(client):
 def test_login_post(client):
     client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': test_password
@@ -81,7 +81,7 @@ def test_login_post(client):
     )
     response = client.post(
         url_for('auth.login'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
         }
@@ -105,7 +105,7 @@ def test_login_post_empty(client):
 def test_login_post_wrong_username(client):
     client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': test_password
@@ -113,7 +113,7 @@ def test_login_post_wrong_username(client):
     )
     response = client.post(
         url_for('auth.login'),
-        data={
+        json={
             'username': 'wrong_username',
             'password': test_password,
         }
@@ -125,7 +125,7 @@ def test_login_post_wrong_username(client):
 def test_login_post_wrong_password(client):
     client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
             'password_confirm': test_password
@@ -134,7 +134,7 @@ def test_login_post_wrong_password(client):
 
     response = client.post(
         url_for('auth.login'),
-        data={
+        json={
             'username': test_username,
             'password': 'wrong_password',
         }
@@ -147,7 +147,7 @@ def test_login_post_no_such_user(client):
 
     response = client.post(
         url_for('auth.login'),
-        data={
+        json={
             'username': test_username,
             'password': test_password,
         }

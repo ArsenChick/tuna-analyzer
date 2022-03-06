@@ -10,13 +10,14 @@ def test_mp3_file(client):
 
     response = client.post(
         url_for('auth.signup'),
-        data={
+        json={
             'username': 'user',
             'password': 'password',
             'password_confirm': 'password'
         }
     )
 
+    assert response.status_code == 200
     token = response.json['access_token']
 
     response = client.post(
