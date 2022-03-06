@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tuna: Документация Tuna API</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tuna
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div><div class="header">
+  <div class="headertitle"><div class="title">Документация Tuna API </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+Авторизация пользователя</h1>
+<p >Методы:</p>
+<ul>
+<li><code>/api/login</code></li>
+<li><code>/api/signup</code></li>
+<li><code>/api/logout</code></li>
+</ul>
+<h2><a class="anchor" id="autotoc_md2"></a>
+/api/login</h2>
+<p >Методы: POST</p>
+<p >Тело запроса - JSON вида:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;username&quot;: &quot;имя пользователя&quot;,   // string</div>
+<div class="line">    &quot;password&quot;: &quot;пароль пользователя&quot; // string</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >Ответ:</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;access_token&quot;: &quot;access_token&quot; // string</div>
+<div class="line">}</div>
+</div><!-- fragment --><p ><b>access_token</b> - токен доступа, при дальнейших запросах необходимо добавлять токен в заголовок запроса <code>Authorization: Bearer access_token</code></p>
+<ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
+/api/signup</h2>
+<p >Методы: POST</p>
+<p >Тело запроса - JSON вида:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;username&quot;: &quot;имя пользователя&quot;,            // string</div>
+<div class="line">    &quot;password&quot;: &quot;пароль&quot;,                      // string</div>
+<div class="line">    &quot;password_confirm&quot;: &quot;подтверждение пароля&quot; // string</div>
+<div class="line">}</div>
+</div><!-- fragment --><p >Ответ:</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;access_token&quot;: &quot;access_token&quot; // string</div>
+<div class="line">}</div>
+</div><!-- fragment --><p ><b>access_token</b> - токен доступа, при дальнейших запросах необходимо добавлять токен в заголовок запроса <code>Authorization: Bearer access_token</code></p>
+<ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
+/api/logout</h2>
+<p >Методы: GET</p>
+<p >Аргументы: нет</p>
+<p >Ответ:</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об успехе&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md5"></a>
+Работа с результатами и файлами</h1>
+<h2><a class="anchor" id="autotoc_md6"></a>
+/api/save_results</h2>
+<p >Методы: POST Заголовки: Authorization</p>
+<p >Тело запроса - JSON вида:</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;bpm&quot;: 0,       // Темп композиции</div>
+<div class="line">    &quot;idTone&quot;: 0,    // id тональности композиции (TODO: доработать связь с тональностью)</div>
+<div class="line">    &quot;dance&quot;: 0,     // Танцевальность композиции</div>
+<div class="line">    &quot;energy&quot;: 0,    // Энергичность композиции </div>
+<div class="line">    &quot;happiness&quot;: 0, // Настроение композиции</div>
+<div class="line">    &quot;version&quot;: 0,   // Версия модели, на которой проводился анализ</div>
+<div class="line">    &quot;file&quot;: {                       // загружаемый файл</div>
+<div class="line">        &quot;filename&quot;: &quot;file.mp3&quot;,     // имя файла</div>
+<div class="line">        &quot;content&quot;: &quot;base64_content&quot; // содержимое файла</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p >Содержимое файла передаётся base64 строке <b>file[filename]</b> - имя файла <b>file[content]</b> - содержимое файла в виде base64 строки </p>
+</blockquote>
+<p>Ответ:</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об успехе&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+/api/get_saves</h2>
+<p >Методы: GET Аргументы: нет Заголовки: Authorization</p>
+<p >Ответ</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об успехе&quot;,</div>
+<div class="line">    &quot;ids&quot;: [</div>
+<div class="line">        1, 2, 3</div>
+<div class="line">    ]</div>
+<div class="line">}</div>
+</div><!-- fragment --><p ><b>ids</b> - список id загрузок принадлежащих текущему пользователю.</p>
+<ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+/api/get_file</h2>
+<p >Методы: GET Аргументы: id Заголовки: Authorization</p>
+<p >Ответ</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об успехе&quot;,</div>
+<div class="line">    &quot;file&quot;: {                       // файл</div>
+<div class="line">        &quot;filename&quot;: &quot;file.mp3&quot;,     // имя файла</div>
+<div class="line">        &quot;content&quot;: &quot;base64_content&quot; // содержимое файла</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p >Содержимое файла передаётся base64 строке <b>file[filename]</b> - имя файла <b>file[content]</b> - содержимое файла в виде base64 строки </p>
+</blockquote>
+<ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md9"></a>
+/api/get_result</h2>
+<p >Методы: GET Аргументы: id Заголовки: Authorization</p>
+<p >Ответ</p>
+<ul>
+<li>При успехе</li>
+</ul>
+<p >HTTP код - 200</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об успехе&quot;,</div>
+<div class="line">    &quot;bpm&quot;: 0,       // Темп композиции</div>
+<div class="line">    &quot;tone&quot;: &quot;tone&quot;, // Тональность композиции (string)</div>
+<div class="line">    &quot;dance&quot;: 0,     // Танцевальность композиции</div>
+<div class="line">    &quot;energy&quot;: 0,    // Энергичность композиции </div>
+<div class="line">    &quot;happiness&quot;: 0, // Настроение композиции</div>
+<div class="line">    &quot;version&quot;: 0,   // Версия модели, на которой проводился анализ,</div>
+<div class="line">    &quot;date&quot;: &quot;dtime&quot; // Дата и время обработки</div>
+<div class="line">}</div>
+</div><!-- fragment --><ul>
+<li>При ошибке</li>
+</ul>
+<p >HTTP код - соответствует спецификации HTTP</p>
+<div class="fragment"><div class="line">{</div>
+<div class="line">    &quot;msg&quot;: &quot;Сообщение об ошибке&quot;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2
+</small></address>
+</body>
+</html>
