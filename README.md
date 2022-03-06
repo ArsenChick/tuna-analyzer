@@ -8,3 +8,5 @@
 Web application for analyzing audio files
 
 [Tuna Docs](https://arsenchick.github.io/tuna-analyzer/)
+
+[Документация API](./API.md)
