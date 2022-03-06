@@ -1,10 +1,19 @@
 var searchData=
 [
-  ['test_5fdemo_0',['test_demo',['../namespacetest__auth.html#a7439a3258b3383f79dbd36c21c7dd3c1',1,'test_auth']]],
-  ['test_5fhome_1',['test_home',['../namespacetest__main.html#aadee5e60b3f5b3cd981be75df3d8e3fa',1,'test_main']]],
-  ['test_5fmp3_5ffile_2',['test_mp3_file',['../namespacetest__data__manager.html#a3951c7fb8b4db8bd02fac3a7963353e5',1,'test_data_manager']]],
-  ['test_5fresult_3',['test_result',['../namespacetest__models.html#a0b6d9485aae22095339e4d1ddc36d8c9',1,'test_models']]],
-  ['test_5fsignup_5fpost_4',['test_signup_post',['../namespacetest__auth.html#a78aa1078cfc8015c1b218091083fdad5',1,'test_auth']]],
-  ['test_5ftone_5',['test_tone',['../namespacetest__models.html#a38db045ee609e47366259bb26250ab2c',1,'test_models']]],
-  ['test_5fuser_6',['test_user',['../namespacetest__models.html#af6a177787d64a294bb79f6c4c991caae',1,'test_models']]]
+  ['test_5fhome_0',['test_home',['../namespacetest__main.html#aadee5e60b3f5b3cd981be75df3d8e3fa',1,'test_main']]],
+  ['test_5flogin_5fget_1',['test_login_get',['../namespacetest__auth.html#a65fd34c332e8b3e3790a1c9f1b46a197',1,'test_auth']]],
+  ['test_5flogin_5fpost_2',['test_login_post',['../namespacetest__auth.html#aa07d0698b061b66b97870aa86cc1f7a3',1,'test_auth']]],
+  ['test_5flogin_5fpost_5fempty_3',['test_login_post_empty',['../namespacetest__auth.html#a2d1e0bfe1cdbd73a3c7c65c454c5d196',1,'test_auth']]],
+  ['test_5flogin_5fpost_5fno_5fsuch_5fuser_4',['test_login_post_no_such_user',['../namespacetest__auth.html#a96814ed692b9936f54461de5fe156c11',1,'test_auth']]],
+  ['test_5flogin_5fpost_5fwrong_5fpassword_5',['test_login_post_wrong_password',['../namespacetest__auth.html#a133c59c83ea99800f8b454987d4c1645',1,'test_auth']]],
+  ['test_5flogin_5fpost_5fwrong_5fusername_6',['test_login_post_wrong_username',['../namespacetest__auth.html#a68e0addef585d2d9a4cd0570c919c47b',1,'test_auth']]],
+  ['test_5fmp3_5ffile_7',['test_mp3_file',['../namespacetest__data__manager.html#a3951c7fb8b4db8bd02fac3a7963353e5',1,'test_data_manager']]],
+  ['test_5fresult_8',['test_result',['../namespacetest__models.html#a0b6d9485aae22095339e4d1ddc36d8c9',1,'test_models']]],
+  ['test_5fsignup_5fget_9',['test_signup_get',['../namespacetest__auth.html#ae45a4456e8885647a66b417e4ca000b2',1,'test_auth']]],
+  ['test_5fsignup_5fpost_10',['test_signup_post',['../namespacetest__auth.html#a78aa1078cfc8015c1b218091083fdad5',1,'test_auth']]],
+  ['test_5fsignup_5fpost_5fempty_11',['test_signup_post_empty',['../namespacetest__auth.html#a3c2533fd27224147eb2c2f0923c8f39e',1,'test_auth']]],
+  ['test_5fsignup_5fpost_5fusername_5falready_5fexists_12',['test_signup_post_username_already_exists',['../namespacetest__auth.html#a75b1de96e50206759339a2c1d92be38e',1,'test_auth']]],
+  ['test_5fsignup_5fpost_5fwrong_5fconfirm_13',['test_signup_post_wrong_confirm',['../namespacetest__auth.html#a18deaf2d870df77ab22c7d33ebe95ec3',1,'test_auth']]],
+  ['test_5ftone_14',['test_tone',['../namespacetest__models.html#a38db045ee609e47366259bb26250ab2c',1,'test_models']]],
+  ['test_5fuser_15',['test_user',['../namespacetest__models.html#af6a177787d64a294bb79f6c4c991caae',1,'test_models']]]
 ];

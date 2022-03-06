@@ -28,7 +28,17 @@ var menudata={children:[
 {text:"Пакеты",url:"namespaces.html",children:[
 {text:"Пакеты",url:"namespaces.html"},
 {text:"Функции с областью видимости пакета",url:"namespacemembers.html",children:[
-{text:"Указатель",url:"namespacemembers.html"},
+{text:"Указатель",url:"namespacemembers.html",children:[
+{text:"a",url:"namespacemembers.html#index_a"},
+{text:"c",url:"namespacemembers.html#index_c"},
+{text:"d",url:"namespacemembers.html#index_d"},
+{text:"g",url:"namespacemembers.html#index_g"},
+{text:"i",url:"namespacemembers.html#index_i"},
+{text:"j",url:"namespacemembers.html#index_j"},
+{text:"l",url:"namespacemembers.html#index_l"},
+{text:"m",url:"namespacemembers.html#index_m"},
+{text:"s",url:"namespacemembers.html#index_s"},
+{text:"t",url:"namespacemembers.html#index_t"}]},
 {text:"Функции",url:"namespacemembers_func.html"},
 {text:"Переменные",url:"namespacemembers_vars.html"}]}]},
 {text:"Классы",url:"annotated.html",children:[
