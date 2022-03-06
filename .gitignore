@@ -260,3 +260,6 @@ sketch
 
 # vscode
 .vscode/
+
+# dev folder
+tuna_uploads/

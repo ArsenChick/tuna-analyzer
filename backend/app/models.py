@@ -13,8 +13,8 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True)
     ## Хэш пароля пользователя.
     password = db.Column(db.String(100))
-    
-    
+
+
 ## Модель тональностей
 #
 # Определяет представление тональностей в БД
@@ -24,7 +24,7 @@ class Tone(db.Model):
     ## Название тональности
     tone = db.Column(db.String(100), unique=True)
 
-    
+
 ## Модель результатов анализа
 #
 # Определяет представление результатов анализа в БД
@@ -50,6 +50,6 @@ class Result(db.Model):
     user = db.relationship('User', backref=db.backref('result', lazy=True))
     idUser = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     ## Путь к аудиофайлу, который анализировался
-    file = db.Column(db.String(100), unique=True)
+    file = db.Column(db.String(1024), unique=True)
     ## Флаг, который определяет удален ли пользователем результат
     isDeleted = db.Column(db.Boolean)
