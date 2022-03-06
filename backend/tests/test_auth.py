@@ -23,10 +23,8 @@ def test_signup_post(client):
     )
 
     assert response.status_code == 200
-<<<<<<< HEAD
-=======
     assert response.json.get('access_token') != None
-    
+
 def test_signup_get(client):
     response = client.get(url_for('auth.signup'))
 
@@ -96,13 +94,13 @@ def test_login_get(client):
     response = client.get(url_for('auth.login'))
 
     assert response.status_code == 405
-    
+
 def test_login_post_empty(client):
     response = client.post(url_for('auth.login'))
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
-    
+
 
 def test_login_post_wrong_username(client):
     client.post(
@@ -123,7 +121,7 @@ def test_login_post_wrong_username(client):
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
-    
+
 def test_login_post_wrong_password(client):
     client.post(
         url_for('auth.signup'),
@@ -133,7 +131,7 @@ def test_login_post_wrong_password(client):
             'password_confirm': test_password
         }
     )
-    
+
     response = client.post(
         url_for('auth.login'),
         data={
@@ -144,7 +142,7 @@ def test_login_post_wrong_password(client):
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
-    
+
 def test_login_post_no_such_user(client):
 
     response = client.post(
@@ -157,4 +155,3 @@ def test_login_post_no_such_user(client):
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
->>>>>>> 58070cc5b3011bb20630042b13c2ee276ab68975
