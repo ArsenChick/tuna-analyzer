@@ -52,3 +52,7 @@ class Test(DefaultConfig):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     ## Директория для загрузки файлов
     UPLOAD_FOLDER = tempfile.mkdtemp(prefix="tuna_")
+    ## Время жизни JWT токена
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=60)
+    ## Время до обновления токена
+    REFRESH_DELTA = timedelta(seconds=1)
