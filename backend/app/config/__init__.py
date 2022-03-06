@@ -14,6 +14,8 @@ class DefaultConfig(object):
     UPLOAD_FOLDER = "../tuna_uploads"
     ## Время жизни JWT токена
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=1)
+    ## Время до обновления токена
+    REFRESH_DELTA = timedelta(minutes=30)
 
 ## Продакшн конфиг приложения
 #

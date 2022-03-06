@@ -32,7 +32,9 @@ def create_app(config='app.config.DefaultConfig'):
         try:
             exp_timestamp = get_jwt()["exp"]
             now = datetime.now(timezone.utc)
-            target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+            target_timestamp = datetime.timestamp(
+                now + app.config["REFRESH_DELTA"]
+            )
 
             if target_timestamp > exp_timestamp:
                 access_token = create_access_token(identity=get_jwt_identity())
