@@ -11,9 +11,6 @@ def cut_endpoint(location: str):
     location_endpoint = location_endpoint.split('?')[0]
     return location_endpoint
 
-## Пример тест
-def test_demo(client):
-    assert 1 == 1
 
 def test_signup_post(client):
     response = client.post(
@@ -26,4 +23,135 @@ def test_signup_post(client):
     )
 
     assert response.status_code == 200
-    print(response.json.keys())
+    assert response.json.get('access_token') != None
+    
+def test_signup_get(client):
+    response = client.get(url_for('auth.signup'))
+
+    assert response.status_code == 405
+
+def test_signup_post_empty(client):
+    response = client.post(url_for('auth.signup'))
+
+    assert response.status_code == 400
+
+def test_signup_post_username_already_exists(client):
+    client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+    response = client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': 'test_password1',
+            'password_confirm': 'test_password1'
+        }
+    )
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+
+def test_signup_post_wrong_confirm(client):
+    response = client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': 'wrong_password'
+        }
+    )
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+
+
+def test_login_post(client):
+    client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+    response = client.post(
+        url_for('auth.login'),
+        data={
+            'username': test_username,
+            'password': test_password,
+        }
+    )
+
+    assert response.status_code == 200
+    assert response.json.get('access_token') != None
+
+def test_login_get(client):
+    response = client.get(url_for('auth.login'))
+
+    assert response.status_code == 405
+    
+def test_login_post_empty(client):
+    response = client.post(url_for('auth.login'))
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+    
+
+def test_login_post_wrong_username(client):
+    client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+    response = client.post(
+        url_for('auth.login'),
+        data={
+            'username': 'wrong_username',
+            'password': test_password,
+        }
+    )
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+    
+def test_login_post_wrong_password(client):
+    client.post(
+        url_for('auth.signup'),
+        data={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+    
+    response = client.post(
+        url_for('auth.login'),
+        data={
+            'username': test_username,
+            'password': 'wrong_password',
+        }
+    )
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+    
+def test_login_post_no_such_user(client):
+
+    response = client.post(
+        url_for('auth.login'),
+        data={
+            'username': test_username,
+            'password': test_password,
+        }
+    )
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
