@@ -92,17 +92,17 @@ def save_results():
 
     return {'msg': 'Upload done'}, 200
 
-@ data_manager.route('/api/get_saves', methods=['GET'])
-@ jwt_required()
+@data_manager.route('/api/get_saves', methods=['GET'])
+@jwt_required()
 def get_saves_ids():
     return {"msg": "test"}
 
-@ data_manager.route('/api/get_file', methods=['GET'])
-@ jwt_required()
+@data_manager.route('/api/get_file', methods=['GET'])
+@jwt_required()
 def get_file():
     return {"msg": "test"}
 
-@ data_manager.route('/api/get_result', methods=['GET'])
-@ jwt_required()
+@data_manager.route('/api/get_result', methods=['GET'])
+@jwt_required()
 def get_result():
     return {"msg": "test"}

@@ -19,9 +19,17 @@ auth = Blueprint('auth', __name__)
 #  Метод POST.
 @auth.route('/api/login', methods=['POST'])
 def login():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
+    json_data: dict = request.get_json()
+
+    username = json_data.get('username', None)
+    password = json_data.get('password', None)
+    remember = True if json_data.get('remember', None) else False
+
+    if username == None:
+        return {'msg': 'Missing username'}, 422
+
+    if password == None:
+        return {'msg': 'Missing password'}, 422
 
     user: User = User.query.filter_by(username=username).first()
 
@@ -38,9 +46,20 @@ def login():
 #  Метод POST.
 @auth.route('/api/signup', methods=['POST'])
 def signup():
-    username = request.form.get('username')
-    password = request.form.get('password')
-    password_confirm = request.form.get('password_confirm')
+    json_data: dict = request.get_json()
+
+    username = json_data.get('username')
+    password = json_data.get('password')
+    password_confirm = json_data.get('password_confirm')
+
+    if username == None:
+        return {'msg': 'Missing username'}, 422
+
+    if password == None:
+        return {'msg': 'Missing password'}, 422
+
+    if password_confirm == None:
+        return {'msg': 'Missing password confirm'}, 422
 
     if password != password_confirm:
         return {'msg': 'Passwords doesn\'t match'}, 401
