@@ -26,4 +26,3 @@ def test_signup_post(client):
     )
 
     assert response.status_code == 200
-    print(response.json.keys())

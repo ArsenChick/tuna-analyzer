@@ -31,7 +31,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@data_manager.route('/save_results', methods=['POST'])
+@data_manager.route('/api/save_results', methods=['POST'])
 @jwt_required()
 def save_results():
     json_data: dict = request.get_json()
@@ -92,17 +92,17 @@ def save_results():
 
     return {'msg': 'Upload done'}, 200
 
-@ data_manager.route('/get_saves', methods=['GET'])
+@ data_manager.route('/api/get_saves', methods=['GET'])
 @ jwt_required()
 def get_saves_ids():
     return {"msg": "test"}
 
-@ data_manager.route('/get_file', methods=['GET'])
+@ data_manager.route('/api/get_file', methods=['GET'])
 @ jwt_required()
 def get_file():
     return {"msg": "test"}
 
-@ data_manager.route('/get_result', methods=['GET'])
+@ data_manager.route('/api/get_result', methods=['GET'])
 @ jwt_required()
 def get_result():
     return {"msg": "test"}

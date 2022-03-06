@@ -38,8 +38,6 @@ def test_mp3_file(client):
         }
     )
 
-    print(response.json)
-
     assert response.status_code == 200
     assert 'msg' in response.json
     assert response.json['msg'] == 'Upload done'

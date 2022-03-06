@@ -17,7 +17,7 @@ auth = Blueprint('auth', __name__)
 #
 #  Обрабатывает форму для входа.
 #  Метод POST.
-@auth.route('/login', methods=['POST'])
+@auth.route('/api/login', methods=['POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -36,7 +36,7 @@ def login():
 #
 #  Обрабатывает форму для регистрации.
 #  Метод POST.
-@auth.route('/signup', methods=['POST'])
+@auth.route('/api/signup', methods=['POST'])
 def signup():
     username = request.form.get('username')
     password = request.form.get('password')
@@ -71,7 +71,7 @@ def signup():
 #
 #  Обрабатывает запрос на выход из системы.
 #  Метод GET.
-@auth.route('/logout', methods=['GET'])
+@auth.route('/api/logout', methods=['GET'])
 def logout():
     response = jsonify({"msg": "Logout ok"})
     unset_jwt_cookies(response)
