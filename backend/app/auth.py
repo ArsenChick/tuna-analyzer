@@ -21,6 +21,9 @@ auth = Blueprint('auth', __name__)
 def login():
     json_data: dict = request.get_json()
 
+    if json_data == None:
+        return {'msg': 'Missing JSON'}, 401
+
     username = json_data.get('username', None)
     password = json_data.get('password', None)
     remember = True if json_data.get('remember', None) else False
@@ -47,6 +50,9 @@ def login():
 @auth.route('/api/signup', methods=['POST'])
 def signup():
     json_data: dict = request.get_json()
+
+    if json_data == None:
+        return {'msg': 'Missing JSON'}, 400
 
     username = json_data.get('username')
     password = json_data.get('password')
