@@ -24,29 +24,6 @@ def create_app(config='app.config.DefaultConfig'):
     db.init_app(app)
     jwt.init_app(app)
 
-    ## Обновление токена доступа
-    #
-    #  Обновляет токен доступа, если его время жизни почти истекло, а пользователь работает в системе
-    @app.after_request
-    def refresh_expiring_jwts(response):
-        try:
-            exp_timestamp = get_jwt()["exp"]
-            now = datetime.now(timezone.utc)
-            target_timestamp = datetime.timestamp(
-                now + app.config["REFRESH_DELTA"])
-
-            if target_timestamp > exp_timestamp:
-                access_token = create_access_token(identity=get_jwt_identity())
-                data = response.get_json()
-
-                if type(data) is dict:
-                    data["access_token"] = access_token
-                    response.data = json.dumps(data)
-            return response
-        except (RuntimeError, KeyError):
-            # Нет валидного JWT токена, не модифицируем запрос
-            return response
-
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
