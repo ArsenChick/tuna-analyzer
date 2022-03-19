@@ -31,9 +31,42 @@ def test_signup_get(client):
     assert response.status_code == 405
 
 def test_signup_post_empty(client):
-    response = client.post(url_for('auth.signup'))
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': None,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
 
-    assert response.status_code == 400
+    assert response.status_code == 422
+    assert response.json.get('msg') != None
+    
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': test_username,
+            'password': None,
+            'password_confirm': test_password
+        }
+    )
+
+    assert response.status_code == 422
+    assert response.json.get('msg') != None
+    
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': None
+        }
+    )
+
+    assert response.status_code == 422
+    assert response.json.get('msg') != None
+    
 
 def test_signup_post_username_already_exists(client):
     client.post(
@@ -96,10 +129,28 @@ def test_login_get(client):
     assert response.status_code == 405
 
 def test_login_post_empty(client):
-    response = client.post(url_for('auth.login'))
+    response = client.post(
+        url_for('auth.login'),
+        json={
+            'username': None,
+            'password': test_password,
+        }
+    )
 
-    assert response.status_code == 401
+    assert response.status_code == 422
     assert response.json.get('msg') != None
+    
+    response = client.post(
+        url_for('auth.login'),
+        json={
+            'username': test_username,
+            'password': None,
+        }
+    )
+    
+    assert response.status_code == 422
+    assert response.json.get('msg') != None
+
 
 
 def test_login_post_wrong_username(client):
@@ -154,4 +205,24 @@ def test_login_post_no_such_user(client):
     )
 
     assert response.status_code == 401
+    assert response.json.get('msg') != None
+    
+def test_logout(client):
+    client.post(
+        url_for('auth.signup'),
+        json={
+            'username': test_username,
+            'password': test_password,
+            'password_confirm': test_password
+        }
+    )
+    response = client.post(
+        url_for('auth.login'),
+        json={
+            'username': test_username,
+            'password': test_password,
+        }
+    )
+    response = client.get(url_for('auth.logout'))
+
     assert response.json.get('msg') != None
