@@ -31,6 +31,11 @@ def test_signup_get(client):
     assert response.status_code == 405
 
 def test_signup_post_empty(client):
+    response = client.post(url_for('auth.signup'))
+
+    assert response.status_code == 400
+    assert response.json.get('msg') != None
+    
     response = client.post(
         url_for('auth.signup'),
         json={
@@ -104,6 +109,11 @@ def test_signup_post_wrong_confirm(client):
 
 
 def test_login_post(client):
+    response = client.post(url_for('auth.login'))
+
+    assert response.status_code == 401
+    assert response.json.get('msg') != None
+    
     client.post(
         url_for('auth.signup'),
         json={
