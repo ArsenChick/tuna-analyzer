@@ -7,7 +7,7 @@
 from fileinput import filename
 from unittest import result
 from urllib import response
-from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app
+from flask import Blueprint, flash, redirect, render_template, request, url_for, current_app, jsonify
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import jwt_required, get_jwt_identity
@@ -25,6 +25,7 @@ data_manager = Blueprint('data', __name__)
 
 ## Разрешенные расширения файлов
 ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg', 'flac'}
+
 
 ## Проверяет расширение файла
 def allowed_file(filename):
@@ -92,17 +93,59 @@ def save_results():
 
     return {'msg': 'Upload done'}, 200
 
+
 @data_manager.route('/api/get_saves', methods=['GET'])
 @jwt_required()
 def get_saves_ids():
-    return {"msg": "test"}
+    current_username: str = get_jwt_identity()
+    user: User = User.query.filter_by(username=current_username).first()
+    current_idUser = user.id
+
+    results = Result.query.filter_by(idUser=current_idUser).with_entities(Result.id).all()
+    ids = [id[0] for id in results]
+    return {
+               "msg": "Request done",
+               "ids": ids
+           }, 200
+
 
 @data_manager.route('/api/get_file', methods=['GET'])
 @jwt_required()
 def get_file():
-    return {"msg": "test"}
+    id_res = request.args.get("id")
+    if id_res == None:
+        return {'msg': 'No id'}, 422
+    result: Result = Result.query.filter_by(id=id_res).first()
+    file_path = result.file
+    f = open(file_path, 'rb')
+    file_content = base64.b64encode(f.read()).decode('utf-8')
+    print(file_content)
+    f.close()
+    file_name = os.path.basename(result.file)
+    return {
+               "msg": "Request done",
+               "file": {
+                   "filename": file_name,
+                   "content": file_content
+               }
+           }, 200
+
 
 @data_manager.route('/api/get_result', methods=['GET'])
 @jwt_required()
 def get_result():
-    return {"msg": "test"}
+    idRes = request.args.get("id", None)
+    if idRes == None:
+        return {'msg': 'No id'}, 422
+    result: Result = Result.query.filter_by(id=idRes).first()
+    #tone: Tone = Tone.query.filter_by(id=result.idTone).first()
+    return {
+               "msg": "Request done",
+               "bpm": result.bpm,
+               "tone": result.idTone,
+               "dance": result.dance,
+               "energy": result.energy,
+               "happiness": result.happiness,
+               "version": result.version,
+               "date": result.date
+           }, 200
