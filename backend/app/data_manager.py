@@ -116,6 +116,8 @@ def get_file():
     if id_res == None:
         return {'msg': 'No id'}, 422
     result: Result = Result.query.filter_by(id=id_res).first()
+    if result == None:
+        return {'msg': 'No such entry'}, 404
     file_path = result.file
     f = open(file_path, 'rb')
     file_content = base64.b64encode(f.read()).decode('utf-8')
@@ -138,9 +140,11 @@ def get_result():
     if idRes == None:
         return {'msg': 'No id'}, 422
     result: Result = Result.query.filter_by(id=idRes).first()
+    if result == None:
+        return {'msg': 'No such entry'}, 404
     #tone: Tone = Tone.query.filter_by(id=result.idTone).first()
     return {
-               "msg": "Request done",
+               "msg": "Сообщение об успехе",
                "bpm": result.bpm,
                "tone": result.idTone,
                "dance": result.dance,
