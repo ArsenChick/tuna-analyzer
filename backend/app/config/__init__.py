@@ -55,6 +55,6 @@ class Test(DefaultConfig):
     ## Директория для загрузки файлов
     UPLOAD_FOLDER = tempfile.mkdtemp(prefix="tuna_")
     ## Время жизни JWT токена
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=60)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=5)
     ## Время до обновления токена
-    REFRESH_DELTA = timedelta(seconds=1)
+    REFRESH_DELTA = timedelta(minutes=4, seconds=58)
