@@ -39,29 +39,25 @@ def create_app(config='app.config.DefaultConfig'):
     @app.after_request
     @jwt_required(optional=True)
     def refresh_expiring_jwts(response):
-        try:
-            maybe_jwt: dict = get_jwt()
+        maybe_jwt: dict = get_jwt()
 
-            # Нет токена, ничего не делаем      
-            if not maybe_jwt:
-                return response
-
-            exp_datetime = maybe_jwt["exp"]
-            now = datetime.now(timezone.utc)
-            target_timestamp = datetime.timestamp(now + app.config["REFRESH_DELTA"])
-
-            if target_timestamp > exp_datetime:
-                access_token = create_access_token(identity=get_jwt_identity())
-                print(response.json)
-                current_json = response.get_json()
-                current_json["new_access_token"] = access_token
-                response.data = json.dumps(current_json)
-                print(response.json)
-
+        # Нет токена, ничего не делаем      
+        if not maybe_jwt:
             return response
-        except Exception as err:
-            print(err)
-            return response
+
+        exp_datetime = maybe_jwt["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + app.config["REFRESH_DELTA"])
+
+        if target_timestamp > exp_datetime:
+            access_token = create_access_token(identity=get_jwt_identity())
+            print(response.json)
+            current_json = response.get_json()
+            current_json["new_access_token"] = access_token
+            response.data = json.dumps(current_json)
+            print(response.json)
+
+        return response
 
     # Создание таблиц, если они не существует
     db.create_all(app=app)
