@@ -1,12 +1,12 @@
 FROM python:3.10-buster
 
-WORKDIR /src
+WORKDIR /tuna
 
 RUN python -m pip install --upgrade pip
 RUN pip install gunicorn
 
-COPY requirements.txt .
+COPY backend/requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY run_prod.sh .
-COPY app ./app/
+COPY backend/run_prod.sh .
+COPY backend/app ./app/
