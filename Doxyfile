@@ -926,7 +926,7 @@ FILE_PATTERNS          = *.c \
                          *.dox \
                          *.py \
                          *.pyw \
-                         .js \
+                         *.js \
                          *.f90 \
                          *.f95 \
                          *.f03 \
