@@ -57,13 +57,13 @@ def test_save_results_no_json(client):
     token = response.json['access_token']
 
     response = client.post(url_for('data.save_results'),
-        headers={
-            'Authorization': "Bearer " + token
-        })
+                           headers={
+        'Authorization': "Bearer " + token
+    })
 
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 def test_save_results_no_auth(client):
     random_data = random.randbytes(1024)
     b64_data = base64.b64encode(random_data).decode()
@@ -122,7 +122,7 @@ def test_save_results_no_filename(client):
 
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 def test_save_results_no_file_content(client):
     response = client.post(
         url_for('auth.signup'),
@@ -156,7 +156,7 @@ def test_save_results_no_file_content(client):
 
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 def test_save_results_no_file(client):
 
     response = client.post(
@@ -188,7 +188,7 @@ def test_save_results_no_file(client):
 
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 def test_save_results_bad_b64(client):
     random_data = random.randbytes(1024)
     b64_data = base64.b64encode(random_data).decode()
@@ -267,13 +267,13 @@ def test_save_results_wrong_format(client):
 
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 def test_save_results_get(client):
     response = client.get(url_for('data.save_results'))
 
-    assert response.status_code == 405
-    
-    
+    assert response.status_code == 404
+
+
 def test_get_saves_ids(client):
     random_data = random.randbytes(1024)
     b64_data = base64.b64encode(random_data).decode()
@@ -311,32 +311,31 @@ def test_get_saves_ids(client):
 
     assert response.status_code == 200
     assert 'msg' in response.json
-    
+
     response = client.get(
-        url_for('data.get_saves_ids'), 
+        url_for('data.get_saves_ids'),
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 200
     assert 'msg' in response.json
     assert response.json['ids'][0] == 1
-    
-    
-    
+
+
 def test_get_saves_ids_post(client):
     response = client.post(url_for('data.get_saves_ids'))
-    
+
     assert response.status_code == 405
-    
+
 def test_get_saves_ids_no_auth(client):
 
     response = client.get(url_for('data.get_saves_ids'))
 
     assert response.status_code == 401
     assert 'msg' in response.json
-    
+
 
 def test_get_saves_ids_empty_id_list(client):
 
@@ -352,19 +351,18 @@ def test_get_saves_ids_empty_id_list(client):
     assert response.status_code == 200
     token = response.json['access_token']
 
-    
     response = client.get(
-        url_for('data.get_saves_ids'), 
+        url_for('data.get_saves_ids'),
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 200
     assert 'msg' in response.json
     assert response.json['ids'] == []
-    
-    
+
+
 def test_get_file(client):
     random_data = random.randbytes(1024)
     b64_data = base64.b64encode(random_data).decode()
@@ -403,14 +401,13 @@ def test_get_file(client):
     assert response.status_code == 200
     assert 'msg' in response.json
 
-    
     response = client.get(
-        url_for('data.get_file') + '?id=1', 
+        url_for('data.get_file') + '?id=1',
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 200
     assert 'msg' in response.json
     assert 'file' in response.json
@@ -430,17 +427,16 @@ def test_get_file_no_id(client):
     assert response.status_code == 200
     token = response.json['access_token']
 
-    
     response = client.get(
-        url_for('data.get_file'), 
+        url_for('data.get_file'),
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 
 def test_get_file_no_such_entry(client):
 
@@ -455,31 +451,30 @@ def test_get_file_no_such_entry(client):
 
     assert response.status_code == 200
     token = response.json['access_token']
-    
+
     response = client.get(
-        url_for('data.get_file') + '?id=1', 
+        url_for('data.get_file') + '?id=1',
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 404
     assert 'msg' in response.json
-    
-    
+
+
 def test_get_file_no_auth(client):
     response = client.get(url_for('data.get_file') + '?id=1')
-    
+
     assert response.status_code == 401
     assert 'msg' in response.json
-    
+
 def test_get_file_post(client):
     response = client.post(url_for('data.get_file'))
-    
+
     assert response.status_code == 405
-    
-    
-    
+
+
 def test_get_result(client):
     random_data = random.randbytes(1024)
     b64_data = base64.b64encode(random_data).decode()
@@ -518,14 +513,13 @@ def test_get_result(client):
     assert response.status_code == 200
     assert 'msg' in response.json
 
-    
     response = client.get(
-        url_for('data.get_result') + '?id=1', 
+        url_for('data.get_result') + '?id=1',
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 200
     assert 'msg' in response.json
     assert 'bpm' in response.json
@@ -545,17 +539,16 @@ def test_get_result_no_id(client):
     assert response.status_code == 200
     token = response.json['access_token']
 
-    
     response = client.get(
-        url_for('data.get_result'), 
+        url_for('data.get_result'),
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 422
     assert 'msg' in response.json
-    
+
 
 def test_get_result_no_such_entry(client):
     response = client.post(
@@ -569,25 +562,25 @@ def test_get_result_no_such_entry(client):
 
     assert response.status_code == 200
     token = response.json['access_token']
-    
+
     response = client.get(
-        url_for('data.get_result') + '?id=1', 
+        url_for('data.get_result') + '?id=1',
         headers={
             'Authorization': "Bearer " + token
         }
     )
-    
+
     assert response.status_code == 404
     assert 'msg' in response.json
-    
-    
+
+
 def test_get_result_no_auth(client):
     response = client.get(url_for('data.get_result') + '?id=1')
-    
+
     assert response.status_code == 401
     assert 'msg' in response.json
-    
+
 def test_get_result_post(client):
     response = client.post(url_for('data.get_result'))
-    
+
     assert response.status_code == 405

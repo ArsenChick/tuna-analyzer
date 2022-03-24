@@ -28,14 +28,14 @@ def test_signup_post(client):
 def test_signup_get(client):
     response = client.get(url_for('auth.signup'))
 
-    assert response.status_code == 405
+    assert response.status_code == 404
 
 def test_signup_post_empty(client):
     response = client.post(url_for('auth.signup'))
 
     assert response.status_code == 400
     assert response.json.get('msg') != None
-    
+
     response = client.post(
         url_for('auth.signup'),
         json={
@@ -47,7 +47,7 @@ def test_signup_post_empty(client):
 
     assert response.status_code == 422
     assert response.json.get('msg') != None
-    
+
     response = client.post(
         url_for('auth.signup'),
         json={
@@ -59,7 +59,7 @@ def test_signup_post_empty(client):
 
     assert response.status_code == 422
     assert response.json.get('msg') != None
-    
+
     response = client.post(
         url_for('auth.signup'),
         json={
@@ -71,7 +71,7 @@ def test_signup_post_empty(client):
 
     assert response.status_code == 422
     assert response.json.get('msg') != None
-    
+
 
 def test_signup_post_username_already_exists(client):
     client.post(
@@ -113,7 +113,7 @@ def test_login_post(client):
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
-    
+
     client.post(
         url_for('auth.signup'),
         json={
@@ -136,7 +136,7 @@ def test_login_post(client):
 def test_login_get(client):
     response = client.get(url_for('auth.login'))
 
-    assert response.status_code == 405
+    assert response.status_code == 404
 
 def test_login_post_empty(client):
     response = client.post(
@@ -149,7 +149,7 @@ def test_login_post_empty(client):
 
     assert response.status_code == 422
     assert response.json.get('msg') != None
-    
+
     response = client.post(
         url_for('auth.login'),
         json={
@@ -157,10 +157,9 @@ def test_login_post_empty(client):
             'password': None,
         }
     )
-    
+
     assert response.status_code == 422
     assert response.json.get('msg') != None
-
 
 
 def test_login_post_wrong_username(client):
@@ -216,7 +215,7 @@ def test_login_post_no_such_user(client):
 
     assert response.status_code == 401
     assert response.json.get('msg') != None
-    
+
 def test_logout(client):
     client.post(
         url_for('auth.signup'),
