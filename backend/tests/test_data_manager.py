@@ -271,7 +271,7 @@ def test_save_results_wrong_format(client):
 def test_save_results_get(client):
     response = client.get(url_for('data.save_results'))
 
-    assert response.status_code == 404
+    assert response.status_code == 200
 
 
 def test_get_saves_ids(client):

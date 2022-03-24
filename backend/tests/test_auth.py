@@ -28,7 +28,7 @@ def test_signup_post(client):
 def test_signup_get(client):
     response = client.get(url_for('auth.signup'))
 
-    assert response.status_code == 404
+    assert response.status_code == 200
 
 def test_signup_post_empty(client):
     response = client.post(url_for('auth.signup'))
@@ -136,7 +136,7 @@ def test_login_post(client):
 def test_login_get(client):
     response = client.get(url_for('auth.login'))
 
-    assert response.status_code == 404
+    assert response.status_code == 200
 
 def test_login_post_empty(client):
     response = client.post(
