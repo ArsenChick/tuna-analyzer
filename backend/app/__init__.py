@@ -1,7 +1,9 @@
 import json
 from datetime import datetime, timezone
-from flask import Flask
-from flask_jwt_extended import (JWTManager, create_access_token, get_jwt,get_jwt_identity, jwt_required)
+from flask import Flask, render_template
+from flask_jwt_extended import (
+    JWTManager, create_access_token, get_jwt, get_jwt_identity, jwt_required
+)
 from flask_sqlalchemy import SQLAlchemy
 
 ## Объект для работы с базой данных
@@ -41,13 +43,14 @@ def create_app(config='app.config.DefaultConfig'):
     def refresh_expiring_jwts(response):
         maybe_jwt: dict = get_jwt()
 
-        # Нет токена, ничего не делаем      
+        # Нет токена, ничего не делаем
         if not maybe_jwt:
             return response
 
         exp_datetime = maybe_jwt["exp"]
         now = datetime.now(timezone.utc)
-        target_timestamp = datetime.timestamp(now + app.config["REFRESH_DELTA"])
+        target_timestamp = datetime.timestamp(
+            now + app.config["REFRESH_DELTA"])
 
         if target_timestamp > exp_datetime:
             access_token = create_access_token(identity=get_jwt_identity())
@@ -58,6 +61,14 @@ def create_app(config='app.config.DefaultConfig'):
             print(response.json)
 
         return response
+
+    ## Обработка 404
+    #
+    # Отправляем индекс с Реакт приложением, т.к. роутинг на клиенте
+    @app.errorhandler(404)
+    def page_not_found(e):
+        print("!!!!!!!!!!!!!!", 404)
+        return render_template('index.html')
 
     # Создание таблиц, если они не существует
     db.create_all(app=app)
