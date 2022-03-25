@@ -34,8 +34,8 @@ jobs:
       run: pytest --cov=app -v
     - uses: actions/upload-artifact@v2
       with:
-      name: backend-coverage
-      path: ./coverage.xml
+        name: backend-coverage
+        path: ./coverage.xml
 
   js-build:
     name: Build NodeJS
