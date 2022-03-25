@@ -58,7 +58,7 @@ jobs:
   cov:
     name: Coveralls
 
-    needs: [build-python, build-js]
+    needs: [py-build, js-build]
     
     runs-on: ubuntu-latest
     
