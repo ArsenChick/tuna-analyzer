@@ -8,6 +8,7 @@
 
 ![GitHub contributors](https://img.shields.io/github/contributors/ArsenChick/tuna-analyzer?style=for-the-badge) 
 ![GitHub last commit](https://img.shields.io/github/last-commit/ArsenChick/tuna-analyzer?style=for-the-badge)
+[![GitHub issues](https://img.shields.io/github/issues/ArsenChick/tuna-analyzer?logo=github&style=for-the-badge)](https://github.com/ArsenChick/tuna-analyzer/issues)
 
 Web application for analyzing audio files
 
