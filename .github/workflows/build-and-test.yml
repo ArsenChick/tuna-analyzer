@@ -63,6 +63,7 @@ jobs:
     - name: Test with Jest
       run: npm test -- --coverage src
     - run: ls -la
+    - run: ls -la coverage
     - uses: actions/upload-artifact@v2
       with:
         name: frontend-coverage
