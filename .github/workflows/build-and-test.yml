@@ -62,6 +62,7 @@ jobs:
       run: npm run build --if-present
     - name: Test with Jest
       run: npm test -- --coverage src
+    - run: ls -la
     - uses: actions/upload-artifact@v2
       with:
         name: frontend-coverage
