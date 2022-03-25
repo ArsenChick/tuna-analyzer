@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-python:
+  buildpython:
 
     runs-on: ubuntu-latest
 
@@ -33,7 +33,8 @@ jobs:
       run: |
         pytest --cov=app -v
 
-  build-js:
+  buildjs:
+  
     runs-on: ubuntu-latest
 
     defaults:
@@ -53,7 +54,7 @@ jobs:
 
 
   cov:
-    needs: [build-python, build-js]
+    needs: [buildpython, buildjs]
     runs-on: ubuntu-latest
     - name: Coveralls
       run: |
