@@ -40,9 +40,11 @@ jobs:
 
     defaults:
       run:
-        working-directory: 'frontend'
+        working-directory: './frontend'
 
     steps:
+    - name: WHAT
+      run: ls -la
     - name: Setup NodeJS 17
       uses: actions/setup-node@v2
       with:
