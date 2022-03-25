@@ -30,8 +30,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest (Flask app)
-      run: |
-        pytest --cov=app -v
+      run: pytest --cov=app -v
 
   build-js:
 
@@ -40,7 +39,6 @@ jobs:
     defaults:
       run:
         working-directory: 'frontend'
-
     - name: Setup NodeJS 17
       uses: actions/setup-node@v2
       with:
@@ -54,9 +52,10 @@ jobs:
 
 
   cov:
-
     needs: [build-python, build-js]
+    
     runs-on: ubuntu-latest
+    
     - name: Coveralls
       run: |
         python -m pip install coveralls
