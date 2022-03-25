@@ -67,7 +67,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: frontend-coverage
-        path: coverage/coverage-final.json
+        path: frontend/coverage/coverage-final.json
 
   cov:
     name: Upload to Codecov
