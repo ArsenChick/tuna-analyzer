@@ -1,6 +1,6 @@
 # Tuna Analyzer
 
-[![Build](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-and-test.yml)
+[![Build](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-and-test.yml) [![codecov](https://codecov.io/gh/ArsenChick/tuna-analyzer/branch/main/graph/badge.svg?token=VHWBOH1JEI)](https://codecov.io/gh/ArsenChick/tuna-analyzer)
 [![Build docs](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-docs.yml/badge.svg)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-docs.yml)
 
 **Статистика коммитов**
