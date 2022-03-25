@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-python:
+  py-build:
     name: Build Python
 
     runs-on: ubuntu-latest
@@ -33,7 +33,7 @@ jobs:
     - name: Test with pytest (Flask app)
       run: pytest --cov=app -v
 
-  build-js:
+  js-build:
     name: Build NodeJS
 
     runs-on: ubuntu-latest
