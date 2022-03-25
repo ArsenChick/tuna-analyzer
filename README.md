@@ -1,8 +1,8 @@
 # Tuna Analyzer
 
-![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/ArsenChick/tuna-analyzer/Build?logo=github&style=for-the-badge)
-![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/ArsenChick/tuna-analyzer/Build%20docs?label=Docs&logo=github&style=for-the-badge)
-![Codecov](https://img.shields.io/codecov/c/github/ArsenChick/tuna-analyzer?logo=codecov&style=for-the-badge)
+[![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/ArsenChick/tuna-analyzer/Build?logo=github&style=for-the-badge)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-and-test.yml)
+[![GitHub Workflow Status (event)](https://img.shields.io/github/workflow/status/ArsenChick/tuna-analyzer/Build%20docs?label=Docs&logo=github&style=for-the-badge)](https://github.com/ArsenChick/tuna-analyzer/actions/workflows/build-docs.yml)
+[![Codecov](https://img.shields.io/codecov/c/github/ArsenChick/tuna-analyzer?logo=codecov&style=for-the-badge)](https://app.codecov.io/gh/ArsenChick/tuna-analyzer)
 
 **Статистика коммитов**
 
