@@ -1,5 +1,5 @@
 ## @package app.data_manager
-#  Управление дынными
+#  Управление данными
 #
 #  Сохранение и отправка файлов, валидация формата
 #  Сохранение и отправка результатов анализа
@@ -31,7 +31,10 @@ ALLOWED_EXTENSIONS = {'mp3', 'wav', 'ogg', 'flac'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
+## Функция сохранения результата
+#
+#  Сохраняет полученные результаты анализа и аудиофайл.
+#  Метод POST.
 @data_manager.route('/api/save_results', methods=['POST'])
 @jwt_required()
 def save_results():
@@ -94,6 +97,10 @@ def save_results():
     return {'msg': 'Upload done'}, 200
 
 
+## Функция получения информации о сохраненных результатах анализа.
+#
+#  Отправляет все идентификаторы сохраненных результатов анализов пользователя.
+#  Метод GET.
 @data_manager.route('/api/get_saves', methods=['GET'])
 @jwt_required()
 def get_saves_ids():
@@ -108,7 +115,10 @@ def get_saves_ids():
                "ids": ids
            }, 200
 
-
+## Функция получения загруженного аудиофайла.
+#
+#  Отправляет ранее сохраненный аудиофайл по его идентификатору.
+#  Метод GET.
 @data_manager.route('/api/get_file', methods=['GET'])
 @jwt_required()
 def get_file():
@@ -132,7 +142,10 @@ def get_file():
                }
            }, 200
 
-
+## Функция получения результатов анализа.
+#
+#  Отправляет ранее сохраненные результаты анализа по их идентификатору.
+#  Метод GET.
 @data_manager.route('/api/get_result', methods=['GET'])
 @jwt_required()
 def get_result():
