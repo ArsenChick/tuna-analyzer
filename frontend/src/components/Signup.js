@@ -1,3 +1,5 @@
+import '../scss/signup.scss';
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import * as Yup from "yup";

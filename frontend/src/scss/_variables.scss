@@ -1,0 +1,128 @@
+/* 
+ *  Цвета и шрифт 
+ */
+//Основное
+$bgPageColor: #ffffff;
+$textColor: #4e4e50;
+$titleColor: #afafaf;
+$smallTitleColor: #afafaf;
+// Верхняя панель
+$bigTopNavColor: #001a3b;
+$smallTopNavColor: #bfb9ff;
+$smallTopNavColorDark: #b4b0e2;
+$navButtonColor: #062649;
+$navButtonTextColor: #afafaf;
+$navPlayButtonColor: #b4b0e2;
+$smallTopNavTextColor: #f7f7f7;
+$selectedElementColor: #ff9999;
+$sliderColor: #e5e5e5;
+$sliderPointColor: #f7f7f7;
+//История анализа
+$textSelectedColor: #9593d8;
+$signColor: #afafaf;
+$recordColor: #7fafe5;
+$recordTextColor: #856285;
+$recordWaitTextColor: #9e9e9e;
+$recordPlayButtonColor: #97e8f5;
+$recordDownloadButtonColor: #97e862;
+$recordDeleteButtonColor: #e5638e;
+$pageNumColor: #bfb9ff;
+$currentPageNumColor: #bfb9ff;
+//Авторизация
+$authTextColor: #8d9cda;
+$authAddTextColor: #7f7f7f;
+$authBoarderColor: #9593d8;
+$authButtonColor: #f5f5ff;
+$authButtonTextColor: #9593d8;
+$authButtonPointColor: #ffffff;
+$authButtonPointBgColor: #e2e2e2;
+$authSelectedButtonPointBgColor: #9593d8;
+//Анализатор
+$mainTitleColor: #dedeff;
+$dragAndDropZoneColor: #efefef;
+$dragAndDropSmallZoneColor: #dedeff;
+$dragAndDropZoneBorderColor: #bfb9ff;
+$dragAndDropZoneTextColor: #9593d8;
+$foggingColor: #ffffff;
+$selectFileButtonColor: #bfb9ff;
+$hintColor: #f7f7f7;
+$hintBorderColor: #838385;
+$hintTextColor: #4e4e50;
+
+/* 
+ *  Прозрачность 
+ */
+//Основное
+$mainTitleOpacity: 37%;
+//Запись
+$recordOpacity: 10%;
+$fileButtonOpacity: 57%;
+//История анализа
+$pageNumOpacity: 22%;
+//Авторизация
+$authBoarderOpacity: 87%;
+$authButtonTextOpacity: 87%;
+//Анализатор
+$dragAndDropZoneOpacity: 37%;
+$dragAndDropBorderZoneOpacity: 87%;
+$foggingOpacity: 34%;
+$selectFileButtonOpacity: 49%;
+
+/* 
+ *  Толщина рамок 
+ */
+//Анализатор
+$dragAndDropZoneBorderSize: 3px;
+$dragAndDropSmallZoneBorderSize: 1.5px;
+$hintBorderSize: 1px;
+
+/* 
+ *  Стиль рамки 
+ */
+//Анализатор
+$dragAndDropZoneBorderStyle: solid;
+$dragAndDropSmallZoneBorderStyle: dashed;
+$hintBorderStyle: solid;
+
+/* 
+ *  Шрифты 
+ */
+$mainFont: Fira Sans;
+
+/* 
+ *  Стили шрифтов 
+ */
+$mainFontStyle: Medium;
+
+/* 
+ *  Размеры шрифтов 
+ */
+//Основное
+$logoFontSize: 65px;
+$textFontSize: 30px;
+$textSelectedColor: 30px;
+$titleFontSize: 30px;
+$smallTitleFontSize: 26px;
+//Верхняя панель
+$signFontSize: 18px;
+$navButtonFontSize: 36px;
+//Авторизация
+$authButtonFontSize: 36px;
+//Анализатор
+$dragAndDropZoneTextFontSize: 50px;
+$selectFileButtonFontSize: 36px;
+$hintTextFontSize: 18px;
+$hintSignSize: 55px;
+
+/* 
+ *  Скругления 
+ */
+//Запись
+$recordCornerRounding: 15px;
+$recordPlayButtonCornerRounding: 15px;
+$recordDownloadButtonCornerRounding: 15px;
+$recordDeleteButtonCornerRounding: 15px;
+
+/* 
+ *  Тень
+ */
