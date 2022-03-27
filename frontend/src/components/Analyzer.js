@@ -1,3 +1,5 @@
+import '../scss/analyzer.scss';
+
 export default function Analyzer() {
   return (
     <main style={{ padding: "1rem 0" }}>

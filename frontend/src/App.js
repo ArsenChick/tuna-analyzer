@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
+import './scss/app.scss';
 
 function App() {
   let [user, setUser] = useState(null);

@@ -1,3 +1,5 @@
+import '../scss/history.scss';
+
 export default function History() {
   return (
     <main style={{ padding: "1rem 0" }}>
