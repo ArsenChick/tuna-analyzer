@@ -7,42 +7,56 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="App">
-      <header>
-        <Link to="/">
-          <h1>Tuna</h1>
-        </Link>
-      </header>
-      <nav>
-        <NavLink
-          // TODO добавить стили и изменить style на className
-          style={({ isActive }) => {
-            return { color: isActive ? "red" : "" };
-          }}
-          to="/history"
-        >
-          My History
-        </NavLink>{" "}
-        {" - "}
-        {user
-          ? <button
-              onClick={() => {
-                setUser(null);
-                navigate("/");
-              }}
-            >
-              {user}: Log out
-            </button>
-          : <NavLink
-              // TODO добавить стили и изменить style на className
-              style={({ isActive }) => {
-                return { color: isActive ? "red" : "" };
-              }}
-              to="/login"
-            >
-              Login
-            </NavLink>}
-      </nav>
+    <div className="App" id="page-content">
+      <div id="top-bar">
+        <div id="big-top-bar">
+          <header>
+            <Link to="/">
+              <h1 id="logo-tittle">Tuna</h1>
+            </Link>
+          </header>
+          <nav class="sections">
+            <ul>
+              <li>
+                <NavLink
+                  // TODO добавить стили и изменить style на className
+                  className="navButton"
+                  id="historyButton"
+                  style={({ isActive }) => {
+                    return { color: isActive ? "red" : "" };
+                  }}
+                  to="/history"
+                >
+                  My History
+                </NavLink>{" "}
+              </li>
+              <li>
+                {user
+                  ? <button className="navButton"
+                      onClick={() => {
+                        setUser(null);
+                        navigate("/");
+                      }}
+                    >
+                      {user}: Log out
+                    </button>
+                  : <NavLink
+                      // TODO добавить стили и изменить style на className
+                      className="navButton"
+                      style={({ isActive }) => {
+                        return { color: isActive ? "red" : "" };
+                      }}
+                      to="/login"
+                    >
+                      Login
+                    </NavLink>}
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div id="small-top-bar">
+        </div>
+      </div>
       <Outlet context={[user, setUser]} />
     </div>
   );
