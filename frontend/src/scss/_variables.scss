@@ -2,14 +2,16 @@
  *  Цвета и шрифт 
  */
 //Основное
+$logoTittleColor: #ffffff;
 $bgPageColor: #ffffff;
 $textColor: #4e4e50;
 $titleColor: #afafaf;
 $smallTitleColor: #afafaf;
 // Верхняя панель
 $bigTopNavColor: #001a3b;
+$bigTopNavColorDarkTheme: #0d1422;
 $smallTopNavColor: #bfb9ff;
-$smallTopNavColorDark: #b4b0e2;
+$smallTopNavColorDarkTheme: #b4b0e2;
 $navButtonColor: #062649;
 $navButtonTextColor: #afafaf;
 $navPlayButtonColor: #b4b0e2;
@@ -132,3 +134,5 @@ $recordDeleteButtonCornerRounding: 15px;
  *  Размеры
  */
 $bigTopBarHight: 100px;
+$scrinVerticalSpaceSize: calc((100vh / 25) * 1.563);
+$scrinHorizontalSpaceSize: calc((100vw / 25) * 1.563);

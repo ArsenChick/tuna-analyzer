@@ -7,12 +7,12 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="App">
+    <div className="App" id="page-content">
       <div id="top-bar">
         <div id="big-top-bar">
         <header>
           <Link to="/">
-            <h1>Tuna</h1>
+            <h1 id="logo-tittle">Tuna</h1>
           </Link>
         </header>
         <nav>
