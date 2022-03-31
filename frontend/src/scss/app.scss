@@ -17,6 +17,10 @@
 #big-top-bar {
   padding: 20px $scrinHorizontalSpaceSize;;
   background: $bigTopNavColor;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 #small-top-bar {
@@ -27,8 +31,6 @@
 #logo-tittle {
   color: $logoTittleColor;
 }
-
-
 
 @media (prefers-color-scheme: dark) {
   #big-top-bar {
@@ -50,7 +52,6 @@
   color: $textColor;
   text-decoration: none;
   font-weight: bold;
-  margin-bottom: 1rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -61,6 +62,8 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -98,6 +101,10 @@
 nav {
   margin: 0;
   padding: 0;
+  margin-left:auto;
+  button{
+    margin: 0;
+  }
 
   ul {
     display: flex;
@@ -106,11 +113,13 @@ nav {
     justify-content: flex-end;
     align-content: flex-start;
     margin: 0 -5px;
-    margin: 0;
-    padding: 0;
+
+    .logo-tittle + li {
+      margin-left: auto;
+    }
 
     & > * {
-      margin: 0 5px;
+      margin: 10px 5px 0 10px;
     }
 
     li {
@@ -120,6 +129,15 @@ nav {
       }
     }
   }
+}
+
+.historyButton {
+  margin-left: auto;
+}
+
+.logo-tittle {
+  margin-bottom: 1rem;
+  margin-top: 1em;
 }
 
 // Arseniy
@@ -205,8 +223,6 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 1rem;
-  margin-top: 1em;
   font-weight: bold;
 }
 
