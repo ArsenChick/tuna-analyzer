@@ -1,50 +1,125 @@
 @import './_variables.scss';
 // Jenka
-
-div {
-
-}
 #page-content {
-    display: flex;
-    flex-flow: column wrap;
-    gap: 0;
+  display: flex;
+  flex-flow: column wrap;
+  gap: 0;
 }
 
 #top-bar {
-    margin: (-$scrinVerticalSpaceSize) 0 0 (-$scrinHorizontalSpaceSize);
-    opacity: 1;
-    z-index: 100;
-    align-items: center;
-    width: 100vw;
+  margin: (-$scrinVerticalSpaceSize) 0 0 (-$scrinHorizontalSpaceSize);
+  opacity: 1;
+  z-index: 100;
+  align-items: center;
+  width: 100vw;
 }
 
 #big-top-bar {
-    padding: 20px $scrinHorizontalSpaceSize;;
-    background: $bigTopNavColor;
+  padding: 20px $scrinHorizontalSpaceSize;;
+  background: $bigTopNavColor;
 }
 
-
 #small-top-bar {
-    background: $smallTopNavColor;
-    padding: 19px 100px;
-
+  background: $smallTopNavColor;
+  padding: 19px 100px;
 }
 
 #logo-tittle {
-    color: $logoTittleColor;
+  color: $logoTittleColor;
 }
 
-nav a {
-    color: $navButtonTextColor;
-}
+
+
 @media (prefers-color-scheme: dark) {
-    #big-top-bar {
-        background: $bigTopNavColorDarkTheme;
-    }
-    #small-top-bar {
-        background: $smallTopNavColorDarkTheme;
+  #big-top-bar {
+    background: $bigTopNavColorDarkTheme;
+  }
+
+  #small-top-bar {
+    background: $smallTopNavColorDarkTheme;
+  }
+}
+
+.navButton {
+  text-align: center;
+  padding: 0.5rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: $navButtonColor;
+  border: 2px solid $navButtonColor;
+  color: $textColor;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  line-height: initial;
+  transition: background-color 200ms ease-in-out, border 200ms ease-in-out,
+    transform 200ms ease-in-out;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+@media (prefers-color-scheme: dark) {
+.navButton {
+    background-color: $navButtonColorDarkTheme;
+    border-color: $navButtonColorDarkTheme;
+    color: $textColor;
+  }
+}
+
+@media (hover: hover) {
+.navButton:hover {
+    cursor: pointer;
+    background-color: $navButtonHoverColor;
+    border-color: $navButtonHoverColor;
+  }
+}
+
+@media (hover: hover) and (prefers-color-scheme: dark) {
+.navButton:hover {
+    cursor: pointer;
+    background-color: $navButtonHoverColorDarkTheme;
+    border-color: $navButtonHoverColorDarkTheme;
+  }
+}
+
+.navButton:focus {
+  outline: none;
+}
+
+.sections {
+  flex-direction: row;
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-content: flex-start;
+    margin: 0 -5px;
+    margin: 0;
+    padding: 0;
+
+    & > * {
+      margin: 0 5px;
     }
 
+    li {
+      list-style-type:none;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 }
 
 // Arseniy
