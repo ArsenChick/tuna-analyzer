@@ -32,17 +32,20 @@ function App() {
               </li>
               <li>
                 {user
-                  ? <button className="navButton"
+                  ? <button
+                      className="navButton"
+                      id="logoutButton"
                       onClick={() => {
                         setUser(null);
                         navigate("/");
                       }}
                     >
-                      {user}: Log out
+                      <div id="userLogin">{user}</div>Log out
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
                       className="navButton"
+                      id="loginButton"
                       style={({ isActive }) => {
                         return { color: isActive ? "red" : "" };
                       }}

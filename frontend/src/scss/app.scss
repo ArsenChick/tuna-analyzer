@@ -36,7 +36,6 @@
   #big-top-bar {
     background: $bigTopNavColorDarkTheme;
   }
-
   #small-top-bar {
     background: $smallTopNavColorDarkTheme;
   }
@@ -62,8 +61,6 @@
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
-
-
 }
 
 @media (prefers-color-scheme: dark) {
@@ -105,23 +102,19 @@ nav {
   button{
     margin: 0;
   }
-
   ul {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     justify-content: flex-end;
     align-content: flex-start;
     margin: 0 -5px;
-
     .logo-tittle + li {
       margin-left: auto;
     }
-
     & > * {
       margin: 10px 5px 0 10px;
     }
-
     li {
       list-style-type:none;
       a {
@@ -133,6 +126,22 @@ nav {
 
 .historyButton {
   margin-left: auto;
+}
+
+#logoutButton {
+  display: inline-block;
+  line-height: 1.3em;
+//  height: 3.9em;
+}
+
+#userLogin {
+  color: $authTextColor;
+  word-wrap: normal;
+  max-width: 120px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .logo-tittle {
