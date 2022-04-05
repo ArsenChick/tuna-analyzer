@@ -214,6 +214,56 @@ body {
   }
 }
 
+// Mixturkin
+
+.dnd-container {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px dashed #d2ceff;
+  background-color: #f5f5ff;
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-container-active {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px dashed #aface6;
+  background-color: #d2ceff;
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-unselectable-p {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: center;
+  color: #9593d8;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.dnd-select-button{
+  display: block;
+  width: 300px; 
+  height: 50px; 
+  border-radius: 10px;
+  margin: auto;
+  background-color: #dbd8ff;
+  color: #aface6;
+  text-align: center;
+}
+
 /* Typography
 ––––––––––––––––––––––––––––––––– */
 
