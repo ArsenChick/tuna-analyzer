@@ -16,7 +16,7 @@ const FileUploader = props => {
   return (
     <>
 	  <button className="dnd-select-button" onClick={handleClick}>Select file </button>
-      <input type="file" accept=".mp3,.waw,.ogg,.flac" ref={hiddenFileInput} onChange={handleChange} style={{display:'none'}} /> 
+      <input type="file" accept=".mp3,.wav,.ogg,.flac" ref={hiddenFileInput} onChange={handleChange} style={{display:'none'}} /> 
     </>
   );
 };
