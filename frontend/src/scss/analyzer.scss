@@ -88,12 +88,19 @@
 .project-info {
   margin: 0 20px;
   padding: 10px 40px;
-  background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-info {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
 }
 
 .project-name {
   font-size: 30px;
   font-weight: bold;
+  color: $selectedWordColor;
 }
 
 .special-word {
