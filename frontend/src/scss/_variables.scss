@@ -47,12 +47,15 @@ $authButtonPointBgColor: #e2e2e2;
 $authSelectedButtonPointBgColor: #9593d8;
 //Анализатор
 $mainTitleColor: #dedeff;
-$dragAndDropZoneColor: #efefef;
+$dragAndDropZoneColor: #f5f5ff;
 $dragAndDropSmallZoneColor: #dedeff;
-$dragAndDropZoneBorderColor: #bfb9ff;
+$dragAndDropZoneBorderColor: #d2ceff;
 $dragAndDropZoneTextColor: #9593d8;
 $foggingColor: #ffffff;
-$selectFileButtonColor: #bfb9ff;
+$selectButtonColor: #dbd8ff;
+$selectButtonColorDarkTheme: #b1ace6;
+$selectButtonTextColor: #aface6;
+$selectButtonTextColorDarkTheme: #7e79ba;
 $hintColor: #f7f7f7;
 $hintBorderColor: #838385;
 $hintTextColor: #4e4e50;
@@ -61,20 +64,20 @@ $hintTextColor: #4e4e50;
  *  Прозрачность 
  */
 //Основное
-$mainTitleOpacity: 37%;
+$mainTitleOpacity: .37;
 //Запись
-$recordOpacity: 10%;
-$fileButtonOpacity: 57%;
+$recordOpacity: .10;
+$fileButtonOpacity: .57;
 //История анализа
-$pageNumOpacity: 22%;
+$pageNumOpacity: .22;
 //Авторизация
-$authBoarderOpacity: 87%;
-$authButtonTextOpacity: 87%;
+$authBoarderOpacity: .87;
+$authButtonTextOpacity: .87;
 //Анализатор
-$dragAndDropZoneOpacity: 37%;
-$dragAndDropBorderZoneOpacity: 87%;
-$foggingOpacity: 34%;
-$selectFileButtonOpacity: 49%;
+$dragAndDropZoneOpacity: .93;
+$dragAndDropBorderZoneOpacity: .87;
+$foggingOpacity: .34;
+$selectFileButtonOpacity: .49;
 
 /* 
  *  Толщина рамок 

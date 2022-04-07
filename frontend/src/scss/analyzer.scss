@@ -1,1 +1,87 @@
 @import './_variables.scss';
+
+// Mixturkin
+
+.dnd-container {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px dashed $dragAndDropZoneBorderColor;
+  background-color: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-container-active {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 5px dashed #aface6;
+  background-color: #d2ceff;
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-unselectable-p {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: center;
+  color: #9593d8;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.dnd-select-button{
+  display: block;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  margin: auto;
+  background-color: $selectButtonColor;
+  border: 2px solid $selectButtonColor;
+  color: $selectButtonTextColor;
+  text-align: center;
+}
+
+// Jenka
+.dnd-container {
+   border-radius: 7px;
+}
+
+@media (hover: hover){
+  .dnd-select-button:hover {
+    color: $selectButtonColor;
+    background-color: $selectButtonTextColor;
+    border-color: $selectButtonTextColor;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dnd-container {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+
+  .dnd-select-button {
+    color: $selectButtonTextColorDarkTheme;
+    background-color: $selectButtonColorDarkTheme;
+    border-color: $selectButtonColorDarkTheme;
+  }
+}
+
+@media (hover: hover) and (prefers-color-scheme: dark) {
+  .dnd-select-button:hover {
+    color: $selectButtonColorDarkTheme;
+    background-color: $selectButtonTextColorDarkTheme;
+    border-color: $selectButtonTextColorDarkTheme;
+  }
+}
+
+
