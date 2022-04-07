@@ -7,7 +7,7 @@ const FileUploader = props => {
 	  hiddenFileInput.current.click();
   };
   const handleChange = event => {
-	  if(event.target.files.length == 1){
+	  if(event.target.files.length === 1){
 		  const fileUploaded = event.target.files[0];
 		  props.handleFile(fileUploaded);
 	  }
@@ -67,8 +67,8 @@ function DragAndDrop(props) {
     let files = [...event.dataTransfer.files];
     setFile(files);
 	d = 0;
-	if(files.length == 1){
-		if(files[0].type == 'audio/mpeg' || files[0].type == 'audio/ogg' || files[0].type == 'audio/waw' || files[0].type == 'audio/flac'){
+	if(files.length === 1){
+		if(files[0].type === 'audio/mpeg' || files[0].type === 'audio/ogg' || files[0].type === 'audio/waw' || files[0].type === 'audio/flac'){
 		  return(
 			<div>{props.dropFunction(files[0])}</div>
 		  );
@@ -78,7 +78,7 @@ function DragAndDrop(props) {
     }
   };
   
-  if(drag == true){
+  if(drag === true){
 	  return (
 		<div
 		  id="dnd-container-active"
@@ -104,7 +104,7 @@ function DragAndDrop(props) {
 	{file.length > 1 &&
 	<p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>Drag files by one at time</p>
 	}
-	{unvalid == true &&
+	{unvalid === true &&
 	<p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>Unsupported format</p>
 	}
 	</div>
