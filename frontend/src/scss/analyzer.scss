@@ -19,8 +19,8 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border: 5px dashed #aface6;
-  background-color: #d2ceff;
+  border: 4.6px dashed $dragAndDropZoneBorderColor;
+  background-color: rgba($dragAndDropActiveZoneColor, .6);
   padding: 45px;
   align-items: center;
   justify-content: center;
@@ -54,6 +54,10 @@
 // Jenka
 .dnd-container {
    border-radius: 7px;
+}
+
+.dnd-container-active {
+  border-radius: 7px;
 }
 
 @media (hover: hover){
@@ -94,6 +98,9 @@
 @media (prefers-color-scheme: dark) {
   .project-info {
     background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+  .dnd-container-active {
+    background-color: rgba($dragAndDropActiveZoneColor, .3);
   }
 }
 
