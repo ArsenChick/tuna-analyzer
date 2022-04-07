@@ -46,7 +46,7 @@ function App() {
                         navigate("/");
                       }}
                     >
-                      <div id="userLogin">{user}</div>
+                      <span id="userLogin">{user}</span>
                       <img src={log_out_icon} width="20px" alt="Log out"/>
                     </button>
                   : <NavLink

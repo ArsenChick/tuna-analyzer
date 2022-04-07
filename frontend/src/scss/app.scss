@@ -128,18 +128,6 @@ nav {
   }
 }
 
-.historyButton {
-  margin-left: auto;
-}
-
-#logoutButton {
-  display: inline-block;
-  line-height: 1.3em;
-  max-width: 300px;
-  white-space: nowrap;
-//  height: 3.9em;
-}
-
 .navButton {
   display: flex;
   flex-direction: row;
@@ -156,14 +144,23 @@ nav {
   };
 }
 
+.historyButton {
+  margin-left: auto;
+}
+
+#logoutButton {
+  white-space: nowrap;
+}
+
 #userLogin {
   color: $authTextColor;
+  margin-right: 4px;
   word-wrap: normal;
   max-width: 100px;
   -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .logo-tittle {
