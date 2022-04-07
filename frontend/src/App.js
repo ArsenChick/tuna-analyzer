@@ -2,6 +2,12 @@ import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import './scss/app.scss';
 
+//Изображения
+//import logo from './img/tuna_logo.svg';
+import log_in_icon from './img/log_in_icon.svg';
+import log_out_icon from './img/log_out_icon.svg';
+
+
 function App() {
   let [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -15,7 +21,7 @@ function App() {
               <h1 id="logo-tittle">Tuna</h1>
             </Link>
           </header>
-          <nav class="sections">
+          <nav className="sections">
             <ul>
               <li>
                 <NavLink
@@ -23,7 +29,7 @@ function App() {
                   className="navButton"
                   id="historyButton"
                   style={({ isActive }) => {
-                    return { color: isActive ? "red" : "" };
+                    return { color: isActive ? "#f48a9a" : "" };
                   }}
                   to="/history"
                 >
@@ -40,18 +46,20 @@ function App() {
                         navigate("/");
                       }}
                     >
-                      <div id="userLogin">{user}</div>Log out
+                      <div id="userLogin">{user}</div>
+                      <img src={log_out_icon} width="20px" alt="Log out"/>
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
                       className="navButton"
                       id="loginButton"
                       style={({ isActive }) => {
-                        return { color: isActive ? "red" : "" };
+                        return { color: isActive ? "#f48a9a" : "" };
                       }}
                       to="/login"
                     >
-                      Login
+                      <span>Log in</span>
+                      <img src={log_in_icon} width="20px"/>
                     </NavLink>}
               </li>
             </ul>

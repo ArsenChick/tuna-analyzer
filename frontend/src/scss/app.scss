@@ -3,7 +3,7 @@
 #page-content {
   display: flex;
   flex-flow: column wrap;
-  gap: 0;
+  gap: 20px;
 }
 
 #top-bar {
@@ -29,7 +29,11 @@
 }
 
 #logo-tittle {
-  color: $logoTittleColor;
+  text-transform: capitalize;
+  background: linear-gradient(to right, $logoTittleLeftColor, $logoTittleRightColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -48,7 +52,7 @@
   border-radius: 10px;
   background-color: $navButtonColor;
   border: 2px solid $navButtonColor;
-  color: $textColor;
+  color: $navButtonTextColor;
   text-decoration: none;
   font-weight: bold;
   -webkit-appearance: none;
@@ -67,7 +71,7 @@
 .navButton {
     background-color: $navButtonColorDarkTheme;
     border-color: $navButtonColorDarkTheme;
-    color: $textColor;
+    color: $navButtonTextColor;
   }
 }
 
@@ -131,13 +135,15 @@ nav {
 #logoutButton {
   display: inline-block;
   line-height: 1.3em;
+  max-width: 300px;
+  white-space: nowrap;
 //  height: 3.9em;
 }
 
 #userLogin {
   color: $authTextColor;
   word-wrap: normal;
-  max-width: 120px;
+  max-width: 100px;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
