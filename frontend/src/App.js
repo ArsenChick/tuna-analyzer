@@ -13,7 +13,7 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <div className="App" id="page-content">
+    <div className="App">
       <div id="top-bar">
         <div id="big-top-bar">
           <header>

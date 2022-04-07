@@ -16,7 +16,7 @@ function Signup() {
     );
 
   return (
-    <div>
+    <div className="page-content sign-up-page">
       <h2>Sign up to Tuna</h2>
       <Formik
         initialValues={{

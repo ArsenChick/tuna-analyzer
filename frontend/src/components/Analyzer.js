@@ -119,8 +119,21 @@ function handleFile (file) {
 
 export default function Analyzer() {
   return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Analyzer!</h2>
+    <main className="page-content analyzer-page">
+      <p className="description project-info">
+        <span className="project-name">Tuna </span>
+        is a web service for music composition analysis.
+      </p>
+      <p className="description">
+        Each user can upload their own musical composition
+        for which the service will determine the&nbsp;
+        <span className="special-word">tempo</span>,&nbsp;
+        <span className="special-word">tonality</span> and
+        evaluate several subjective characteristics:&nbsp;
+        <span className="special-word">energy</span>,&nbsp;
+        <span className="special-word">happiness</span> and&nbsp;
+        <span className="special-word">danceability</span>.
+      </p>
 	  <DragAndDrop dropFunction={handleFile} />
     </main>
   );

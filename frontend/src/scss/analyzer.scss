@@ -1,14 +1,12 @@
 @import './_variables.scss';
-
 // Mixturkin
-
 .dnd-container {
   height: 300px;
   width: 450px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  border: 5px dashed $dragAndDropZoneBorderColor;
+  border: 4.6px dashed $dragAndDropZoneBorderColor;
   background-color: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
   padding: 45px;
   align-items: center;
@@ -51,6 +49,8 @@
   text-align: center;
 }
 
+
+
 // Jenka
 .dnd-container {
    border-radius: 7px;
@@ -67,6 +67,7 @@
 @media (prefers-color-scheme: dark) {
   .dnd-container {
     background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+    border-color: rgba($dragAndDropZoneBorderColor, $dragAndDropZoneOpacity);
   }
 
   .dnd-select-button {
@@ -84,4 +85,18 @@
   }
 }
 
+.project-info {
+  margin: 0 20px;
+  padding: 10px 40px;
+  background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+}
 
+.project-name {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.special-word {
+  color: $selectedWordColor;
+  font-weight: bold;
+}
