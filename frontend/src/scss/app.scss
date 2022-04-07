@@ -140,6 +140,22 @@ nav {
 //  height: 3.9em;
 }
 
+.navButton {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  & * {
+    margin: 0 2px;
+  };
+
+  & :first-child {
+    margin-left: -5px;
+  }
+  & :last-child {
+    margin-right: -5px;
+  };
+}
+
 #userLogin {
   color: $authTextColor;
   word-wrap: normal;

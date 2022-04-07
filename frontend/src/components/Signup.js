@@ -14,7 +14,7 @@ function Signup() {
         <h2>You should logout first!</h2>
       </div>
     );
-  
+
   return (
     <div>
       <h2>Sign up to Tuna</h2>

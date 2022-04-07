@@ -59,7 +59,7 @@ function App() {
                       to="/login"
                     >
                       <span>Log in</span>
-                      <img src={log_in_icon} width="20px"/>
+                      <img src={log_in_icon} width="20px" alt=""/>
                     </NavLink>}
               </li>
             </ul>
