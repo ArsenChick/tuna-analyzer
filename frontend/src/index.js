@@ -5,10 +5,10 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 
 import App from './App';
-import Analyzer from './components/Analyzer';
-import Auth from './components/Auth';
-import Signup from './components/Signup';
-import History from './components/History';
+import Analyzer from './routes/Analyzer';
+import Auth from './routes/Auth';
+import Signup from './routes/Signup';
+import History from './routes/History';
 
 ReactDOM.render(
   <React.StrictMode>

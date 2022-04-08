@@ -1,8 +1,7 @@
-import '../scss/signup.scss';
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import * as Yup from "yup";
+import '../scss/signup.scss';
 
 function Signup() {
   const [user, setUser] = useOutletContext();
