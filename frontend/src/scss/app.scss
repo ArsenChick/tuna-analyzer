@@ -659,13 +659,13 @@ button[type="submit"] {
   min-width: 620px;
   display: flex;
   flex-direction: column;
-  margin: 20px 0;
+  margin: 25px 0;
   padding: 0;
 }
 
 main {
   & * {
-    margin: 20px 0;
+    margin: 25px 0;
   }
 }
 
@@ -690,12 +690,26 @@ main {
   padding: 19px 100px;
 }
 
-#logo-tittle {
+
+
+#logo-title {
   text-transform: capitalize;
-  background: linear-gradient(to right, $logoTittleLeftColor, $logoTittleRightColor);
+  background: $logoTittleColor;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+//    box-shadow: inset 0 0 $logoTittleLeftColor,
+//                inset 0 0 $logoTittleRightColor;
+//  transition: box-shadow .3s, color .3s;
+}
 
+@media (hover: hover) {
+  #logo-title:hover {
+    color: #ffffff;
+    -webkit-background-clip: border-box;
+	-webkit-text-fill-color: currentColor;
+//    box-shadow: inset 00px 0 110px 0px $logoTittleLeftColor,
+//                inset 110px 0 110px 0px $logoTittleRightColor;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -776,7 +790,7 @@ nav {
     justify-content: flex-end;
     align-content: flex-start;
     margin: 0 -5px;
-    .logo-tittle + li {
+    .logo-title + li {
       margin-left: auto;
     }
     & > * {
@@ -825,8 +839,59 @@ nav {
   text-overflow: ellipsis;
 }
 
-.logo-tittle {
+.logo-title {
   margin-bottom: 1rem;
   margin-top: 1em;
 }
 
+.hint-area {
+  position: fixed;
+  right: 50px;
+  bottom: 15px;
+  top: auto;
+  left: auto;
+
+  width: 350px;
+  color: $hintTextColor;
+  ul {
+    margin: auto 0;
+    * {
+      padding: 5px 0;
+    }
+    span {
+      font-weight: bold;
+    }
+    li {
+
+    }
+  }
+}
+
+.hint-modal-body {
+  position: relative;
+  top: -10px;
+  padding: 20px;
+  background: $hintBackgroundColor;
+  border: 2px solid $hintBorderColor;
+  border-radius: 7px;
+  opacity: 0.8;
+}
+
+.hint-button {
+  position: relative;
+  left: 290px;
+  padding: 7px 22px;
+  //padding: 10px 15px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  background: $logoTittleColor;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.hint-button:hover {
+  opacity: 1;
+}

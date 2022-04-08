@@ -2,7 +2,6 @@
  *  Цвета и шрифт 
  */
 //Основное
-$logoTittleColor: #ffffff;
 $logoTittleLeftColor: #51d9e5;
 $logoTittleRightColor: #e551e4;
 $bgPageColor: #ffffff;
@@ -57,7 +56,7 @@ $selectButtonColor: #dbd8ff;
 $selectButtonColorDarkTheme: #b1ace6;
 $selectButtonTextColor: #aface6;
 $selectButtonTextColorDarkTheme: #7e79ba;
-$hintColor: #f7f7f7;
+$hintBackgroundColor: #f7f7f7;
 $hintBorderColor: #838385;
 $hintTextColor: #4e4e50;
 
@@ -136,9 +135,9 @@ $recordDownloadButtonCornerRounding: 15px;
 $recordDeleteButtonCornerRounding: 15px;
 
 /* 
- *  Тень
+ *  Градиент
  */
-
+$logoTittleColor: linear-gradient(to right, $logoTittleLeftColor, $logoTittleRightColor);
 
 /*
  *  Размеры
