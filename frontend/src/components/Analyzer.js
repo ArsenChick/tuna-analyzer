@@ -112,10 +112,49 @@ function DragAndDrop(props) {
   );
 }
 
+
 function handleFile (file) {
 	console.log(file.name);
 }
-  
+
+
+function Hint() {
+  return (
+    <div className="hint-area">
+      <div className="hint-modal-body">
+        <ul>
+          <span>Characteristics description:</span>
+          <li>
+              <b>BPM</b> (Beats Per Minute) a musical term
+              that means measuring the tempo of the
+              music.
+          </li>
+          <li>
+             <b>Key</b> is the group of pitches, or scale, that
+             forms the basis of a music composition
+             in classical.
+          </li>
+          <li>
+             Elements that give the composition more&nbsp;
+             <b>energy</b>: higher tones, fast and irregular
+             rhythms, dissonant harmony.
+          </li>
+          <li>
+              <b>Happiness</b> of the music is usually expressed
+               in a fast tempo and in a major key
+          </li>
+          <li>
+              <b>Danceability</b> is measured using a mixture
+              of song features such as beat strength,
+              tempo stability, and overall tempo.
+          </li>
+        </ul>
+      </div>
+      <button className="hint-button">?</button>
+    </div>
+  );
+}
+
 
 export default function Analyzer() {
   return (
@@ -135,6 +174,8 @@ export default function Analyzer() {
         <span className="special-word">danceability</span>.
       </p>
 	  <DragAndDrop dropFunction={handleFile} />
+	  <Hint/>
     </main>
   );
 }
+
