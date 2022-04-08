@@ -2,21 +2,27 @@
  *  Цвета и шрифт 
  */
 //Основное
+$logoTittleColor: #ffffff;
 $bgPageColor: #ffffff;
-$textColor: #4e4e50;
+$textColor: #ffffff;
 $titleColor: #afafaf;
 $smallTitleColor: #afafaf;
 // Верхняя панель
 $bigTopNavColor: #001a3b;
+$bigTopNavColorDarkTheme: #0d1422;
 $smallTopNavColor: #bfb9ff;
-$smallTopNavColorDark: #b4b0e2;
-$navButtonColor: #062649;
+$smallTopNavColorDarkTheme: #b4b0e2;
+$navButtonColor: #092850;
 $navButtonTextColor: #afafaf;
+$navButtonHoverColor: #0c2f5c;
+$navButtonColorDarkTheme: #121e37;
+$navButtonTextColorDarkTheme: #afafaf;
+$navButtonHoverColorDarkTheme: #182541;
 $navPlayButtonColor: #b4b0e2;
-$smallTopNavTextColor: #f7f7f7;
-$selectedElementColor: #ff9999;
 $sliderColor: #e5e5e5;
 $sliderPointColor: #f7f7f7;
+$smallTopNavTextColor: #f7f7f7;
+$selectedButtonTextColor: #ff9999;
 //История анализа
 $textSelectedColor: #9593d8;
 $signColor: #afafaf;
@@ -126,3 +132,11 @@ $recordDeleteButtonCornerRounding: 15px;
 /* 
  *  Тень
  */
+
+
+/*
+ *  Размеры
+ */
+$bigTopBarHight: 100px;
+$scrinVerticalSpaceSize: calc((100vh / 25) * 1.563);
+$scrinHorizontalSpaceSize: calc((100vw / 25) * 1.563);

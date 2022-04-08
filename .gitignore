@@ -263,3 +263,6 @@ sketch
 
 # dev folder
 tuna_uploads/
+
+# InteliJ IDEA
+.idea
