@@ -3,7 +3,7 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import './scss/app.scss';
 
 //Изображения
-//import logo from './img/tuna_logo.svg';
+import logo_icon from './img/tuna_neon_logo.svg';
 import log_in_icon from './img/log_in_icon.svg';
 import log_out_icon from './img/log_out_icon.svg';
 
@@ -18,6 +18,7 @@ function App() {
         <div id="big-top-bar">
           <header>
             <Link to="/" className="page-link">
+              <img src={logo_icon} width="70px" alt=""/>
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>

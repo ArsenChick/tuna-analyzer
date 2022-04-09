@@ -727,7 +727,24 @@ nav {
 
 header {
   a {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
     text-decoration: none;
+
+    * {
+      margin: 0 5px;
+    };
+
+    :first-child {
+      margin-left: -5px;
+    }
+
+    :last-child {
+      margin-right: -5px;
+    };
   }
 }
 
