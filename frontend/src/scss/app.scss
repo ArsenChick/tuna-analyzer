@@ -726,6 +726,7 @@ nav {
 }
 
 header {
+  user-select: none;
   a {
     display: flex;
     flex-direction: row;
