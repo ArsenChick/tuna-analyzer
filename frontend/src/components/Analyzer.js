@@ -140,12 +140,13 @@ function Description() {
   );
 }
 
-
-function Hint() {
+const Hint = ({active, setActive}) => {
   return (
     <div className="hint-area">
-      <div className="hint-modal-body">
-        <ul>
+      <div className={active ? "hint-modal-window active" : "hint-modal-window"}
+        onClick={e => e.stopPropagation()
+      }>
+        <ul className="hint-content">
           <span>Characteristics description:</span>
           <li>
             <b>BPM</b> (Beats Per Minute) a musical term
@@ -173,18 +174,25 @@ function Hint() {
           </li>
         </ul>
       </div>
-      <button className="hint-button">?</button>
+      <button
+        className="hint-button"
+        onClick={() => { active ? setActive(false) : setActive(true)
+      }}>
+        ?
+      </button>
     </div>
   );
 }
 
 
 export default function Analyzer() {
+  const [hintActive, setHintActive] = useState(false)
+
   return (
     <main className="page-content analyzer-page">
       <Description/>
 	  <DragAndDrop dropFunction={handleFile} />
-	  <Hint/>
+	  <Hint active={hintActive} setActive={setHintActive}/>
     </main>
   );
 }

@@ -781,15 +781,15 @@ header {
   flex-direction: row;
   align-items: flex-start;
 
-  & * {
+  * {
     margin: 0 2px;
   };
 
-  & :first-child {
+  :first-child {
     margin-left: -5px;
   }
 
-  & :last-child {
+  :last-child {
     margin-right: -5px;
   };
 }
@@ -854,7 +854,7 @@ header {
 }
 
 main {
-  & * {
+  content-item {
     margin: 25px 0;
   }
 }
