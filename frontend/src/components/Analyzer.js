@@ -68,7 +68,7 @@ function DragAndDrop(props) {
     setFile(files);
 	d = 0;
 	if(files.length === 1){
-		if(files[0].type === 'audio/mpeg' || files[0].type === 'audio/ogg' || files[0].type === 'audio/waw' || files[0].type === 'audio/flac'){
+		if(files[0].type === 'audio/mpeg' || files[0].type === 'audio/ogg' || files[0].type === 'audio/wav' || files[0].type === 'audio/flac'){
 		  return(
 			<div>{props.dropFunction(files[0])}</div>
 		  );
