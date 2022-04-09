@@ -654,21 +654,12 @@ button[type="submit"] {
   margin-top: 1rem;
 }
 
+
+
 // Jenka
-.page-content {
-  min-width: 620px;
-  display: flex;
-  flex-direction: column;
-  margin: 25px 0;
-  padding: 0;
-}
 
-main {
-  & * {
-    margin: 25px 0;
-  }
-}
-
+/* Top panel
+––––––––––––––––––––––––––––––––– */
 #top-bar {
   margin: (-$scrinVerticalSpaceSize) 0 0 (-$scrinHorizontalSpaceSize);
   opacity: 1;
@@ -690,7 +681,55 @@ main {
   padding: 19px 100px;
 }
 
+@media (prefers-color-scheme: dark) {
+  #big-top-bar {
+    background: $bigTopNavColorDarkTheme;
+  }
 
+  #small-top-bar {
+    background: $smallTopNavColorDarkTheme;
+  }
+}
+
+nav {
+  margin: 0;
+  padding: 0;
+  margin-left:auto;
+
+  button{
+    margin: 0;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+    align-content: flex-start;
+    margin: 0 -5px;
+
+    & > * {
+      margin: 10px 5px 0 10px;
+    }
+
+    li {
+      list-style-type:none;
+      a {
+        text-decoration: none;
+      }
+    }
+
+    .logo-title + li {
+      margin-left: auto;
+    }
+  }
+}
+
+header {
+  a {
+    text-decoration: none;
+  }
+}
 
 #logo-title {
   text-transform: capitalize;
@@ -705,22 +744,15 @@ main {
 @media (hover: hover) {
   #logo-title:hover {
     color: #ffffff;
-    -webkit-background-clip: border-box;
-	-webkit-text-fill-color: currentColor;
+//    -webkit-background-clip: border-box;
+//	-webkit-text-fill-color: currentColor;
 //    box-shadow: inset 00px 0 110px 0px $logoTittleLeftColor,
 //                inset 110px 0 110px 0px $logoTittleRightColor;
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  #big-top-bar {
-    background: $bigTopNavColorDarkTheme;
-  }
-  #small-top-bar {
-    background: $smallTopNavColorDarkTheme;
-  }
-}
-
+/* Top panel button
+––––––––––––––––––––––––––––––––– */
 .navButton {
   text-align: center;
   padding: 0.5rem 1.25rem;
@@ -742,6 +774,24 @@ main {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+
+  & * {
+    margin: 0 2px;
+  };
+
+  & :first-child {
+    margin-left: -5px;
+  }
+
+  & :last-child {
+    margin-right: -5px;
+  };
 }
 
 @media (prefers-color-scheme: dark) {
@@ -772,54 +822,6 @@ main {
   outline: none;
 }
 
-.sections {
-  flex-direction: row;
-}
-
-nav {
-  margin: 0;
-  padding: 0;
-  margin-left:auto;
-  button{
-    margin: 0;
-  }
-  ul {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap-reverse;
-    justify-content: flex-end;
-    align-content: flex-start;
-    margin: 0 -5px;
-    .logo-title + li {
-      margin-left: auto;
-    }
-    & > * {
-      margin: 10px 5px 0 10px;
-    }
-    li {
-      list-style-type:none;
-      a {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
-.navButton {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  & * {
-    margin: 0 2px;
-  };
-  & :first-child {
-    margin-left: -5px;
-  }
-  & :last-child {
-    margin-right: -5px;
-  };
-}
-
 .historyButton {
   margin-left: auto;
 }
@@ -828,6 +830,8 @@ nav {
   white-space: nowrap;
 }
 
+/* Display user login
+––––––––––––––––––––––––––––––––– */
 #userLogin {
   text-transform: inherit;
   color: $authTextColor;
@@ -839,7 +843,22 @@ nav {
   text-overflow: ellipsis;
 }
 
-.logo-title {
-  margin-bottom: 1rem;
-  margin-top: 1em;
+/* Page content
+––––––––––––––––––––––––––––––––– */
+.page-content {
+  min-width: 620px;
+  display: flex;
+  flex-direction: column;
+  margin: 25px 0;
+  padding: 0;
+}
+
+main {
+  & * {
+    margin: 25px 0;
+  }
+}
+
+.sections {
+  flex-direction: row;
 }

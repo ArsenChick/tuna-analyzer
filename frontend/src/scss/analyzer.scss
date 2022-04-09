@@ -1,5 +1,8 @@
 @import './_variables.scss';
 // Mixturkin
+
+/* DnD element
+––––––––––––––––––––––––––––––––– */
 .dnd-container {
   height: 300px;
   width: 450px;
@@ -52,6 +55,9 @@
 
 
 // Jenka
+
+/* DnD element
+––––––––––––––––––––––––––––––––– */
 .dnd-container {
    border-radius: 7px;
 }
@@ -74,6 +80,10 @@
     border-color: rgba($dragAndDropZoneBorderColor, $dragAndDropZoneOpacity);
   }
 
+  .dnd-container-active {
+    background-color: rgba($dragAndDropActiveZoneColor, .3);
+  }
+
   .dnd-select-button {
     color: $selectButtonTextColorDarkTheme;
     background-color: $selectButtonColorDarkTheme;
@@ -89,22 +99,8 @@
   }
 }
 
-.project-info {
-  margin: 0;
-  padding: 10px 30px;
-  border-radius: 7px;
-  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
-}
-
-@media (prefers-color-scheme: dark) {
-  .project-info {
-    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
-  }
-  .dnd-container-active {
-    background-color: rgba($dragAndDropActiveZoneColor, .3);
-  }
-}
-
+/* Analyzer info
+––––––––––––––––––––––––––––––––– */
 .project-name {
   font-size: 30px;
   font-weight: bold;
@@ -116,6 +112,25 @@
   font-weight: bold;
 }
 
+.description {
+  font-size: 20px;
+}
+
+.project-info {
+  margin: 0;
+  padding: 10px 30px;
+  border-radius: 7px;
+  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-info {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+}
+
+/* Hint
+––––––––––––––––––––––––––––––––– */
 .hint-area {
   opacity: 0;
   position: fixed;
@@ -128,12 +143,15 @@
   color: $hintTextColor;
   ul {
     margin: auto 0;
+
     * {
       padding: 5px 0;
     }
+
     span {
       font-weight: bold;
     }
+
     li {
 
     }

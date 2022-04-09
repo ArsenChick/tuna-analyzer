@@ -93,6 +93,7 @@ function DragAndDrop(props) {
 		
 	  );
   }
+
   return (<div
       id="dnd-container"
       className="dnd-container"
@@ -118,47 +119,9 @@ function handleFile (file) {
 }
 
 
-function Hint() {
+function Description() {
   return (
-    <div className="hint-area">
-      <div className="hint-modal-body">
-        <ul>
-          <span>Characteristics description:</span>
-          <li>
-              <b>BPM</b> (Beats Per Minute) a musical term
-              that means measuring the tempo of the
-              music.
-          </li>
-          <li>
-             <b>Key</b> is the group of pitches, or scale, that
-             forms the basis of a music composition
-             in classical.
-          </li>
-          <li>
-             Elements that give the composition more&nbsp;
-             <b>energy</b>: higher tones, fast and irregular
-             rhythms, dissonant harmony.
-          </li>
-          <li>
-              <b>Happiness</b> of the music is usually expressed
-               in a fast tempo and in a major key
-          </li>
-          <li>
-              <b>Danceability</b> is measured using a mixture
-              of song features such as beat strength,
-              tempo stability, and overall tempo.
-          </li>
-        </ul>
-      </div>
-      <button className="hint-button">?</button>
-    </div>
-  );
-}
-
-
-export default function Analyzer() {
-  return (
-    <main className="page-content analyzer-page">
+    <div>
       <p className="description project-info">
         <span className="project-name">Tuna </span>
         is a web service for music composition analysis.
@@ -173,6 +136,53 @@ export default function Analyzer() {
         <span className="special-word">happiness</span> and&nbsp;
         <span className="special-word">danceability</span>.
       </p>
+    </div>
+  );
+}
+
+
+function Hint() {
+  return (
+    <div className="hint-area">
+      <div className="hint-modal-body">
+        <ul>
+          <span>Characteristics description:</span>
+          <li>
+            <b>BPM</b> (Beats Per Minute) a musical term
+            that means measuring the tempo of the
+            music.
+          </li>
+          <li>
+            <b>Key</b> is the group of pitches, or scale, that
+            forms the basis of a music composition
+            in classical.
+          </li>
+          <li>
+            Elements that give the composition more&nbsp;
+            <b>energy</b>: higher tones, fast and irregular
+            rhythms, dissonant harmony.
+          </li>
+          <li>
+            <b>Happiness</b> of the music is usually expressed
+            in a fast tempo and in a major key
+          </li>
+          <li>
+            <b>Danceability</b> is measured using a mixture
+            of song features such as beat strength,
+            tempo stability, and overall tempo.
+          </li>
+        </ul>
+      </div>
+      <button className="hint-button">?</button>
+    </div>
+  );
+}
+
+
+export default function Analyzer() {
+  return (
+    <main className="page-content analyzer-page">
+      <Description/>
 	  <DragAndDrop dropFunction={handleFile} />
 	  <Hint/>
     </main>
