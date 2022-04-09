@@ -2,20 +2,27 @@ import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import './scss/app.scss';
 
+//Изображения
+import logo_icon from './img/tuna_neon_logo.svg';
+import log_in_icon from './img/log_in_icon.svg';
+import log_out_icon from './img/log_out_icon.svg';
+
+
 function App() {
   let [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   return (
-    <div className="App" id="page-content">
+    <div className="App">
       <div id="top-bar">
         <div id="big-top-bar">
           <header>
-            <Link to="/">
-              <h1 id="logo-tittle">Tuna</h1>
+            <Link to="/" className="page-link">
+              <img src={logo_icon} width="70px" alt=""/>
+              <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <nav class="sections">
+          <nav className="sections">
             <ul>
               <li>
                 <NavLink
@@ -23,7 +30,7 @@ function App() {
                   className="navButton"
                   id="historyButton"
                   style={({ isActive }) => {
-                    return { color: isActive ? "red" : "" };
+                    return { color: isActive ? "#f48a9a" : "" };
                   }}
                   to="/history"
                 >
@@ -32,23 +39,28 @@ function App() {
               </li>
               <li>
                 {user
-                  ? <button className="navButton"
+                  ? <button
+                      className="navButton"
+                      id="logoutButton"
                       onClick={() => {
                         setUser(null);
                         navigate("/");
                       }}
                     >
-                      {user}: Log out
+                      <span id="userLogin">{user}</span>
+                      <img src={log_out_icon} width="20px" alt=""/>
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
                       className="navButton"
+                      id="loginButton"
                       style={({ isActive }) => {
-                        return { color: isActive ? "red" : "" };
+                        return { color: isActive ? "#f48a9a" : "" };
                       }}
                       to="/login"
                     >
-                      Login
+                      <span>Log in</span>
+                      <img src={log_in_icon} width="20px" alt=""/>
                     </NavLink>}
               </li>
             </ul>

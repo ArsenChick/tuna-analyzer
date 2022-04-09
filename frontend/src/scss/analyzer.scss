@@ -1,1 +1,211 @@
 @import './_variables.scss';
+// Mixturkin
+
+/* DnD element
+––––––––––––––––––––––––––––––––– */
+.dnd-container {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 4.6px dashed $dragAndDropZoneBorderColor;
+  background-color: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-container-active {
+  height: 300px;
+  width: 450px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 4.6px dashed $dragAndDropZoneBorderColor;
+  background-color: rgba($dragAndDropActiveZoneColor, .6);
+  padding: 45px;
+  align-items: center;
+  justify-content: center;
+}
+
+.dnd-unselectable-p {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: center;
+  color: #9593d8;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.dnd-select-button{
+  display: block;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  margin: auto;
+  background-color: $selectButtonColor;
+  border: 2px solid $selectButtonColor;
+  color: $selectButtonTextColor;
+  text-align: center;
+}
+
+
+
+// Jenka
+
+/* DnD element
+––––––––––––––––––––––––––––––––– */
+.dnd-container {
+   border-radius: 7px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.dnd-container-active {
+  border-radius: 7px;
+}
+
+@media (hover: hover){
+  .dnd-select-button:hover {
+    color: $selectButtonColor;
+    background-color: $selectButtonTextColor;
+    border-color: $selectButtonTextColor;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dnd-container {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+    border-color: rgba($dragAndDropZoneBorderColor, $dragAndDropZoneOpacity);
+  }
+
+  .dnd-container-active {
+    background-color: rgba($dragAndDropActiveZoneColor, .3);
+  }
+
+  .dnd-select-button {
+    color: $selectButtonTextColorDarkTheme;
+    background-color: $selectButtonColorDarkTheme;
+    border-color: $selectButtonColorDarkTheme;
+  }
+}
+
+@media (hover: hover) and (prefers-color-scheme: dark) {
+  .dnd-select-button:hover {
+    color: $selectButtonColorDarkTheme;
+    background-color: $selectButtonTextColorDarkTheme;
+    border-color: $selectButtonTextColorDarkTheme;
+  }
+}
+
+/* Analyzer info
+––––––––––––––––––––––––––––––––– */
+.project-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: $selectedWordColor;
+}
+
+.special-word {
+  color: $selectedWordColor;
+  font-weight: bold;
+}
+
+.description {
+  p {
+    font-size: 18px;
+  }
+
+  * {
+    margin: 25px 0;
+  };
+
+}
+
+.project-info {
+  margin: 0;
+  padding: 10px 30px;
+  border-radius: 7px;
+  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-info {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+}
+
+/* Hint
+––––––––––––––––––––––––––––––––– */
+.hint-area {
+  position: fixed;
+  right: 40px;
+  bottom: 10px;
+  top: auto;
+  left: auto;
+
+  width: 400px;
+  color: $hintTextColor;
+  ul {
+    margin: 0;
+
+    * {
+      padding: 8px 0;
+    }
+
+    span {
+      font-weight: bold;
+    }
+
+    li {
+
+    }
+  }
+}
+
+.hint-modal-window {
+  position: relative;
+  top: -10px;
+  padding: 20px;
+  background: $hintBackgroundColor;
+  border: 2px solid $hintBorderColor;
+  border-radius: 7px;
+  z-index: 1000;
+  opacity: 0;
+  -webkit-transition: opacity 200ms ease-in;
+  -moz-transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in;
+  pointer-events: none;
+}
+
+.hint-modal-window.active {
+  opacity: 0.8;
+  pointer-events: auto;
+}
+
+.hint-content {
+
+}
+
+.hint-button {
+  position: relative;
+  left: 340px;
+  padding: 7px 22px;
+  //padding: 10px 15px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 20px;
+  background: $logoTittleColor;
+  border: 2px solid #ffffff;
+  border-radius: 25px;
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.hint-button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
