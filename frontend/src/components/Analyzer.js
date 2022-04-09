@@ -119,14 +119,14 @@ function handleFile (file) {
 }
 
 
-function Description() {
+const Description = () => {
   return (
-    <div>
-      <p className="description project-info">
+    <div className="description">
+      <p className="project-info">
         <span className="project-name">Tuna </span>
         is a web service for music composition analysis.
       </p>
-      <p className="description">
+      <p className="project-propose">
         Each user can upload their own musical composition
         for which the service will determine the&nbsp;
         <span className="special-word">tempo</span>,&nbsp;

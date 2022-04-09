@@ -850,7 +850,7 @@ header {
 /* Display user login
 ––––––––––––––––––––––––––––––––– */
 #userLogin {
-  text-transform: inherit;
+  text-transform: none;
   color: $authTextColor;
   margin-right: 4px;
   word-wrap: normal;
