@@ -66,6 +66,8 @@
 
 .dnd-container-active {
   border-radius: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 @media (hover: hover){
@@ -175,15 +177,25 @@
   border-radius: 7px;
   z-index: 1000;
   opacity: 0;
+  pointer-events: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
   -webkit-transition: opacity 200ms ease-in;
   -moz-transition: opacity 200ms ease-in;
   transition: opacity 200ms ease-in;
-  pointer-events: none;
+  display: none;
 }
 
 .hint-modal-window.active {
   opacity: 0.8;
   pointer-events: auto;
+  -moz-user-select: auto;
+  -khtml-user-select: auto;
+  -webkit-user-select: auto;
+  user-select: auto;
+  display: block;
 }
 
 .hint-content {
