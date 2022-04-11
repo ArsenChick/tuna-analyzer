@@ -221,3 +221,13 @@
   opacity: 1;
   cursor: pointer;
 }
+
+/* Odd style
+––––––––––––––––––––––––––––––––– */
+.in-line {
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(400px, 1fr));
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+}
