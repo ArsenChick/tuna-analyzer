@@ -117,6 +117,7 @@
 }
 
 .description {
+  max-width:870px;
   p {
     font-size: 18px;
   }
@@ -229,9 +230,14 @@
 /* Odd style
 ––––––––––––––––––––––––––––––––– */
 .in-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+flex-flow: space-between;
 
-  display: grid;
-  grid-template-columns: repeat(2, minmax(400px, 1fr));
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
+}
+
+.flex-item {
+  flex: 1 1 auto;
+  margin: 0 10px;
 }
