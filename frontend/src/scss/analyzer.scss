@@ -176,6 +176,7 @@
   background: $hintBackgroundColor;
   border: 2px solid $hintBorderColor;
   border-radius: 7px;
+  display: none;
   z-index: 1;
   opacity: 0;
   pointer-events: none;
@@ -183,9 +184,10 @@
   -khtml-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  -webkit-transition: opacity 200ms ease-in;
-  -moz-transition: opacity 200ms ease-in;
-  transition: opacity 200ms ease-in;
+  // Transition не работает с display:none
+  //-webkit-transition: opacity 200ms ease-in;
+  //-moz-transition: opacity 200ms ease-in;
+  //transition: opacity 200ms ease-in;
   visibility: hidden;
   overflow-y: auto;
   overflow-x: hidden;
@@ -193,6 +195,7 @@
 }
 
 .hint-modal-window.active {
+  display: block;
   z-index: 1000;
   opacity: 0.8;
   pointer-events: auto;
@@ -220,6 +223,7 @@
   border-radius: 25px;
   opacity: 0.9;
   z-index: 1;
+
 }
 
 .hint-button:hover {
@@ -233,7 +237,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-flex-flow: space-between;
+  flex-flow: space-between;
 
 }
 
