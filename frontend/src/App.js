@@ -51,7 +51,7 @@ function App() {
                     >
                       <span id="userLogin">{user}</span>
                       <img src={log_out_icon} width="20px" alt=""/>
-                      <img src={active_log_out_icon} width="20px" alt="" hidden/>
+                      <img src={active_log_out_icon} width="20px" alt="" hidden />
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
