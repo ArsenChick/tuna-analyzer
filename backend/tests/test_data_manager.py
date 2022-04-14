@@ -402,7 +402,10 @@ def test_get_file(client):
     assert 'msg' in response.json
 
     response = client.get(
-        url_for('data.get_file') + '?id=1',
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -453,7 +456,10 @@ def test_get_file_no_such_entry(client):
     token = response.json['access_token']
 
     response = client.get(
-        url_for('data.get_file') + '?id=1',
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -464,7 +470,12 @@ def test_get_file_no_such_entry(client):
 
 
 def test_get_file_no_auth(client):
-    response = client.get(url_for('data.get_file') + '?id=1')
+    response = client.get(
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        }
+    )
 
     assert response.status_code == 401
     assert 'msg' in response.json
@@ -514,7 +525,10 @@ def test_get_result(client):
     assert 'msg' in response.json
 
     response = client.get(
-        url_for('data.get_result') + '?id=1',
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -564,7 +578,10 @@ def test_get_result_no_such_entry(client):
     token = response.json['access_token']
 
     response = client.get(
-        url_for('data.get_result') + '?id=1',
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -575,7 +592,12 @@ def test_get_result_no_such_entry(client):
 
 
 def test_get_result_no_auth(client):
-    response = client.get(url_for('data.get_result') + '?id=1')
+    response = client.get(
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        }
+    )
 
     assert response.status_code == 401
     assert 'msg' in response.json
