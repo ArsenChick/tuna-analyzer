@@ -170,7 +170,7 @@ def get_result():
                "date": result.date
     }, 200
 
-@data_manager.route('/api/delete_result', methods=['GET'])
+@data_manager.route('/api/delete_result', methods=['DELETE'])
 @jwt_required()
 def delete_result():
     idRes = request.args.get("id", None)
