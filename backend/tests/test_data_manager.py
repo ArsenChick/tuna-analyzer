@@ -402,7 +402,10 @@ def test_get_file(client):
     assert 'msg' in response.json
 
     response = client.get(
-        url_for('data.get_file') + '?id=1',
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -453,7 +456,10 @@ def test_get_file_no_such_entry(client):
     token = response.json['access_token']
 
     response = client.get(
-        url_for('data.get_file') + '?id=1',
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -464,7 +470,12 @@ def test_get_file_no_such_entry(client):
 
 
 def test_get_file_no_auth(client):
-    response = client.get(url_for('data.get_file') + '?id=1')
+    response = client.get(
+        url_for('data.get_file'),
+        query_string={
+            'id': 1
+        }
+    )
 
     assert response.status_code == 401
     assert 'msg' in response.json
@@ -514,7 +525,10 @@ def test_get_result(client):
     assert 'msg' in response.json
 
     response = client.get(
-        url_for('data.get_result') + '?id=1',
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -564,7 +578,10 @@ def test_get_result_no_such_entry(client):
     token = response.json['access_token']
 
     response = client.get(
-        url_for('data.get_result') + '?id=1',
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        },
         headers={
             'Authorization': "Bearer " + token
         }
@@ -575,7 +592,12 @@ def test_get_result_no_such_entry(client):
 
 
 def test_get_result_no_auth(client):
-    response = client.get(url_for('data.get_result') + '?id=1')
+    response = client.get(
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        }
+    )
 
     assert response.status_code == 401
     assert 'msg' in response.json
@@ -584,3 +606,176 @@ def test_get_result_post(client):
     response = client.post(url_for('data.get_result'))
 
     assert response.status_code == 405
+
+def test_delete_result(client):
+    random_data = random.randbytes(1024)
+    b64_data = base64.b64encode(random_data).decode()
+
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': 'user',
+            'password': 'password',
+            'password_confirm': 'password'
+        }
+    )
+
+    assert response.status_code == 200
+    token = response.json['access_token']
+
+    response = client.post(
+        url_for('data.save_results'),
+        json={
+            'bpm': 128,
+            'idTone': 0,
+            'dance': 42,
+            'energy': 42,
+            'happiness': 42,
+            'version': 42,
+            'file': {
+                'filename': 'file.mp3',
+                'content': b64_data
+            }
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 200
+    assert 'msg' in response.json
+
+    response = client.delete(
+        url_for('data.delete_result'),
+        query_string={
+            'id': 1
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 200
+    assert 'msg' in response.json
+
+    response = client.get(
+        url_for('data.get_result'),
+        query_string={
+            'id': 1
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 404
+
+def test_double_delete_result(client):
+    random_data = random.randbytes(1024)
+    b64_data = base64.b64encode(random_data).decode()
+
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': 'user',
+            'password': 'password',
+            'password_confirm': 'password'
+        }
+    )
+
+    assert response.status_code == 200
+    token = response.json['access_token']
+
+    response = client.post(
+        url_for('data.save_results'),
+        json={
+            'bpm': 128,
+            'idTone': 0,
+            'dance': 42,
+            'energy': 42,
+            'happiness': 42,
+            'version': 42,
+            'file': {
+                'filename': 'file.mp3',
+                'content': b64_data
+            }
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 200
+    assert 'msg' in response.json
+
+    response = client.delete(
+        url_for('data.delete_result'),
+        query_string={
+            'id': 1
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 200
+    assert 'msg' in response.json
+
+    response = client.delete(
+        url_for('data.delete_result'),
+        query_string={
+            'id': 1
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 404
+
+def test_noid_delete_result(client):
+    random_data = random.randbytes(1024)
+    b64_data = base64.b64encode(random_data).decode()
+
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': 'user',
+            'password': 'password',
+            'password_confirm': 'password'
+        }
+    )
+
+    assert response.status_code == 200
+    token = response.json['access_token']
+
+    response = client.post(
+        url_for('data.save_results'),
+        json={
+            'bpm': 128,
+            'idTone': 0,
+            'dance': 42,
+            'energy': 42,
+            'happiness': 42,
+            'version': 42,
+            'file': {
+                'filename': 'file.mp3',
+                'content': b64_data
+            }
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 200
+    assert 'msg' in response.json
+
+    response = client.delete(
+        url_for('data.delete_result'),
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 422
