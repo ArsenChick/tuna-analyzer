@@ -190,8 +190,10 @@ export default function Analyzer() {
 
   return (
     <main className="page-content analyzer-page">
-      <Description/>
-	  <DragAndDrop dropFunction={handleFile} />
+      <div className="in-line">
+        <div className="flex-item"> <Description/> </div>
+        <div className="flex-item"> <DragAndDrop dropFunction={handleFile} /> </div>
+	  </div>
 	  <Hint active={hintActive} setActive={setHintActive}/>
     </main>
   );
