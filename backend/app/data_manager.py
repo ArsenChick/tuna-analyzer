@@ -170,6 +170,10 @@ def get_result():
                "date": result.date
     }, 200
 
+## Функция получения результатов анализа.
+#
+#  Удаляет результаты анализа  по их идентификатору.
+#  Метод DELETE.
 @data_manager.route('/api/delete_result', methods=['DELETE'])
 @jwt_required()
 def delete_result():
