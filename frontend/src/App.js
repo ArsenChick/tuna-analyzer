@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
-import './scss/app.scss';
+import "./scss/app.scss";
 
 //Изображения
-import logo_icon from './img/tuna_neon_logo.svg';
-import log_in_icon from './img/log_in_icon.svg';
-import active_log_in_icon from './img/active_log_in_icon.svg';
-import log_out_icon from './img/log_out_icon.svg';
-import active_log_out_icon from './img/active_log_out_icon.svg';
+import logo_icon from "./img/tuna_neon_logo.svg";
+import log_in_icon from "./img/log_in_icon.svg";
+import active_log_in_icon from "./img/active_log_in_icon.svg";
+import log_out_icon from "./img/log_out_icon.svg";
+import active_log_out_icon from "./img/active_log_out_icon.svg";
 
+import * as Icon from "react-feather";
 
 function App() {
   let [user, setUser] = useState(null);
@@ -20,7 +21,7 @@ function App() {
         <div id="big-top-bar">
           <header>
             <Link to="/" className="page-link">
-              <img src={logo_icon} width="70px" alt=""/>
+              <img src={logo_icon} width="70px" alt="" />
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
@@ -36,7 +37,8 @@ function App() {
                   }}
                   to="/history"
                 >
-                  My History
+                  <span>My History</span>
+                  <Icon.List size={20} />
                 </NavLink>{" "}
               </li>
               <li>
@@ -49,9 +51,10 @@ function App() {
                         navigate("/");
                       }}
                     >
-                      <span id="userLogin">{user}</span>
-                      <img src={log_out_icon} width="20px" alt="" hidden />
-                      <img src={active_log_out_icon} width="20px" alt="" />
+                      <span id="userLogin">
+                        {user}
+                      </span>
+                      <Icon.LogIn size={20} />
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
@@ -63,15 +66,13 @@ function App() {
                       to="/login"
                     >
                       <span>Log in</span>
-                      <img src={log_in_icon} width="20px" alt="" hidden />
-                      <img src={active_log_in_icon} width="20px" alt="" />
+                      <Icon.LogIn size={20} />
                     </NavLink>}
               </li>
             </ul>
           </nav>
         </div>
-        <div id="small-top-bar">
-        </div>
+        <div id="small-top-bar" />
       </div>
       <Outlet context={[user, setUser]} />
     </div>
