@@ -4,10 +4,6 @@ import "./scss/app.scss";
 
 //Изображения
 import logo_icon from "./img/tuna_neon_logo.svg";
-import log_in_icon from "./img/log_in_icon.svg";
-import active_log_in_icon from "./img/active_log_in_icon.svg";
-import log_out_icon from "./img/log_out_icon.svg";
-import active_log_out_icon from "./img/active_log_out_icon.svg";
 
 import * as Icon from "react-feather";
 
