@@ -9,6 +9,8 @@ services:
     depends_on:
       - tuna-db
     command: ./run_prod.sh
+    volumes:
+      - tuna_uploads:/tuna_uploads
 
   tuna-db:
     image: mariadb
@@ -29,3 +31,4 @@ services:
 
 volumes:
   tuna_mariadb:
+  tuna_uploads:

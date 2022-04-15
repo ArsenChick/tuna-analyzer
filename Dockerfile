@@ -32,4 +32,4 @@ RUN cp /build/build/*.ico ./app/static/
 RUN cp /build/build/*.txt ./app/static/
 RUN cp /build/build/index.html ./app/templates/
 
-RUN mkdir -p ../tuna_uploads
+RUN mkdir -p /tuna_uploads
