@@ -2,69 +2,61 @@ import '../scss/history.scss';
 import React, { useState, useEffect, useCallback } from 'react';
 
 function Result(props){
-    return (
-	<>
-        <tr>    
-			<td>{props.date}</td>
+  return (
+    <>
+      <tr>    
+        <td>{props.date}</td>
+	<td>{props.name}</td>
+        <td>{props.bpm}</td>
+        <td>{props.tone}</td>
+        <td>{props.dance}</td>
+        <td>{props.energy}</td>
+        <td>{props.happiness}</td>
+        <td>{props.version}</td>
 			
-			<td>{props.name}</td>
-		
-            <td>{props.bpm}</td>
-		
-            <td>{props.tone}</td>
-		
-            <td>{props.dance}</td>
-		
-            <td>{props.energy}</td>
-		
-			<td>{props.happiness}</td>
-		
-			<td>{props.version}</td>
-			
-			<td>{<button style={{backgroundColor: 'lightblue', display: 'block', margin: 'auto'}}>▶</button>}</td>
-			<td>{<button style={{backgroundColor: 'lightgreen', display: 'block', margin: 'auto'}}>Ы</button>}</td>
-			<td>{<button style={{backgroundColor: 'red', display: 'block', margin: 'auto'}}>X</button>}</td>
-        </tr>
-	</>
-    )
+        <td>{<button style={{backgroundColor: 'lightblue', display: 'block', margin: 'auto'}}>▶</button>}</td>
+        <td>{<button style={{backgroundColor: 'lightgreen', display: 'block', margin: 'auto'}}>Ы</button>}</td>
+        <td>{<button style={{backgroundColor: 'red', display: 'block', margin: 'auto'}}>X</button>}</td>
+      </tr>
+    </>
+  )
 }
 
 function DataList(props) {
-	let results = props.data.map((res, i)=> {
-        return <Result key={i} bpm={res.bpm} name={res.name} tone={res.tone} dance={res.dance} energy={res.energy} happiness={res.happiness} version={res.version} date={res.date}/>
-    });
-    if(results.length < 1){
-        return <div>No results were yet saved</div>
-    }
-
-    return(
-		<>
-			{results}
-		</>
-	);
+  let results = props.data.map((res, i)=> {
+    return <Result key={i} bpm={res.bpm} name={res.name} tone={res.tone} dance={res.dance} energy={res.energy} happiness={res.happiness} version={res.version} date={res.date}/>
+  });
+  if(results.length < 1){
+    return <div>No results were yet saved</div>
+  }
+  return(
+    <>
+      {results}
+    </>
+  );
 }
 
 function Table(props) {
-	return (
-      <div>
-        <table>
-            <tr>
-				<th>Date</th>
-				<th>Name</th>
-                <th>BPM</th>
-                <th>Tone</th>
-                <th>Danceability</th>
-                <th>Energy</th>
-				<th>Happiness</th>
-				<th>Version</th>
-				
-				<th style={{textAlign: 'center'}}>Play</th>
-				<th style={{textAlign: 'center'}}>Upload</th>
-				<th style={{textAlign: 'center'}}>Delete</th>
-            </tr>
-			<DataList data={props.data} />
-        </table>
-	  </div>);
+  return (
+    <div>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>BPM</th>
+          <th>Tone</th>
+          <th>Danceability</th>
+          <th>Energy</th>
+          <th>Happiness</th>
+          <th>Version</th>
+
+          <th style={{textAlign: 'center'}}>Play</th>
+          <th style={{textAlign: 'center'}}>Upload</th>
+          <th style={{textAlign: 'center'}}>Delete</th>
+        </tr>
+        <DataList data={props.data} />
+      </table>
+  </div>);
 }
 
 function PageButton(props){
