@@ -34,7 +34,7 @@ function App() {
                   to="/history"
                 >
                   <span>My History</span>
-                  <Icon.List size={20} />
+                  <Icon.Book size={20} />
                 </NavLink>{" "}
               </li>
               <li>
@@ -50,7 +50,7 @@ function App() {
                       <span id="userLogin">
                         {user}
                       </span>
-                      <Icon.LogIn size={20} />
+                      <Icon.LogOut size={20} />
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className
