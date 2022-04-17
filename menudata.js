@@ -42,6 +42,7 @@ var menudata={children:[
 {text:"Функции",url:"namespacemembers_func.html",children:[
 {text:"a",url:"namespacemembers_func.html#index_a"},
 {text:"c",url:"namespacemembers_func.html#index_c"},
+{text:"d",url:"namespacemembers_func.html#index_d"},
 {text:"g",url:"namespacemembers_func.html#index_g"},
 {text:"i",url:"namespacemembers_func.html#index_i"},
 {text:"l",url:"namespacemembers_func.html#index_l"},

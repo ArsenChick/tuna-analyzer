@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['happiness_0',['happiness',['../classapp_1_1models_1_1Result.html#ac990f6b11cf15e4e1c48496224aea96b',1,'app::models::Result']]]
+  ['file_0',['file',['../classapp_1_1models_1_1Result.html#a40a5d58ffa6e88aa578d6683ac413105',1,'app::models::Result']]]
 ];

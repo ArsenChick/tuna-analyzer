@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['id_0',['id',['../classapp_1_1models_1_1User.html#acf2488b95c97e0378c9bf49de3b50f28',1,'app.models.User.id()'],['../classapp_1_1models_1_1Tone.html#acf2488b95c97e0378c9bf49de3b50f28',1,'app.models.Tone.id()'],['../classapp_1_1models_1_1Result.html#acf2488b95c97e0378c9bf49de3b50f28',1,'app.models.Result.id()']]],
-  ['idtone_1',['idTone',['../classapp_1_1models_1_1Result.html#a1fabc7e1a04aa486ae14a1c56abe862b',1,'app::models::Result']]],
-  ['iduser_2',['idUser',['../classapp_1_1models_1_1Result.html#ad6f2e86eb020cc1781a81cef1d020f1c',1,'app::models::Result']]],
-  ['isdeleted_3',['isDeleted',['../classapp_1_1models_1_1Result.html#ab850ea8056fcccd43bbaedf46259f23f',1,'app::models::Result']]]
+  ['happiness_0',['happiness',['../classapp_1_1models_1_1Result.html#ac990f6b11cf15e4e1c48496224aea96b',1,'app::models::Result']]]
 ];

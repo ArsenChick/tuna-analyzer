@@ -6,5 +6,6 @@ var searchData=
   ['date_3',['date',['../classapp_1_1models_1_1Result.html#ade6a701b82b93dfb7eae4e79cd3b18a6',1,'app::models::Result']]],
   ['db_4',['db',['../namespaceapp.html#a89a7f6028a19c3dc081cc5f16eb53891',1,'app']]],
   ['defaultconfig_5',['DefaultConfig',['../classapp_1_1config_1_1DefaultConfig.html',1,'app::config']]],
-  ['dev_6',['Dev',['../classapp_1_1config_1_1Dev.html',1,'app::config']]]
+  ['delete_5fresult_6',['delete_result',['../namespaceapp_1_1data__manager.html#a7d8b669fb08dabe414db41b36569dc6c',1,'app::data_manager']]],
+  ['dev_7',['Dev',['../classapp_1_1config_1_1Dev.html',1,'app::config']]]
 ];
