@@ -1,7 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import * as Yup from "yup";
-
 import '../scss/auth.scss';
 
 function Auth() {
