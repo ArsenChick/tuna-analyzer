@@ -7,5 +7,5 @@ var searchData=
   ['signup_2ejs_4',['Signup.js',['../Signup_8js.html',1,'']]],
   ['sqlalchemy_5fdatabase_5furi_5',['SQLALCHEMY_DATABASE_URI',['../classapp_1_1config_1_1Prod.html#a534c16fa625d68455ffaf8aaecf769cd',1,'app.config.Prod.SQLALCHEMY_DATABASE_URI()'],['../classapp_1_1config_1_1Dev.html#a534c16fa625d68455ffaf8aaecf769cd',1,'app.config.Dev.SQLALCHEMY_DATABASE_URI()'],['../classapp_1_1config_1_1Test.html#a534c16fa625d68455ffaf8aaecf769cd',1,'app.config.Test.SQLALCHEMY_DATABASE_URI()']]],
   ['sqlalchemy_5ftrack_5fmodifications_6',['SQLALCHEMY_TRACK_MODIFICATIONS',['../classapp_1_1config_1_1DefaultConfig.html#ad1d290f8385a5b88c6fb0896220c0c1f',1,'app::config::DefaultConfig']]],
-  ['static_5ffile_7',['static_file',['../namespaceapp_1_1main.html#aade60135843864a52264b450a0ac6f59',1,'app::main']]]
+  ['static_5ffile_7',['static_file',['../namespaceapp_1_1main.html#a55bc4cab78926ae4ca0ab8f29a6d637f',1,'app::main']]]
 ];
