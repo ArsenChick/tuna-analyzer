@@ -108,12 +108,16 @@ def get_saves_ids():
     user: User = User.query.filter_by(username=current_username).first()
     current_idUser = user.id
 
-    results = Result.query.filter_by(idUser=current_idUser).with_entities(Result.id).all()
+    results = Result.query.filter_by(
+        idUser=current_idUser,
+        isDeleted=False
+    ).with_entities(Result.id).all()
+
     ids = [id[0] for id in results]
     return {
-               "msg": "Request done",
+        "msg": "Request done",
                "ids": ids
-           }, 200
+    }, 200
 
 ## Функция получения загруженного аудиофайла.
 #
@@ -131,16 +135,15 @@ def get_file():
     file_path = result.file
     f = open(file_path, 'rb')
     file_content = base64.b64encode(f.read()).decode('utf-8')
-    print(file_content)
     f.close()
     file_name = os.path.basename(result.file)
     return {
-               "msg": "Request done",
+        "msg": "Request done",
                "file": {
                    "filename": file_name,
                    "content": file_content
                }
-           }, 200
+    }, 200
 
 ## Функция получения результатов анализа.
 #
@@ -152,12 +155,12 @@ def get_result():
     idRes = request.args.get("id", None)
     if idRes == None:
         return {'msg': 'No id'}, 422
-    result: Result = Result.query.filter_by(id=idRes).first()
+    result: Result = Result.query.filter_by(id=idRes, isDeleted=False).first()
     if result == None:
         return {'msg': 'No such entry'}, 404
     #tone: Tone = Tone.query.filter_by(id=result.idTone).first()
     return {
-               "msg": "Сообщение об успехе",
+        "msg": "Ok",
                "bpm": result.bpm,
                "tone": result.idTone,
                "dance": result.dance,
@@ -165,4 +168,26 @@ def get_result():
                "happiness": result.happiness,
                "version": result.version,
                "date": result.date
-           }, 200
+    }, 200
+
+## Функция получения результатов анализа.
+#
+#  Удаляет результаты анализа  по их идентификатору.
+#  Метод DELETE.
+@data_manager.route('/api/delete_result', methods=['DELETE'])
+@jwt_required()
+def delete_result():
+    idRes = request.args.get("id", None)
+    if idRes == None:
+        return {'msg': 'No id'}, 422
+
+    result: Result = Result.query.filter_by(id=idRes, isDeleted=False).first()
+    if result == None:
+        return {'msg': 'No such entry'}, 404
+
+    result.isDeleted = True
+    db.session.commit()
+
+    return {
+        'msg': 'Ok',
+    }, 200

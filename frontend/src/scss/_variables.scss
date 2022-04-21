@@ -2,18 +2,19 @@
  *  Цвета и шрифт 
  */
 //Основное
-$logoTittleColor: #ffffff;
+$logoTittleLeftColor: #51d9e5;
+$logoTittleRightColor: #e551e4;
 $bgPageColor: #ffffff;
 $textColor: #ffffff;
 $titleColor: #afafaf;
 $smallTitleColor: #afafaf;
-// Верхняя панель
+//Верхняя панель
 $bigTopNavColor: #001a3b;
 $bigTopNavColorDarkTheme: #0d1422;
 $smallTopNavColor: #bfb9ff;
 $smallTopNavColorDarkTheme: #b4b0e2;
 $navButtonColor: #092850;
-$navButtonTextColor: #afafaf;
+$navButtonTextColor: #d4d4d4;
 $navButtonHoverColor: #0c2f5c;
 $navButtonColorDarkTheme: #121e37;
 $navButtonTextColorDarkTheme: #afafaf;
@@ -22,9 +23,9 @@ $navPlayButtonColor: #b4b0e2;
 $sliderColor: #e5e5e5;
 $sliderPointColor: #f7f7f7;
 $smallTopNavTextColor: #f7f7f7;
-$selectedButtonTextColor: #ff9999;
+$selectedButtonTextColor: #f48a9a;
 //История анализа
-$textSelectedColor: #9593d8;
+$selectedTextColor: #9593d8;
 $signColor: #afafaf;
 $recordColor: #7fafe5;
 $recordTextColor: #856285;
@@ -45,13 +46,17 @@ $authButtonPointBgColor: #e2e2e2;
 $authSelectedButtonPointBgColor: #9593d8;
 //Анализатор
 $mainTitleColor: #dedeff;
-$dragAndDropZoneColor: #efefef;
+$selectedWordColor: #9593d8;
+$dragAndDropZoneColor: #f5f5ff;
+$dragAndDropActiveZoneColor: #d2ceff;;
 $dragAndDropSmallZoneColor: #dedeff;
-$dragAndDropZoneBorderColor: #bfb9ff;
-$dragAndDropZoneTextColor: #9593d8;
+$dragAndDropZoneBorderColor: #d2ceff;
 $foggingColor: #ffffff;
-$selectFileButtonColor: #bfb9ff;
-$hintColor: #f7f7f7;
+$selectButtonColor: #dbd8ff;
+$selectButtonColorDarkTheme: #b1ace6;
+$selectButtonTextColor: #aface6;
+$selectButtonTextColorDarkTheme: #7e79ba;
+$hintBackgroundColor: #f7f7f7;
 $hintBorderColor: #838385;
 $hintTextColor: #4e4e50;
 
@@ -59,20 +64,20 @@ $hintTextColor: #4e4e50;
  *  Прозрачность 
  */
 //Основное
-$mainTitleOpacity: 37%;
+$mainTitleOpacity: .37;
 //Запись
-$recordOpacity: 10%;
-$fileButtonOpacity: 57%;
+$recordOpacity: .10;
+$fileButtonOpacity: .57;
 //История анализа
-$pageNumOpacity: 22%;
+$pageNumOpacity: .22;
 //Авторизация
-$authBoarderOpacity: 87%;
-$authButtonTextOpacity: 87%;
+$authBoarderOpacity: .87;
+$authButtonTextOpacity: .87;
 //Анализатор
-$dragAndDropZoneOpacity: 37%;
-$dragAndDropBorderZoneOpacity: 87%;
-$foggingOpacity: 34%;
-$selectFileButtonOpacity: 49%;
+$dragAndDropZoneOpacity: .93;
+$dragAndDropBorderZoneOpacity: .87;
+$foggingOpacity: .34;
+$selectFileButtonOpacity: .49;
 
 /* 
  *  Толщина рамок 
@@ -130,9 +135,9 @@ $recordDownloadButtonCornerRounding: 15px;
 $recordDeleteButtonCornerRounding: 15px;
 
 /* 
- *  Тень
+ *  Градиент
  */
-
+$logoTittleColor: linear-gradient(to right, $logoTittleLeftColor, $logoTittleRightColor);
 
 /*
  *  Размеры

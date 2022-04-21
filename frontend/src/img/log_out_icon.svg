@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.4 27.2">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #afafaf;
+      }
+
+      .cls-2 {
+        fill: #062649;
+        stroke: #062649;
+      }
+
+      .cls-2, .cls-3 {
+        stroke-linecap: round;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        stroke-linejoin: round;
+      }
+
+      .cls-2, .cls-4 {
+        stroke-width: 2.5px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+        stroke: #afafaf;
+      }
+
+      .cls-3 {
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="Слой_2" data-name="Слой 2">
+    <g id="Лого">
+      <g id="Log_out" data-name="Log out">
+        <rect class="cls-1" width="20.7" height="27.19" rx="3"/>
+        <g>
+          <line class="cls-2" x1="10.9" y1="13.8" x2="28.5" y2="13.8"/>
+          <g>
+            <line class="cls-3" x1="24.8" y1="8.9" x2="29.4" y2="13.5"/>
+            <line class="cls-3" x1="24" y1="19" x2="29.4" y2="13.7"/>
+          </g>
+          <line class="cls-4" x1="20.7" y1="13.8" x2="29.1" y2="13.8"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -5,12 +5,16 @@ from flask_jwt_extended import (
     JWTManager, create_access_token, get_jwt, get_jwt_identity, jwt_required
 )
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 
 ## Объект для работы с базой данных
 db = SQLAlchemy()
 
 ## Объект для работы с JWT токенами
 jwt = JWTManager()
+
+## Временное решение, надо разобраться с JS
+cors = CORS()
 
 ## "Фабрика" для создания приложения
 #
@@ -24,6 +28,7 @@ def create_app(config='app.config.DefaultConfig'):
     app.config.from_object(config)
     db.init_app(app)
     jwt.init_app(app)
+    cors.init_app(app)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

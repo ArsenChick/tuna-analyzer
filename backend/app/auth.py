@@ -4,6 +4,7 @@
 #  Эндпоинты для входа, регистрации и выхода пользователя
 
 from flask import Blueprint, jsonify, request
+from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, unset_jwt_cookies
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -18,6 +19,7 @@ auth = Blueprint('auth', __name__)
 #  Обрабатывает форму для входа.
 #  Метод POST.
 @auth.route('/api/login', methods=['POST'])
+@cross_origin()
 def login():
     json_data: dict = request.get_json()
 
@@ -48,6 +50,7 @@ def login():
 #  Обрабатывает форму для регистрации.
 #  Метод POST.
 @auth.route('/api/signup', methods=['POST'])
+@cross_origin()
 def signup():
     json_data: dict = request.get_json()
 
@@ -97,6 +100,7 @@ def signup():
 #  Обрабатывает запрос на выход из системы.
 #  Метод GET.
 @auth.route('/api/logout', methods=['GET'])
+@cross_origin()
 def logout():
     response = jsonify({"msg": "Logout ok"})
     unset_jwt_cookies(response)

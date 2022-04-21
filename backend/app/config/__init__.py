@@ -11,7 +11,7 @@ class DefaultConfig(object):
     ## Отслеживать изменения объектов и посылать сигналы
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ## Директория для загрузки файлов
-    UPLOAD_FOLDER = "../tuna_uploads"
+    UPLOAD_FOLDER = "/tuna_uploads"
     ## Время жизни JWT токена
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=24)
     ## Место хранения JWT токена

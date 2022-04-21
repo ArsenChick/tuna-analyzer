@@ -13,9 +13,9 @@ function Signup() {
         <h2>You should logout first!</h2>
       </div>
     );
-  
+
   return (
-    <div>
+    <div className="page-content sign-up-page">
       <h2>Sign up to Tuna</h2>
       <Formik
         initialValues={{
