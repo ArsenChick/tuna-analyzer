@@ -17,3 +17,8 @@ def index():
 @main.route('/<path:path>')
 def static_file(path):
     return current_app.send_static_file(path)
+
+## Возврщает файл из директории workers
+@main.route('/workers/<path:path>')
+def static_file(path):
+    return current_app.send_static_file(path)
