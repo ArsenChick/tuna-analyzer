@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['save_5fresults_0',['save_results',['../namespaceapp_1_1data__manager.html#ab480e61dbb3ef40b334b4adb0fb10c67',1,'app::data_manager']]],
-  ['signup_1',['signup',['../namespaceapp_1_1auth.html#ad8d914ebbecbc4bcaf59750fb7a0cd18',1,'app::auth']]],
-  ['static_5ffile_2',['static_file',['../namespaceapp_1_1main.html#a55bc4cab78926ae4ca0ab8f29a6d637f',1,'app::main']]]
+  ['models_5ffile_0',['models_file',['../namespaceapp_1_1main.html#ac14739c4b5f065ace07993cc8625bb87',1,'app::main']]],
+  ['modules_5ffile_1',['modules_file',['../namespaceapp_1_1main.html#abfca8dc891c9b3b5257317a0d278c4e8',1,'app::main']]]
 ];
