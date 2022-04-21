@@ -1,8 +1,6 @@
 import { EssentiaTFInputExtractor } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js-model.es.js";
 import { EssentiaWASM } from 'https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia-wasm.es.js';
 
-console.log('hello');
-
 const extractor = new EssentiaTFInputExtractor(EssentiaWASM, 'musicnn', false);
 
 function outputFeatures(f) {
@@ -14,7 +12,6 @@ function computeFeatures(audioData) {
   
   const features = extractor.computeFrameWise(audioData, 256);
   console.info(`Feature extraction took: ${Date.now() - featuresStart}`);
-  console.log(features);
 
   return features;
 }

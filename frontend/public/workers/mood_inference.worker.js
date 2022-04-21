@@ -1,4 +1,7 @@
 /* eslint-disable no-undef */
+// import * as tf from "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.es2017.js";
+// import { setWasmPaths } from "";
+// import { TensorflowMusiCNN } from "https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js-model.es.js";
 importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs");
 importScripts("https://cdn.jsdelivr.net/npm/essentia.js@0.1.3/dist/essentia.js-model.umd.js");
 
@@ -7,15 +10,18 @@ let modelName = "";
 let modelLoaded = false;
 let modelReady = false;
 
+console.log(tf.getBackend());
+
 const modelTagOrder = {
   'mood_happy': [true, false],
+  'mood_aggressive': [true, false],
   'danceability': [true, false]
 };
 
 function initModel() {
-  model = new EssentiaModel.TensorflowMusiCNN(tf, getModelURL(modelName));
+  model = new TensorflowMusiCNN(tf, getModelURL());
   
-  loadModel(modelName).then((isLoaded) => {
+  loadModel().then((isLoaded) => {
     if (isLoaded) {
       modelLoaded = true;
       // perform dry run to warm them up
@@ -73,7 +79,7 @@ function outputPredictions(p) {
   postMessage({ predictions: p });
 }
 
-function twoValuesAverage (arrayOfArrays) {
+function twoValuesAverage(arrayOfArrays) {
   let firstValues = [];
   let secondValues = [];
 
@@ -93,7 +99,6 @@ function modelPredict(features) {
     const inferenceStart = Date.now();
 
     model.predict(features, true).then((predictions) => {
-      console.log(predictions);
       const summarizedPredictions = twoValuesAverage(predictions);
       // format predictions, grab only positive one
       const results = summarizedPredictions.filter((_, i) => modelTagOrder[modelName][i])[0];
@@ -101,7 +106,6 @@ function modelPredict(features) {
       console.info(`${modelName}: Inference took: ${Date.now() - inferenceStart}`);
       // output to main thread
       outputPredictions(results);
-      model.dispose();
     });
   }
 }

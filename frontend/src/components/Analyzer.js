@@ -2,31 +2,52 @@ import React from 'react';
 import { preprocess, shortenAudio } from '../scripts/audioUtils';
 import '../scss/analyzer.scss';
 
-const modelNames = ['mood_happy', 'danceability'];
+const moodModelNames = ['mood_happy', 'mood_aggressive', 'danceability'];
+
+const keyBPMWorkerPath = "./workers/core_extractor.worker.js";
+const extractorWorkerPath = "./workers/model_extractor.worker.js";
+const moodWorkerPath = "./workers/mood_inference.worker.js";
+// const energyWorkerPath = "./workers/energy_inference.worker.js";
+
 
 class Analyzer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      results: []
+    }
+
     this.handleUpload = this.handleUpload.bind(this);
     this.audioFile = React.createRef();
     
     this.actx = null;
-    this.inferenceWorkers = {};
-    this.keyBPMWorker = null;
-    this.featureExtractionWorker = null;
+    this.workers = {
+      keyBpm: null,
+      featureExtraction: null,
+      moodInference: {},
+      energyInference: null
+    };
+    this.activeWorkers = 0;
   }
 
   componentDidMount() {
-    modelNames.forEach((n) => { 
-      this.inferenceWorkers[n] = new Worker("./workers/model_inference.worker.js");
-      this.inferenceWorkers[n].onmessage = (msg) => {
-        if (msg.data.predictions) {
-          const preds = msg.data.predictions;
-          console.log(`${n} predictions: `, preds);
-        }
-      };
-      this.inferenceWorkers[n].postMessage({ name: n });
+    this.workers.keyBpm = new Worker(keyBPMWorkerPath, { type: 'module' });
+    this.workers.featureExtraction = new Worker(extractorWorkerPath, { type: 'module' });
+
+    moodModelNames.forEach((mood) => { 
+      this.workers.moodInference[mood] = new Worker(moodWorkerPath);
+      this.workers.moodInference[mood].postMessage({ name: mood });
     });
+
+    // try {
+    //   this.workers.moodInference['test'] = new Worker(moodWorkerPath, { type: 'module' });
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    // this.workers.moodInference['test'].postMessage({ name: 'mood_happy' });
+
+    // this.workers.energyInference = new Worker(energyWorkerPath);
+    // this.workers.energyInference.postMessage({ start: true });
   }
 
   handleUpload(event) {    
@@ -41,52 +62,127 @@ class Analyzer extends React.Component {
     }
 
     const audioFile = this.audioFile.current.files[0];
-    audioFile.arrayBuffer().then((ab) => {
-      this.analyzeFile(ab);
-    });
+    audioFile.arrayBuffer().then((ab) => this.analyzeFile(ab));
   }
 
   analyzeFile(arrayBuffer) {
     this.actx.resume().then(() => {
       this.actx.decodeAudioData(arrayBuffer).then(async (audioBuffer) => {
         console.info("Done decoding audio!");
+        let analyzePromises = [];
 
         const prepocessedAudio = preprocess(audioBuffer);
         await this.actx.suspend();
-        this.getKeyBPM(prepocessedAudio);
+        const keyBpmPromise = this.getKeyBpm(prepocessedAudio);
+        analyzePromises.push(keyBpmPromise);
 
         let audioData = shortenAudio(prepocessedAudio, 0.15, true);
-        this.extractFeaturesModel(audioData);
+        const featuresPromise = this.extractFeatures(audioData);
+        analyzePromises.push(featuresPromise);
+
+        await featuresPromise.then(async (features) => {
+          for (const mood of moodModelNames) {
+            const promise = this.getMoodPredictions(mood, features);
+            analyzePromises.push(promise);
+            await promise;
+          }
+        });
+
+        // Promise.all(analyzePromises).then((results) => {
+        //   const bpm = results[0].bpm;
+        //   const features = results[1];
+        //   this.getEnergyPredictions(bpm, features);
+        // });
+
+        Promise.all(analyzePromises).then((results) => {
+          results.splice(1, 1);
+          this.outputResults(...results);
+        });
       });
     });
   }
 
-  getKeyBPM(audioData) {
-    this.keyBPMWorker = new Worker("./workers/core_extractor.worker.js", { type: 'module' });
-    this.keyBPMWorker.onmessage = (msg) => {
-      if (msg.data.keyData && msg.data.bpm) {
-        console.log(msg.data);
+  getKeyBpm(audioData) {
+    const keyBpm = new Promise((resolve) => {
+      this.workers.keyBpm.onmessage = (msg) => {
+        if (msg.data.keyData && msg.data.bpm) {
+          resolve(msg.data);
+        }
       }
-    };
-    this.keyBPMWorker.postMessage({
-      audio: audioData.buffer,
     });
+    this.workers.keyBpm.postMessage({
+      audio: audioData.buffer
+    });
+    return keyBpm;
   }
 
-  extractFeaturesModel(audioData) {
-    this.featureExtractionWorker = new Worker("./workers/model_extractor.worker.js", { type: 'module' });
-    this.featureExtractionWorker.onmessage = (msg) => {
-      if (msg.data.features) {
-        modelNames.forEach((n) => {
-          this.inferenceWorkers[n].postMessage({
-            features: msg.data.features
-          });
-        });
-        msg.data.features = null;
-      }
-    };
-    this.featureExtractionWorker.postMessage({
+  extractFeatures(audioData) {
+    const features = new Promise((resolve) => {
+      this.workers.featureExtraction.onmessage = (msg) => {
+        if (msg.data.features) {
+          resolve(msg.data.features);
+        }
+      };
+    });
+    this.workers.featureExtraction.postMessage({
       audio: audioData.buffer
+    });
+    return features;
+  }
+
+  getMoodPredictions(mood, features) {
+    const moodPreds = new Promise((resolve) => {
+      this.workers.moodInference[mood].onmessage = (msg) => {
+        if (msg.data.predictions) {
+          resolve(msg.data.predictions);
+        }
+      };
+    });
+    this.workers.moodInference[mood].postMessage({
+      features: features
+    });
+    return moodPreds;
+  }
+
+  getEnergyPredictions(bpm, features) {
+    const energy = new Promise((resolve) => {
+      this.workers.energyInference.onmessage = (msg) => {
+        if (msg.data.predictions) {
+          const preds = msg.data.predictions;
+          console.log(`energy predictions: `, preds);
+          resolve(preds);
+        }
+      };
+    });
+    this.workers.energyInference.postMessage({
+      bpm: bpm, features: features
+    });
+    return energy;
+  }
+
+  outputResults(keyBpmData, happy, aggressive, dance) {
+    const prevState = this.state.results.slice();
+
+    const filename = this.audioFile.current.files[0].name;
+    const fullKeyName = `${keyBpmData.keyData.key} ${keyBpmData.keyData.scale}`;
+
+    const happyScaled = (10 * happy).toPrecision(2);
+    const aggressiveScaled = (10 * aggressive).toPrecision(2);
+    const danceScaled = (10 * dance).toPrecision(2);
+
+    const tableRow = (
+      <tr key={prevState.length}>
+        <td>{filename}</td>
+        <td>{Math.ceil(keyBpmData.bpm)}</td>
+        <td>{fullKeyName}</td>
+        <td>{happyScaled}</td>
+        <td>{aggressiveScaled}</td>
+        <td>{danceScaled}</td>
+      </tr>
+    );
+
+    this.setState({
+      results: [...prevState, tableRow]
     });
   }
 
@@ -99,24 +195,21 @@ class Analyzer extends React.Component {
           <button type="submit">Submit</button>
         </form>
         <div>
-          <div id="danceability">
-            <span>Danceability</span>
-            <div data-classifier="Danceability"></div>
-          </div>
-          <div id="mood_happy">
-            <span>Happy</span>
-            <div data-classifier="Happy"></div>
-          </div>
-          <div id="bpm-and-key">
-            <div id="bpm">
-              <div>BPM</div>
-              <div id="bpm-value"></div>
-            </div>
-            <div id="key">
-              <div>Key</div>
-              <div id="key-value"></div>
-            </div>
-          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Filename</th>
+                <th>BPM</th>
+                <th>Key</th>
+                <th>Happiness</th>
+                <th>Aggressiveness</th>
+                <th>Danceability</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.results}
+            </tbody>
+          </table>
         </div>
       </div>      
     );

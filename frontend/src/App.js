@@ -15,7 +15,7 @@ function App() {
               <h1 id="logo-tittle">Tuna</h1>
             </Link>
           </header>
-          <nav class="sections">
+          <nav className="sections">
             <ul>
               <li>
                 <NavLink
