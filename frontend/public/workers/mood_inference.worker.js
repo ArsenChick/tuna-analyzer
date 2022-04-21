@@ -10,8 +10,6 @@ let modelName = "";
 let modelLoaded = false;
 let modelReady = false;
 
-console.log(tf.getBackend());
-
 const modelTagOrder = {
   'mood_happy': [true, false],
   'mood_aggressive': [true, false],
@@ -19,7 +17,8 @@ const modelTagOrder = {
 };
 
 function initModel() {
-  model = new TensorflowMusiCNN(tf, getModelURL());
+  console.log('hello');
+  model = new EssentiaModel.TensorflowMusiCNN(tf, getModelURL());
   
   loadModel().then((isLoaded) => {
     if (isLoaded) {

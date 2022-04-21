@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { preprocess, shortenAudio } from '../scripts/audioUtils';
 import '../scss/analyzer.scss';
-import React, { useState, useEffect } from 'react';
 
 const moodModelNames = ['mood_happy', 'mood_aggressive', 'danceability'];
 
@@ -111,7 +110,7 @@ function DragAndDrop(props) {
     >
       <p className="dnd-unselectable-p">Drag&drop file here</p>
       <p className="dnd-unselectable-p" style={{fontSize: 28}}>or</p>
-      <FileUploader handleFile={handleFile}></FileUploader>
+      <FileUploader handleFile={props.dropFunction}></FileUploader>
       {file.length > 1 &&
         <p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>
           Drag files by one at time
@@ -125,12 +124,6 @@ function DragAndDrop(props) {
 	  </div>
   );
 }
-
-
-function handleFile(file) {
-	console.log(file.name);
-}
-
 
 const Description = () => {
   return (
@@ -359,7 +352,7 @@ class Analyzer extends React.Component {
   outputResults(keyBpmData, happy, aggressive, dance) {
     const prevState = this.state.results.slice();
 
-    const filename = this.audioFile.current.files[0].name;
+    const filename = this.audioFile.name;
     const fullKeyName = `${keyBpmData.keyData.key} ${keyBpmData.keyData.scale}`;
 
     const happyScaled = (10 * happy).toPrecision(2);

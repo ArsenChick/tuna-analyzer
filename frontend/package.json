@@ -18,9 +18,8 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "winwasm": "PowerShell -Command cp node_modules/@tensorflow/tfjs-backend-wasm/dist/tfjs-backend-wasm.wasm ./public/modules -Force",
-    "start": "npm run winwasm && react-scripts start",
-    "build": "npm run winwasm && react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
