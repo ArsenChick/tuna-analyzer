@@ -1,11 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
 import * as Yup from "yup";
-
-import '../scss/auth.scss';
+import "../scss/auth.scss";
 
 function Auth() {
   const [user, setUser] = useOutletContext();
+  const [fail, setFail] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "access_token",
+    "username",
+  ]);
   const navigate = useNavigate();
 
   if (user)
@@ -32,10 +38,31 @@ function Auth() {
         })}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-            setUser(values.username);
-            navigate("/");
+            var m = JSON.stringify(values, null, 2);
+            var requestOptions = {
+              mode: "cors",
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: m,
+            };
+            fetch("/api/login", requestOptions)
+              .then((response) => response.json())
+              .then((data) => {
+                if ("access_token" in data) {
+                  setFail(false);
+                  setCookie("access_token", data.access_token);
+                  setCookie("username", values.username);
+                  console.log(data.access_token);
+                  setSubmitting(false);
+                  setUser(values.username);
+                  navigate("/");
+                } else {
+                  setFail(true);
+                }
+              });
           }, 400);
         }}
       >
@@ -56,12 +83,12 @@ function Auth() {
           <button type="submit">Log in</button>
         </Form>
       </Formik>
+      {fail && <p style={{ color: "red" }}>Login failed</p>}
       <p>
-        Don't have an account?{" "}
-        <Link to="/signup">Sign up</Link>{" "}now!
+        Don't have an account? <Link to="/signup">Sign up</Link> now!
       </p>
     </div>
   );
-};
+}
 
 export default Auth;
