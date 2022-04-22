@@ -8,7 +8,7 @@ import "../scss/auth.scss";
 function Auth() {
   const [user, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [, setCookie] = useCookies([
     "access_token",
     "username",
   ]);

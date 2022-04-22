@@ -1,6 +1,6 @@
 import "../scss/history.scss";
-import React, { useState, useEffect, useCallback } from "react";
-import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
+import React, { useState, useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 function Result(props) {
@@ -251,7 +251,7 @@ export default function History() {
     } else {
       GR();
     }
-  }, [page, ids]);
+  }, [page, ids, cookies.access_token, navigate]);
 
   if (mdata === null) {
     return (

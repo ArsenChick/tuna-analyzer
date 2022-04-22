@@ -6,7 +6,7 @@ import '../scss/signup.scss';
 
 function Signup() {
   const [user, setUser] = useOutletContext();
-  const [cookies, setCookie, removeCookie] = useCookies(['access_token', 'username']);
+  const [, setCookie] = useCookies(['access_token', 'username']);
   const navigate = useNavigate();
 
   if (user)
