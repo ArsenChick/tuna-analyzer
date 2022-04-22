@@ -3,18 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.2",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^13.5.0",
-    "essentia.js": "^0.1.3",
     "formik": "^2.2.9",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
+    "react-cookie": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
-    "react-router-dom": "^6.2.2",
-    "react-scripts": "^5.0.0",
-    "timsort": "^0.3.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"
   },
@@ -43,6 +42,10 @@
     ]
   },
   "devDependencies": {
-    "sass": "^1.49.9"
-  }
+    "sass": "^1.50.1"
+  },
+  "description": "Клиентская часть Tuna analyzer",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
