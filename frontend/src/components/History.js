@@ -156,7 +156,7 @@ function Footer(props) {
 }
 
 export default function History() {
-  const [cookies, setCookie, removeCookie] = useCookies([
+  const [cookies] = useCookies([
     "access_token",
     "username",
   ]);
