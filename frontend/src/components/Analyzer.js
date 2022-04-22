@@ -1,43 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { preprocess, shortenAudio } from '../scripts/audioUtils';
-import '../scss/analyzer.scss';
+import React, { useState, useEffect } from "react";
+import { preprocess, shortenAudio } from "../scripts/audioUtils";
+import "../scss/analyzer.scss";
 
-const moodModelNames = ['mood_happy', 'mood_aggressive', 'danceability'];
+const moodModelNames = ["mood_happy", "mood_aggressive", "danceability"];
 
 const keyBPMWorkerPath = "./workers/core_extractor.worker.js";
 const extractorWorkerPath = "./workers/model_extractor.worker.js";
 const moodWorkerPath = "./workers/mood_inference.worker.js";
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
 
-const FileUploader = props => {
+const FileUploader = (props) => {
   const hiddenFileInput = React.useRef(null);
-  const handleClick = event => {
+  const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
-  const handleChange = event => {
+  const handleChange = (event) => {
     if (event.target.files.length === 1) {
       const fileUploaded = event.target.files[0];
-      if (fileUploaded.type === 'audio/mpeg' ||
-          fileUploaded.type === 'audio/ogg' ||
-          fileUploaded.type === 'audio/wav' ||
-          fileUploaded.type === 'audio/flac') {
+      if (
+        fileUploaded.type === "audio/mpeg" ||
+        fileUploaded.type === "audio/ogg" ||
+        fileUploaded.type === "audio/wav" ||
+        fileUploaded.type === "audio/flac"
+      ) {
         props.handleFile(fileUploaded);
         props.setUnv(false);
-      }
-      else {
-	props.setUnv(true);
+      } else {
+        props.setUnv(true);
       }
     }
   };
-  
+
   return (
     <>
-	  <button className="dnd-select-button" onClick={handleClick}>Select file </button>
-      <input type="file" accept=".mp3,.wav,.ogg,.flac" ref={hiddenFileInput} onChange={handleChange} style={{display:'none'}} /> 
+      <button className="dnd-select-button" onClick={handleClick}>
+        Select file{" "}
+      </button>
+      <input
+        type="file"
+        accept=".mp3,.wav,.ogg,.flac"
+        ref={hiddenFileInput}
+        onChange={handleChange}
+        style={{ display: "none" }}
+      />
     </>
   );
 };
-
 
 function DragAndDrop(props) {
   const [drag, setDrag] = useState(0);
@@ -50,46 +58,45 @@ function DragAndDrop(props) {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleDragEnter = event => {
+  const handleDragEnter = (event) => {
     event.preventDefault();
-	  d++;
+    d++;
     setDrag(true);
   };
 
-  const handleDragOver = event => {
+  const handleDragOver = (event) => {
     event.preventDefault();
-	  event.stopPropagation();
-    
+    event.stopPropagation();
     if (drag) d = 1;
     if (d > 0) setDrag(true);
     if (d <= 0) setDrag(false);
   };
 
-  const handleDragLeave = event => {
+  const handleDragLeave = (event) => {
     event.preventDefault();
-	  d--;
+    d--;
     if (d <= 0) {
       setDrag(false);
     }
   };
 
-  const handleDrop = event => {
+  const handleDrop = (event) => {
     event.preventDefault();
-	  setUnvalid(false);
+    setUnvalid(false);
     setDrag(false);
-    
+
     let files = [...event.dataTransfer.files];
     setFile(files);
     d = 0;
-    
+
     if (files.length === 1) {
-      if (files[0].type === 'audio/mpeg' ||
-         files[0].type === 'audio/ogg' ||
-         files[0].type === 'audio/wav' ||
-         files[0].type === 'audio/flac') {
-        return(
-          <div>{props.dropFunction(files[0])}</div>
-        );
+      if (
+        files[0].type === "audio/mpeg" ||
+        files[0].type === "audio/ogg" ||
+        files[0].type === "audio/wav" ||
+        files[0].type === "audio/flac"
+      ) {
+        return <div>{props.dropFunction(files[0])}</div>;
       } else {
         setUnvalid(true);
       }
@@ -107,6 +114,7 @@ function DragAndDrop(props) {
         onDragEnter={event => handleDragEnter(event)}
       >
       <p className="dnd-unselectable-p">Drag&drop file here</p>
+
       </div>
     );
   }
@@ -115,22 +123,33 @@ function DragAndDrop(props) {
     <div
       id="dnd-container"
       className="dnd-container"
-      onDragEnter={event => handleDragEnter(event)}
+      onDragEnter={(event) => handleDragEnter(event)}
     >
       <p className="dnd-unselectable-p">Drag&drop file here</p>
-      <p className="dnd-unselectable-p" style={{fontSize: 28}}>or</p>
-      <FileUploader setUnv={setUnvalid} handleFile={props.dropFunction}></FileUploader>
-      {file.length > 1 &&
-        <p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>
+      <p className="dnd-unselectable-p" style={{ fontSize: 28 }}>
+        or
+      </p>
+      <FileUploader
+        setUnv={setUnvalid}
+        handleFile={props.dropFunction}
+      ></FileUploader>
+      {file.length > 1 && (
+        <p
+          className="dnd-unselectable-p"
+          style={{ fontSize: 16, color: "red" }}
+        >
           Drag files by one at time
         </p>
-      }
-      {unvalid === true &&
-        <p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>
+      )}
+      {unvalid === true && (
+        <p
+          className="dnd-unselectable-p"
+          style={{ fontSize: 16, color: "red" }}
+        >
           Unsupported format
         </p>
-      }
-	  </div>
+      )}
+    </div>
   );
 }
 
@@ -418,3 +437,4 @@ class Analyzer extends React.Component {
 }
 
 export default Analyzer;
+
