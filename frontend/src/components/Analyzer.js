@@ -12,13 +12,22 @@ const moodWorkerPath = "./workers/mood_inference.worker.js";
 const FileUploader = props => {
   const hiddenFileInput = React.useRef(null);
   const handleClick = event => {
-	  hiddenFileInput.current.click();
+    hiddenFileInput.current.click();
   };
   const handleChange = event => {
-	  if (event.target.files.length === 1) {
-		  const fileUploaded = event.target.files[0];
-		  props.handleFile(fileUploaded);
-	  }
+    if (event.target.files.length === 1) {
+      const fileUploaded = event.target.files[0];
+      if (fileUploaded.type === 'audio/mpeg' ||
+          fileUploaded.type === 'audio/ogg' ||
+          fileUploaded.type === 'audio/wav' ||
+          fileUploaded.type === 'audio/flac') {
+        props.handleFile(fileUploaded);
+        props.setUnv(false);
+      }
+      else {
+	props.setUnv(true);
+      }
+    }
   };
   
   return (
@@ -110,7 +119,7 @@ function DragAndDrop(props) {
     >
       <p className="dnd-unselectable-p">Drag&drop file here</p>
       <p className="dnd-unselectable-p" style={{fontSize: 28}}>or</p>
-      <FileUploader handleFile={props.dropFunction}></FileUploader>
+      <FileUploader setUnv={setUnvalid} handleFile={props.dropFunction}></FileUploader>
       {file.length > 1 &&
         <p className="dnd-unselectable-p" style={{fontSize: 16, color: 'red'}}>
           Drag files by one at time
