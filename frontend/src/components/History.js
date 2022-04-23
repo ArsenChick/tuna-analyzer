@@ -209,7 +209,7 @@ export default function History() {
   const [mdata, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
-  const elementsPerPage = 2;
+  const elementsPerPage = 5;
   var pages = 1;
   const navigate = useNavigate();
 
