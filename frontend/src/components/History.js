@@ -144,7 +144,18 @@ function PageButton(props) {
 }
 function Footer(props) {
   var pageList = [];
-  for (var i = 0; i < props.pages; i++) {
+  var i = 0;
+  var max = 0;
+  if(props.curPage < 4){
+    max = 5;
+  } else if(props.pages - props.curPage < 3) {
+    i = props.pages - 5;
+    max = props.pages;
+  } else {
+    i = props.curPage - 3;
+    max = props.curPage + 2;
+  }
+  for (; i < max; i++) {
     pageList.push(i + 1);
   }
   let buttons = pageList.map((i) => {
@@ -152,7 +163,42 @@ function Footer(props) {
       <PageButton id={i} handler={props.handler} curPage={props.curPage} />
     );
   });
-  return <div style={{ width: "100%", textAlign: "center" }}>{buttons}</div>;
+  return(
+    <div style={{ width: "100%", textAlign: "center" }}>
+      <button
+        style={{ display: "inline-block" }}
+        onClick={() => {
+          props.handler(1);
+        }}
+      >
+        {'<<'}
+      </button>
+      <button
+        style={{ display: "inline-block" }}
+        onClick={() => {
+          props.handler(props.curPage - 1);
+        }}
+      >
+        {'<'}
+      </button>
+      {buttons}
+      <button
+        style={{ display: "inline-block" }}
+        onClick={() => {
+          props.handler(props.curPage + 1);
+        }}
+      >
+        {'>'}
+      </button>
+      <button
+        style={{ display: "inline-block" }}
+        onClick={() => {
+          props.handler(props.pages);
+        }}
+      >
+        {'>>'}
+      </button>
+    </div>);
 }
 
 export default function History() {
@@ -163,7 +209,7 @@ export default function History() {
   const [mdata, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
-  const elementsPerPage = 5;
+  const elementsPerPage = 2;
   var pages = 1;
   const navigate = useNavigate();
 
@@ -171,7 +217,14 @@ export default function History() {
     navigate("/");
   }
   const updateState = (val) => {
-    setPage(val);
+    if(val < 1){
+      setPage(1);
+    } else if(val > pages) {
+      setPage(pages);
+    }
+    else {
+      setPage(val);
+    }
   };
 
   useEffect(() => {
