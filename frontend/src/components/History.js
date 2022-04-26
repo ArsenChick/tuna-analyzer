@@ -290,11 +290,11 @@ export default function History() {
     const link = document.createElement('a');
     link.setAttribute('download', name.slice(37));
     var extension = name.slice(-3);
-    if(extension == "mp3"){
+    if(extension === "mp3"){
       link.setAttribute('href', 'data:audio/mpeg;charset=utf-8;base64,' + encodeURIComponent(content));
-    } else if (extension == "ogg") {
+    } else if (extension === "ogg") {
       link.setAttribute('href', 'data:application/ogg;charset=utf-8;base64,' + encodeURIComponent(content));
-    } else if (extension == "wav") {
+    } else if (extension === "wav") {
       link.setAttribute('href', 'data:audio/x-wav;charset=utf-8;base64,' + encodeURIComponent(content));
     } else {
       link.setAttribute('href', 'data:audio/x-flac;charset=utf-8;base64,' + encodeURIComponent(content));
