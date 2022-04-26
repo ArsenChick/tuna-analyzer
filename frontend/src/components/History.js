@@ -9,7 +9,7 @@ function Result(props) {
       <tr>
         <td>{props.date}</td>
 
-        <td>{props.name}</td>
+        <td>{props.name.slice(37)}</td>
 
         <td>{props.bpm}</td>
 
@@ -44,6 +44,9 @@ function Result(props) {
                 display: "block",
                 margin: "auto",
               }}
+              onClick={() => {
+                props.downloadFile(props.id);
+              }}
             >
               Ы
             </button>
@@ -56,6 +59,9 @@ function Result(props) {
                 backgroundColor: "red",
                 display: "block",
                 margin: "auto",
+              }}
+              onClick={() => {
+                props.deleteRes(props.id);
               }}
             >
               X
@@ -72,6 +78,7 @@ function DataList(props) {
     return (
       <Result
         key={i}
+		id={res.id}
         bpm={res.bpm}
         name={res.name}
         tone={res.tone}
@@ -80,6 +87,8 @@ function DataList(props) {
         happiness={res.happiness}
         version={res.version}
         date={res.date}
+        deleteRes={props.deleteRes}
+	    	downloadFile={props.downloadFile}
       />
     );
   });
@@ -108,7 +117,11 @@ function Table(props) {
           <th style={{ textAlign: "center" }}>Upload</th>
           <th style={{ textAlign: "center" }}>Delete</th>
         </tr>
-        <DataList data={props.data} />
+        <DataList 
+          data={props.data} 
+          deleteRes={props.deleteRes}
+          downloadFile={props.downloadFile}
+        />
       </table>
     </div>
   );
@@ -147,7 +160,9 @@ function Footer(props) {
   var i = 0;
   var max = 0;
   if(props.curPage < 4){
-    max = 5;
+	if(props.pages > 4)
+      max = 5;
+    else max = props.pages;
   } else if(props.pages - props.curPage < 3) {
     i = props.pages - 5;
     max = props.pages;
@@ -164,6 +179,8 @@ function Footer(props) {
     );
   });
   return(
+  <div>
+  {pageList.length > 0 &&
     <div style={{ width: "100%", textAlign: "center" }}>
       <button
         style={{ display: "inline-block" }}
@@ -171,34 +188,36 @@ function Footer(props) {
           props.handler(1);
         }}
       >
-        {'<<'}
+	    {'<<'}
       </button>
-      <button
+	  <button
         style={{ display: "inline-block" }}
         onClick={() => {
           props.handler(props.curPage - 1);
         }}
       >
-        {'<'}
+	    {'<'}
       </button>
       {buttons}
-      <button
+	  <button
         style={{ display: "inline-block" }}
         onClick={() => {
           props.handler(props.curPage + 1);
         }}
       >
-        {'>'}
+	    {'>'}
       </button>
-      <button
+	  <button
         style={{ display: "inline-block" }}
         onClick={() => {
           props.handler(props.pages);
         }}
       >
-        {'>>'}
+	    {'>>'}
       </button>
-    </div>);
+    </div>
+  }
+  </div>);
 }
 
 export default function History() {
@@ -209,7 +228,7 @@ export default function History() {
   const [mdata, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
-  const elementsPerPage = 5;
+  const elementsPerPage = 2;
   var pages = 1;
   const navigate = useNavigate();
 
@@ -217,15 +236,66 @@ export default function History() {
     navigate("/");
   }
   const updateState = (val) => {
-    if(val < 1){
-      setPage(1);
-    } else if(val > pages) {
-      setPage(pages);
-    }
+	if(val < 1){
+		setPage(1);
+	} else if(val > pages) {
+		setPage(pages);
+	}
     else {
-      setPage(val);
-    }
+		setPage(val);
+	}
   };
+  const deleteRes = async function (id){
+	  var requestOptions = {
+        mode: "cors",
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + cookies.access_token
+        },
+      };
+      await fetch("/api/delete_result?id=" + id, requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          var bid = [...ids];
+          var index = bid.indexOf(id)
+          if (index !== -1) {
+            bid.splice(index, 1);
+          }
+          setIds(bid);
+          pages = Math.ceil(ids.length / elementsPerPage);
+          if(page > Math.ceil(bid.length / elementsPerPage))
+            updateState(page - 1);
+        });
+  }
+
+  const downloadFile = async function (id){
+    var name = "";
+  	var content = "";
+    var requestOptions = {
+      mode: "cors",
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + cookies.access_token,
+        "Content-Type": "application/json",
+      },
+    };
+    await fetch("/api/get_file?id=" + id, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        name = data.file.filename;
+        content = data.file.content;
+      });
+    var blob = new Blob([content], {type: 'audio/mpeg'});
+  	var url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+	  link.setAttribute('download', name.slice(37));
+    link.setAttribute('href', 'data:audio/mpeg;charset=utf-8;base64,' + encodeURIComponent(content));
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   useEffect(() => {
     async function GI() {
@@ -273,7 +343,6 @@ export default function History() {
           .then((data) => {
             name = data.file.filename;
           });
-        name = name.slice(37);
         await fetch("/api/get_result?id=" + id, requestOptions)
           .then((response) => response.json())
           .then((data) => {
@@ -317,7 +386,11 @@ export default function History() {
     return (
       <main className="page-content history-page">
         <h2>History!</h2>
-        <Table data={mdata.data} />
+        <Table 
+		  data={mdata.data} 
+          deleteRes={deleteRes}
+          downloadFile={downloadFile}
+		/>
         <Footer
           handler={updateState}
           curPage={page}
