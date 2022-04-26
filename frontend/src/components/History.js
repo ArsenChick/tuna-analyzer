@@ -246,32 +246,32 @@ export default function History() {
 	}
   };
   const deleteRes = async function (id){
-	  var requestOptions = {
-        mode: "cors",
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + cookies.access_token
-        },
-      };
-      await fetch("/api/delete_result?id=" + id, requestOptions)
-        .then((response) => response.json())
-        .then((data) => {
-          var bid = [...ids];
-          var index = bid.indexOf(id)
-          if (index !== -1) {
-            bid.splice(index, 1);
-          }
-          setIds(bid);
-          pages = Math.ceil(ids.length / elementsPerPage);
-          if(page > Math.ceil(bid.length / elementsPerPage))
-            updateState(page - 1);
-        });
+    var requestOptions = {
+      mode: "cors",
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + cookies.access_token
+      },
+    };
+  await fetch("/api/delete_result?id=" + id, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      var bid = [...ids];
+      var index = bid.indexOf(id)
+      if (index !== -1) {
+        bid.splice(index, 1);
+      }
+      setIds(bid);
+      pages = Math.ceil(ids.length / elementsPerPage);
+      if(page > Math.ceil(bid.length / elementsPerPage))
+        updateState(page - 1);
+    });
   }
 
   const downloadFile = async function (id){
     var name = "";
-  	var content = "";
+    var content = "";
     var requestOptions = {
       mode: "cors",
       method: "GET",
@@ -287,10 +287,8 @@ export default function History() {
         name = data.file.filename;
         content = data.file.content;
       });
-    var blob = new Blob([content], {type: 'audio/mpeg'});
-  	var url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-	  link.setAttribute('download', name.slice(37));
+    link.setAttribute('download', name.slice(37));
     link.setAttribute('href', 'data:audio/mpeg;charset=utf-8;base64,' + encodeURIComponent(content));
     document.body.appendChild(link);
     link.click();
