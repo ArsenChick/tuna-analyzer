@@ -43,21 +43,20 @@ function Signup() {
             .required("Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            var m = (JSON.stringify(values, null, 2));
-            var requestOptions = {
-              mode: 'cors',
-              method: 'POST',
-              headers : {
-                'Accept': 'application/json',
-                'Content-Type' : 'application/json'
-              },
-              body: m
-            };
-            fetch("/api/signup", requestOptions)
+          var m = (JSON.stringify(values, null, 2));
+          var requestOptions = {
+            mode: 'cors',
+            method: 'POST',
+            headers : {
+              'Accept': 'application/json',
+              'Content-Type' : 'application/json'
+            },
+            body: m
+          };
+          fetch("/api/signup", requestOptions)
             .then(response => response.json())
             .then(data => {
-              if('access_token' in data){
+              if('access_token' in data) {
                 setCookie('access_token', data.access_token);
                 setCookie('username', values.username);
                 setSubmitting(false);
@@ -65,7 +64,6 @@ function Signup() {
                 navigate("/");
               }
             });
-          }, 400);
         }}
       >
         {(formik) => (

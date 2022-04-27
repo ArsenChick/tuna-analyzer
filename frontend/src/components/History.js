@@ -8,21 +8,13 @@ function Result(props) {
     <>
       <tr>
         <td>{props.date}</td>
-
         <td>{props.name.slice(37)}</td>
-
         <td>{props.bpm}</td>
-
         <td>{props.tone}</td>
-
         <td>{props.dance}</td>
-
         <td>{props.energy}</td>
-
         <td>{props.happiness}</td>
-
         <td>{props.version}</td>
-
         <td>
           {
             <button
@@ -78,7 +70,7 @@ function DataList(props) {
     return (
       <Result
         key={i}
-		id={res.id}
+		    id={res.id}
         bpm={res.bpm}
         name={res.name}
         tone={res.tone}
@@ -159,11 +151,11 @@ function Footer(props) {
   var pageList = [];
   var i = 0;
   var max = 0;
-  if(props.curPage < 4){
-	if(props.pages > 4)
+  if (props.curPage < 4) {
+    if (props.pages > 4)
       max = 5;
     else max = props.pages;
-  } else if(props.pages - props.curPage < 3) {
+  } else if (props.pages - props.curPage < 3) {
     i = props.pages - 5;
     max = props.pages;
   } else {
@@ -236,16 +228,16 @@ export default function History() {
     navigate("/");
   }
   const updateState = (val) => {
-	if(val < 1){
+	if (val < 1) {
 		setPage(1);
-	} else if(val > pages) {
+	} else if (val > pages) {
 		setPage(pages);
 	}
     else {
 		setPage(val);
 	}
   };
-  const deleteRes = async function (id){
+  const deleteRes = async function (id) {
     var requestOptions = {
       mode: "cors",
       method: "DELETE",
@@ -254,22 +246,22 @@ export default function History() {
         Authorization: "Bearer " + cookies.access_token
       },
     };
-  await fetch("/api/delete_result?id=" + id, requestOptions)
-    .then((response) => response.json())
-    .then((data) => {
-      var bid = [...ids];
-      var index = bid.indexOf(id)
-      if (index !== -1) {
-        bid.splice(index, 1);
-      }
-      setIds(bid);
-      pages = Math.ceil(ids.length / elementsPerPage);
-      if(page > Math.ceil(bid.length / elementsPerPage))
-        updateState(page - 1);
-    });
+    await fetch("/api/delete_result?id=" + id, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        var bid = [...ids];
+        var index = bid.indexOf(id)
+        if (index !== -1) {
+          bid.splice(index, 1);
+        }
+        setIds(bid);
+        pages = Math.ceil(ids.length / elementsPerPage);
+        if (page > Math.ceil(bid.length / elementsPerPage))
+          updateState(page - 1);
+      });
   }
 
-  const downloadFile = async function (id){
+  const downloadFile = async function (id) {
     var name = "";
     var content = "";
     var requestOptions = {
@@ -394,10 +386,10 @@ export default function History() {
       <main className="page-content history-page">
         <h2>History!</h2>
         <Table 
-		  data={mdata.data} 
+		      data={mdata.data} 
           deleteRes={deleteRes}
           downloadFile={downloadFile}
-		/>
+		    />
         <Footer
           handler={updateState}
           curPage={page}

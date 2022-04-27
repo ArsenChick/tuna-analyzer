@@ -37,33 +37,31 @@ function Auth() {
           password: Yup.string().required("Enter the password"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            var m = JSON.stringify(values, null, 2);
-            var requestOptions = {
-              mode: "cors",
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: m,
-            };
-            fetch("/api/login", requestOptions)
-              .then((response) => response.json())
-              .then((data) => {
-                if ("access_token" in data) {
-                  setFail(false);
-                  setCookie("access_token", data.access_token);
-                  setCookie("username", values.username);
-                  console.log(data.access_token);
-                  setSubmitting(false);
-                  setUser(values.username);
-                  navigate("/");
-                } else {
-                  setFail(true);
-                }
-              });
-          }, 400);
+          var m = JSON.stringify(values, null, 2);
+          var requestOptions = {
+            mode: "cors",
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: m,
+          };
+          fetch("/api/login", requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+              if ("access_token" in data) {
+                setFail(false);
+                setCookie("access_token", data.access_token);
+                setCookie("username", values.username);
+                console.log(data.access_token);
+                setSubmitting(false);
+                setUser(values.username);
+                navigate("/");
+              } else {
+                setFail(true);
+              }
+            });
         }}
       >
         <Form>
