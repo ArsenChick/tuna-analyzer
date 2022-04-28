@@ -151,16 +151,16 @@ function Footer(props) {
   var pageList = [];
   var i = 0;
   var max = 0;
-  if (props.curPage < 4) {
-    if (props.pages > 4)
-      max = 5;
+  if (props.curPage < props.maxPages - 1) {
+    if (props.pages > props.maxPages - 1)
+      max = props.maxPages;
     else max = props.pages;
-  } else if (props.pages - props.curPage < 3) {
-    i = props.pages - 5;
+  } else if (props.pages - props.curPage < props.maxPages - 2) {
+    i = props.pages - props.maxPages;
     max = props.pages;
   } else {
-    i = props.curPage - 3;
-    max = props.curPage + 2;
+    i = props.curPage - Math.floor(props.maxPages / 2) - 1;
+    max = props.curPage + Math.floor(props.maxPages / 2);
   }
   for (; i < max; i++) {
     pageList.push(i + 1);
@@ -221,6 +221,7 @@ export default function History() {
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
   const elementsPerPage = 2;
+  const maxPages = 5;
   var pages = 1;
   const navigate = useNavigate();
 
@@ -395,6 +396,7 @@ export default function History() {
           curPage={page}
           elems={elementsPerPage}
           pages={pages}
+          maxPages={maxPages}
         />
       </main>
     );

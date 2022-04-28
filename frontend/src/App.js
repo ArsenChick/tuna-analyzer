@@ -14,7 +14,7 @@ function App() {
   const navigate = useNavigate();
   if(cookies.username && user == null){
 	  setUser(cookies.username);
-    setCookie("username", user);
+    setCookie("username", cookies.username);
   }
   
   return (
