@@ -1,11 +1,12 @@
-import '../scss/signup.scss';
-
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import * as Yup from "yup";
+import '../scss/signup.scss';
 
 function Signup() {
   const [user, setUser] = useOutletContext();
+  const [, setCookie] = useCookies(['access_token', 'username']);
   const navigate = useNavigate();
 
   if (user)
@@ -22,7 +23,7 @@ function Signup() {
         initialValues={{
           username: "",
           password: "",
-          passwordConfirm: "",
+          password_confirm: "",
           acceptedTerms: false,
         }}
         validationSchema={Yup.object({
@@ -34,7 +35,7 @@ function Signup() {
             .min(8, "Must be 8-16 characters long")
             .max(16, "Must be 8-16 characters long")
             .required("Required"),
-          confirmPassword: Yup.string()
+          password_confirm: Yup.string()
             .oneOf([Yup.ref("password"), null], "Passwords must match")
             .required("Required"),
           acceptedTerms: Yup.bool()
@@ -42,12 +43,27 @@ function Signup() {
             .required("Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-            setUser(values.username);
-            navigate("/");
-          }, 400);
+          var m = (JSON.stringify(values, null, 2));
+          var requestOptions = {
+            mode: 'cors',
+            method: 'POST',
+            headers : {
+              'Accept': 'application/json',
+              'Content-Type' : 'application/json'
+            },
+            body: m
+          };
+          fetch("/api/signup", requestOptions)
+            .then(response => response.json())
+            .then(data => {
+              if('access_token' in data) {
+                setCookie('access_token', data.access_token);
+                setCookie('username', values.username);
+                setSubmitting(false);
+                setUser(values.username);
+                navigate("/");
+              }
+            });
         }}
       >
         {(formik) => (
@@ -64,10 +80,10 @@ function Signup() {
               name="password"
               render={(msg) => <div className="error">{msg}</div>}
             />
-            <label htmlFor="confirmPassword">Confirm password</label>
-            <Field name="confirmPassword" type="password" />
+            <label htmlFor="password_confirm">Confirm password</label>
+            <Field name="password_confirm" type="password" />
             <ErrorMessage
-              name="confirmPassword"
+              name="password_confirm"
               render={(msg) => <div className="error">{msg}</div>}
             />
             <label htmlFor="acceptedTerms">
