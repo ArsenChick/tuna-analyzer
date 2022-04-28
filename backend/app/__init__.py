@@ -69,13 +69,10 @@ def create_app(config='app.config.DefaultConfig'):
 
     ## Обработка 404
     #
-    # Отправляем индекс с Реакт приложением, т.к. роутинг на клиенте
+    #  Отправляем индекс с Реакт приложением, т.к. роутинг на клиенте
     @app.errorhandler(404)
     def page_not_found(e):
         print("!!!!!!!!!!!!!!", 404)
         return render_template('index.html')
-
-    # Создание таблиц, если они не существует
-    db.create_all(app=app)
 
     return app

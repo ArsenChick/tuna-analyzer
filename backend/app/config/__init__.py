@@ -18,6 +18,11 @@ class DefaultConfig(object):
     JWT_TOKEN_LOCATION = ["headers"]
     ## Время до обновления токена
     REFRESH_DELTA = timedelta(hours=12)
+    ## Admin user name
+    TUNA_ADMIN_USER = "Admin"
+    ## Admin user pass
+    TUNA_ADMIN_PASS = "change-this-on-prod"
+
 
 ## Продакшн конфиг приложения
 #
