@@ -779,3 +779,80 @@ def test_noid_delete_result(client):
     )
 
     assert response.status_code == 422
+
+def test_no_tone(client):
+    random_data = random.randbytes(1024)
+    b64_data = base64.b64encode(random_data).decode()
+
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': 'user',
+            'password': 'password',
+            'password_confirm': 'password'
+        }
+    )
+
+    assert response.status_code == 200
+    token = response.json['access_token']
+
+    response = client.post(
+        url_for('data.save_results'),
+        json={
+            'bpm': 128,
+            'dance': 42,
+            'energy': 42,
+            'happiness': 42,
+            'version': 42,
+            'file': {
+                'filename': 'file.mp3',
+                'content': b64_data
+            }
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 422
+    assert 'msg' in response.json
+    assert response.json['msg'] == 'Tone is empty'
+
+def test_invalid_tone(client):
+    random_data = random.randbytes(1024)
+    b64_data = base64.b64encode(random_data).decode()
+
+    response = client.post(
+        url_for('auth.signup'),
+        json={
+            'username': 'user',
+            'password': 'password',
+            'password_confirm': 'password'
+        }
+    )
+
+    assert response.status_code == 200
+    token = response.json['access_token']
+
+    response = client.post(
+        url_for('data.save_results'),
+        json={
+            'bpm': 128,
+            'tone': 'random_string',
+            'dance': 42,
+            'energy': 42,
+            'happiness': 42,
+            'version': 42,
+            'file': {
+                'filename': 'file.mp3',
+                'content': b64_data
+            }
+        },
+        headers={
+            'Authorization': "Bearer " + token
+        }
+    )
+
+    assert response.status_code == 422
+    assert 'msg' in response.json
+    assert response.json['msg'] == 'Invalid tone'
