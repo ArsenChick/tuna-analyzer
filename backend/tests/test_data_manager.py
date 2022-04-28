@@ -24,7 +24,7 @@ def test_mp3_file(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -294,7 +294,7 @@ def test_get_saves_ids(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -383,7 +383,7 @@ def test_get_file(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -506,7 +506,7 @@ def test_get_result(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -627,7 +627,7 @@ def test_delete_result(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -690,7 +690,7 @@ def test_double_delete_result(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
@@ -753,7 +753,7 @@ def test_noid_delete_result(client):
         url_for('data.save_results'),
         json={
             'bpm': 128,
-            'idTone': 0,
+            'tone': 'F major',
             'dance': 42,
             'energy': 42,
             'happiness': 42,
