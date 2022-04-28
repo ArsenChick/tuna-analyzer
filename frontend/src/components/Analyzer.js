@@ -388,13 +388,13 @@ class Analyzer extends React.Component {
     const danceScaled = (10 * dance).toPrecision(2);
 
     const tableRow = (
-      <tr key={prevState.length}>
-        <td>{filename}</td>
-        <td>{Math.ceil(keyBpmData.bpm)}</td>
-        <td>{fullKeyName}</td>
-        <td>{happyScaled}</td>
-        <td>{aggressiveScaled}</td>
-        <td>{danceScaled}</td>
+      <tr key={prevState.length} className="record-info">
+        <td className="record-name">{filename}</td>
+        <td className="record-tone">{Math.ceil(keyBpmData.bpm)}</td>
+        <td className="record-key">{fullKeyName}</td>
+        <td className="record-happiness">{happyScaled}</td>
+        <td className="record-aggressiveness">{aggressiveScaled}</td>
+        <td className="record-danceability">{danceScaled}</td>
       </tr>
     );
 
@@ -410,10 +410,10 @@ class Analyzer extends React.Component {
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
-        <div>
+        <div className="analysis-history">
           <table>
             <thead>
-              <tr>
+              <tr className="titles">
                 <th>Filename</th>
                 <th>BPM</th>
                 <th>Key</th>

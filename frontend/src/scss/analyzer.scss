@@ -274,11 +274,25 @@
   }
 }
 
-
-
 /* Analysis History
 ––––––––––––––––––––––––––––––––– */
 .analysis-history {
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.titles {
+  th {
+    border-color: $recordTitleColor;
+    color: $recordTitleColor;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .titles {
+    th {
+      border-color: var(--gray-400);
+      color: var(--gray-400);
+    }
+  }
 }
