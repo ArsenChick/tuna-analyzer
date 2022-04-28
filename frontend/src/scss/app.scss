@@ -661,15 +661,17 @@ button[type="submit"] {
 /* Top panel
 ––––––––––––––––––––––––––––––––– */
 #top-bar {
-  margin: (-$scrinVerticalSpaceSize) 0 0 (-$scrinHorizontalSpaceSize);
+  position: relative;
+width: 100vw;
+  margin: (-$scrinVerticalSpaceSize) (-$scrinHorizontalSpaceSize) 0 (-$scrinHorizontalSpaceSize);
   opacity: 1;
   z-index: 100;
   align-items: center;
-  width: 100vw;
+  min-width: 450px;
 }
 
 #big-top-bar {
-  padding: 20px $scrinHorizontalSpaceSize;;
+  padding: 20px $scrinHorizontalSpaceSize;
   background: $bigTopNavColor;
   display: flex;
   flex-direction: row;

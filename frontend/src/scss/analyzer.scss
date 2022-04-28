@@ -60,14 +60,34 @@
 ––––––––––––––––––––––––––––––––– */
 .dnd-container {
    border-radius: 7px;
-   margin-top: 10px;
-   margin-bottom: 10px;
+   margin-top: 20px;
+   margin-bottom: 20px;
+   transition: 200ms;
 }
 
 .dnd-container-active {
   border-radius: 7px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  transition: 200ms;
+  line-height: 200px;
+  text-align: center;
+
+  :first-child {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+
+  :not(:first-child) {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 @media (hover: hover){
@@ -118,6 +138,7 @@
 
 .description {
   max-width:870px;
+
   p {
     font-size: 18px;
   }
@@ -238,10 +259,26 @@
   flex-wrap: wrap;
   justify-content: center;
   flex-flow: space-between;
-
 }
 
 .flex-item {
   flex: 1 1 auto;
   margin: 0 10px;
+    transition: 300ms;
+}
+
+@media (max-width: 1555px) {
+  .description {
+    max-width: none;
+
+  }
+}
+
+
+
+/* Analysis History
+––––––––––––––––––––––––––––––––– */
+.analysis-history {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
