@@ -44,7 +44,8 @@ def save_results():
         return {'msg': 'Invalid JSON data'}, 422
 
     bpm: int = json_data.get("bpm", 0)
-    idTone: int = json_data.get("idTone", 1)
+    # idTone: int = json_data.get("idTone", 1)
+    tone_name: str = json_data.get("tone", None)
     dance: int = json_data.get("dance", 0)
     energy: int = json_data.get("energy", 0)
     happiness: int = json_data.get("happiness", 0)
@@ -78,9 +79,17 @@ def save_results():
     else:
         return {'msg': 'Invalid file'}, 422
 
+    if tone_name is None:
+        return {'msg': f'Tone is empty'}, 422
+
+    tone = Tone.query.filter_by(tone=tone_name).first()
+
+    if tone is None:
+        return {'msg': f'Invalid tone'}, 422
+
     result = Result(
         bpm=bpm,
-        idTone=idTone,
+        idTone=tone.id,
         dance=dance,
         energy=energy,
         happiness=happiness,

@@ -18,6 +18,11 @@ class DefaultConfig(object):
     JWT_TOKEN_LOCATION = ["headers"]
     ## Время до обновления токена
     REFRESH_DELTA = timedelta(hours=12)
+    ## Admin user name
+    TUNA_ADMIN_USER = "Admin"
+    ## Admin user pass
+    TUNA_ADMIN_PASS = "change-this-on-prod"
+
 
 ## Продакшн конфиг приложения
 #
@@ -41,6 +46,8 @@ class Dev(DefaultConfig):
     JWT_SECRET_KEY = 'JWT-dev'
     ## Ссылка на БД
     SQLALCHEMY_DATABASE_URI = 'sqlite:///db.sqlite'
+    ## Директория для загрузки файлов
+    UPLOAD_FOLDER = "./tuna_uploads"
 
 ## Конфиг для тестирования
 class Test(DefaultConfig):
