@@ -46,6 +46,8 @@ class Analyzer extends React.Component {
     
     this.actx = null;
     this.resultsData = [];
+    this.analyzesInQueue = [];
+
     this.workers = {
       keyBpm: null,
       featureExtraction: null,
@@ -80,23 +82,36 @@ class Analyzer extends React.Component {
       }
     }
 
+    const queueNo = this.resultsData.length;
     this.resultsData.push({ file: file });
     this.showQueued(file.name);
-    const audioFile = file;
-    audioFile.arrayBuffer().then((ab) => this.analyzeFile(ab));
+
+    this.analyzesInQueue.push(new Promise(async (resolve) => {
+      if (this.analyzesInQueue.length !== 0) {
+        await this.analyzesInQueue[this.analyzesInQueue.length - 1];
+        this.analyzesInQueue.shift();
+      }
+
+      this.showAnalyzing(queueNo, file.name);
+      const audioFile = file;
+      audioFile.arrayBuffer()
+        .then((ab) => this.analyzeFile(ab)
+          .then((results) => {
+            this.saveResults(queueNo, ...results);
+            this.outputResults(queueNo);
+            resolve(this.analyzesInQueue.length);
+          }));
+    }));
   }
 
   showQueued(filename) {
     const prevState = this.state.resultsView.slice();
-
     const tableRow = (
       <tr key={prevState.length}>
         <td>{filename}</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
-        <td>Loading...</td>
+        {[...Array(5).keys()].map((num) =>
+          <td key={num}>Waiting...</td>
+        )}
       </tr>
     );
 
@@ -105,9 +120,27 @@ class Analyzer extends React.Component {
     });
   }
 
+  showAnalyzing(queueNo, filename) {
+    const prevState = this.state.resultsView.slice();
+    const tableRow = (
+      <tr key={queueNo}>
+        <td>{filename}</td>
+        {[...Array(5).keys()].map((num) =>
+          <td key={num}>Loading...</td>
+        )}
+      </tr>
+    );
+    
+    prevState[queueNo] = tableRow;
+    this.setState({
+      resultsView: prevState
+    });
+  }
+
   analyzeFile(arrayBuffer) {
-    this.actx.resume().then(() => {
-      this.actx.decodeAudioData(arrayBuffer).then(async (audioBuffer) => {
+    return this.actx.resume().then(async () => {
+      return await this.actx.decodeAudioData(arrayBuffer)
+        .then(async (audioBuffer) => {
         console.info("Done decoding audio!");
         let analyzePromises = [];
 
@@ -120,18 +153,16 @@ class Analyzer extends React.Component {
         const featuresPromise = this.extractFeatures(audioData);
         analyzePromises.push(featuresPromise);
 
-        await featuresPromise.then(async (features) => {
-          for (const mood of moodModelNames) {
-            const promise = this.getMoodPredictions(mood, features);
-            analyzePromises.push(promise);
-            await promise;
-          }
-        });
+        let features = await featuresPromise;
+        for (const mood of moodModelNames) {
+          const promise = this.getMoodPredictions(mood, features);
+          analyzePromises.push(promise);
+          await promise;
+        }
 
-        Promise.all(analyzePromises).then((results) => {
+        return await Promise.all(analyzePromises).then((results) => {
           results.splice(1, 1);
-          this.saveResults(...results);
-          this.outputResults();
+          return results;
         });
       });
     });
@@ -179,29 +210,22 @@ class Analyzer extends React.Component {
     return moodPreds;
   }
 
-  saveResults(keyBpmData, happy, aggressive, dance) {
-    let specificResult = this.resultsData.pop();
-
+  saveResults(queueNo, keyBpmData, happy, aggressive, dance) {
+    let specificResult = this.resultsData[queueNo];
     specificResult.key = `${keyBpmData.keyData.key} ${keyBpmData.keyData.scale}`;
     specificResult.bpm = Math.ceil(keyBpmData.bpm);
     specificResult.happy = (10 * happy).toPrecision(2);
     specificResult.energy = (10 * aggressive).toPrecision(2);
     specificResult.dance = (10 * dance).toPrecision(2);
-
-    this.resultsData.push(specificResult);
-    console.log(this.resultsData);
   }
 
-  outputResults() {
+  outputResults(queueNo) {
     const prevState = this.state.resultsView.slice();
-    prevState.pop();
-
-    const keyJsx = prevState.length;
-    const specificResult = this.resultsData[keyJsx];
+    const specificResult = this.resultsData[queueNo];
     const filename = specificResult.file.name;
 
     const tableRow = (
-      <tr key={prevState.length}>
+      <tr key={queueNo}>
         <td>{filename}</td>
         <td>{specificResult.bpm}</td>
         <td>{specificResult.key}</td>
@@ -210,9 +234,10 @@ class Analyzer extends React.Component {
         <td>{specificResult.dance}</td>
       </tr>
     );
-
+    
+    prevState[queueNo] = tableRow;
     this.setState({
-      resultsView: [...prevState, tableRow]
+      resultsView: prevState
     });
   }
 
