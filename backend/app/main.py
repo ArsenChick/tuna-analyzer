@@ -33,11 +33,6 @@ def workers_file(path):
 def models_file(path):
     return send_from_directory(os.path.join(current_app.root_path, 'models'), path)
 
-## Возврщает файл из директории modules
-@main.route('/modules/<path:path>')
-def modules_file(path):
-    return send_from_directory(os.path.join(current_app.root_path, 'modules'), path)
-
 ## Преинициализация БД
 #
 #  Создает и заполняет таблицы начальными значениями
