@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import './index.scss';
 
 import App from './App';
-import Analyzer from './components/Analyzer';
+import Analyzer from './components/analyzer/Analyzer';
 import Auth from './components/Auth';
 import Signup from './components/Signup';
 import History from './components/History';

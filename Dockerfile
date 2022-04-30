@@ -27,7 +27,6 @@ RUN mkdir -p ./app/templates
 
 RUN cp -r /build/build/static ./app/
 RUN cp -r /build/build/models ./app/
-RUN cp -r /build/build/modules ./app/
 RUN cp -r /build/build/workers ./app/
 RUN cp /build/build/*.json ./app/static/
 RUN cp /build/build/*.png ./app/static/
