@@ -69,6 +69,18 @@
 .analysis-history {
   margin-top: 20px;
   margin-bottom: 20px;
+  table{
+    tbody{
+      border: 1px solid $recordColor;
+      tr {
+        background: rgba($recordColor, 1 - $dragAndDropZoneOpacity);
+      }
+
+      td {
+        padding:7px 10px;
+      }
+    }
+  }
 }
 
 .titles {
@@ -85,4 +97,12 @@
       color: var(--gray-400);
     }
   }
+}
+
+/* Record
+––––––––––––––––––––––––––––––––– */
+.record-row{
+  border: 1px solid black;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }

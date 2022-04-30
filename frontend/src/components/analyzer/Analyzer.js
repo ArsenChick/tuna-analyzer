@@ -107,7 +107,7 @@ class Analyzer extends React.Component {
   showQueued(filename) {
     const prevState = this.state.resultsView.slice();
     const tableRow = (
-      <tr key={prevState.length}>
+      <tr key={prevState.length} className="record-row waiting">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Waiting...</td>
@@ -123,7 +123,7 @@ class Analyzer extends React.Component {
   showAnalyzing(queueNo, filename) {
     const prevState = this.state.resultsView.slice();
     const tableRow = (
-      <tr key={queueNo}>
+      <tr key={queueNo} className="record-row loading">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Loading...</td>
@@ -225,7 +225,7 @@ class Analyzer extends React.Component {
     const filename = specificResult.file.name;
 
     const tableRow = (
-      <tr key={queueNo}>
+      <tr key={queueNo} className="record-row">
         <td className="record-name">{filename}</td>
         <td className="record-tone">{specificResult.bpm}</td>
         <td className="record-key">{specificResult.key}</td>
