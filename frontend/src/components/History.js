@@ -1,4 +1,4 @@
-import "../scss/history.scss";
+import "../scss/history/history.scss";
 import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";

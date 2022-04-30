@@ -1,0 +1,88 @@
+@import './../_variables.scss';
+
+// Jenka
+
+/* Analyzer info
+––––––––––––––––––––––––––––––––– */
+.project-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: $selectedWordColor;
+}
+
+.special-word {
+  color: $selectedWordColor;
+  font-weight: bold;
+}
+
+.description {
+  max-width:870px;
+
+  p {
+    font-size: 18px;
+  }
+
+  * {
+    margin: 25px 0;
+  };
+
+}
+
+.project-info {
+  margin: 0;
+  padding: 10px 30px;
+  border-radius: 7px;
+  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-info {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+}
+
+/* Odd style
+––––––––––––––––––––––––––––––––– */
+.in-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-flow: space-between;
+  margin-bottom: 10px;
+}
+
+.flex-item {
+  flex: 1 1 auto;
+  margin: 0 10px;
+    transition: 300ms;
+}
+
+@media (max-width: 1570px) {
+  .description {
+    max-width: none;
+
+  }
+}
+
+/* Analysis History
+––––––––––––––––––––––––––––––––– */
+.analysis-history {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.titles {
+  th {
+    border-color: $recordTitleColor;
+    color: $recordTitleColor;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .titles {
+    th {
+      border-color: var(--gray-400);
+      color: var(--gray-400);
+    }
+  }
+}

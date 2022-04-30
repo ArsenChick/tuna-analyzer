@@ -1,4 +1,4 @@
-import "../../scss/analyzer.scss";
+import "../../scss/analyzer/hint.scss";
 
 export const Hint = ({active, setActive}) => {
   return (

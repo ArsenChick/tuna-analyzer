@@ -3,7 +3,7 @@ import { preprocess, shortenAudio } from "../../scripts/audioUtils";
 
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
-import "../../scss/analyzer.scss";
+import "../../scss/analyzer/analyzer.scss";
 
 const moodModelNames = ["mood_happy", "mood_aggressive", "danceability"];
 
@@ -226,15 +226,14 @@ class Analyzer extends React.Component {
 
     const tableRow = (
       <tr key={queueNo}>
-        <td>{filename}</td>
-        <td>{specificResult.bpm}</td>
-        <td>{specificResult.key}</td>
-        <td>{specificResult.happy}</td>
-        <td>{specificResult.energy}</td>
-        <td>{specificResult.dance}</td>
+        <td className="record-name">{filename}</td>
+        <td className="record-tone">{specificResult.bpm}</td>
+        <td className="record-key">{specificResult.key}</td>
+        <td className="record-happiness">{specificResult.happy}</td>
+        <td className="record-aggressiveness">{specificResult.energy}</td>
+        <td className="record-danceability">{specificResult.dance}</td>
       </tr>
     );
-    
     prevState[queueNo] = tableRow;
     this.setState({
       resultsView: prevState
@@ -248,10 +247,10 @@ class Analyzer extends React.Component {
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
-        <div>
+        <div className="analysis-history">
           <table>
             <thead>
-              <tr>
+              <tr className="titles">
                 <th>Filename</th>
                 <th>BPM</th>
                 <th>Key</th>

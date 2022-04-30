@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../../scss/analyzer.scss";
+import "../../scss/analyzer/drag_and_drop.scss";
 
 const FileUploader = (props) => {
   const hiddenFileInput = React.useRef(null);

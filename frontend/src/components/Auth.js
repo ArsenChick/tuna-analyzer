@@ -3,7 +3,7 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import * as Yup from "yup";
-import "../scss/auth.scss";
+import "../scss/auth/auth.scss";
 
 function Auth() {
   const [user, setUser] = useOutletContext();
