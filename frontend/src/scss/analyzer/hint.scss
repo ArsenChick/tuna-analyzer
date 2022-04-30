@@ -51,7 +51,6 @@
   visibility: hidden;
   overflow-y: auto;
   overflow-x: hidden;
-
 }
 
 .hint-modal-window.active {
@@ -82,8 +81,7 @@
   border: 2px solid #ffffff;
   border-radius: 25px;
   opacity: 0.9;
-  z-index: 1;
-
+  z-index: 1000;
 }
 
 .hint-button:hover {
