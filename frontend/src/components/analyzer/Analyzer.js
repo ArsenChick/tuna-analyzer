@@ -1,6 +1,7 @@
 import React from "react";
 import { preprocess, shortenAudio } from "../../scripts/audioUtils";
 
+import { Description } from "./Description";
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
 import "../../scss/analyzer/analyzer.scss";
@@ -11,27 +12,6 @@ const keyBPMWorkerPath = "./workers/core_extractor.worker.js";
 const extractorWorkerPath = "./workers/model_extractor.worker.js";
 const moodWorkerPath = "./workers/mood_inference.worker.js";
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
-
-const Description = () => {
-  return (
-    <div className="description">
-      <p className="project-info">
-        <span className="project-name">Tuna </span>
-        is a web service for music composition analysis.
-      </p>
-      <p className="project-propose">
-        Each user can upload their own musical composition
-        for which the service will determine the&nbsp;
-        <span className="special-word">tempo</span>,&nbsp;
-        <span className="special-word">tonality</span> and
-        evaluate several subjective characteristics:&nbsp;
-        <span className="special-word">energy</span>,&nbsp;
-        <span className="special-word">happiness</span> and&nbsp;
-        <span className="special-word">danceability</span>.
-      </p>
-    </div>
-  );
-}
 
 class Analyzer extends React.Component {
   constructor(props) {

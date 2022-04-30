@@ -1,0 +1,41 @@
+@import './../_variables.scss';
+// Jenka
+
+/* Analyzer info
+––––––––––––––––––––––––––––––––– */
+.project-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: $selectedWordColor;
+}
+
+.special-word {
+  color: $selectedWordColor;
+  font-weight: bold;
+}
+
+.description {
+  max-width:870px;
+
+  p {
+    font-size: 18px;
+  }
+
+  * {
+    margin: 25px 0;
+  };
+
+}
+
+.project-info {
+  margin: 0;
+  padding: 10px 30px;
+  border-radius: 7px;
+  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  .project-info {
+    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+  }
+}
