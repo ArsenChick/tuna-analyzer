@@ -33,6 +33,8 @@ describe("App guest", () => {
 });
 
 describe("App authorized user", () => {
+  let app;
+
   // тут устанавливаем фейковые куки
   // app создаем в каждом тесте чтобы загружались куки
   beforeEach(() => {
@@ -40,55 +42,31 @@ describe("App authorized user", () => {
       writable: true,
       value: "username=test; access_token=token;"
     });
-  });
 
-  it("Check home link", () => {
-    const app = mount(
+    app = mount(
       <BrowserRouter>
         <App />
       </BrowserRouter>
     );
+  });
 
+  it("Check home link", () => {
     expect(app.find("#logo-title").exists()).toBeTruthy();
   });
 
   it("Check history link", () => {
-    const app = mount(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
     expect(app.find("#historyButton").exists()).toBeTruthy();
   });
 
   it("Check logout button", () => {
-    const app = mount(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
     expect(app.find("#logoutButton").exists()).toBeTruthy();
   });
 
   it("Check login button", () => {
-    const app = mount(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
     expect(app.find("#loginButton").exists()).toBeFalsy();
   });
 
   it("Check logout", () => {
-    const app = mount(
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    );
-
     const logout_btn = app.find("#logoutButton");
     expect(logout_btn.exists).toBeTruthy();
     logout_btn.simulate("click");
