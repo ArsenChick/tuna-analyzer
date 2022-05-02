@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../scss/analyzer.scss";
 
 const FileUploader = (props) => {
@@ -56,11 +56,6 @@ export function DragAndDrop(props) {
   const [drag, setDrag] = useState(0);
   const [unvalid, setUnvalid] = useState(0);
   var d = 0;
-
-  {/*useEffect(() => {
-    const timer = setTimeout(() => {}, 5);
-    return () => clearTimeout(timer);
-  }, []);*/}
 
   const handleDragEnter = (event) => {
     event.preventDefault();
