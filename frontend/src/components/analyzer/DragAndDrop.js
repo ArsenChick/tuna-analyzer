@@ -10,9 +10,7 @@ const FileUploader = (props) => {
   const handleChange = (event) => {
     u = false;
     const fileUploaded = event.target.files;
-    
     const checkTypes = [...fileUploaded].map((file) => {
-      console.log(file);
       if (
         file.type !== "audio/mpeg" &&
         file.type !== "audio/ogg" &&
@@ -28,6 +26,7 @@ const FileUploader = (props) => {
       if (u === false) {
         [...fileUploaded].map((file) => {
           props.handleFile(file);
+          return;
         }
         )
       }
@@ -91,30 +90,30 @@ export function DragAndDrop(props) {
     let files = [...event.dataTransfer.files];
     d = 0;
     let u = false;
-    if (files.length > 0) {
-      u = false;
-      const checkTypes = files.map((file) => {
-        if (
-          file.type !== "audio/mpeg" &&
-          file.type !== "audio/ogg" &&
-          file.type !== "audio/wav" &&
-          file.type !== "audio/flac"
-        ){
-          setUnvalid(true);
-          u = true;
-        } 
+    u = false;
+    const checkTypes = files.map((file) => {
+      if (
+        file.type !== "audio/mpeg" &&
+        file.type !== "audio/ogg" &&
+        file.type !== "audio/wav" &&
+        file.type !== "audio/flac"
+      ){
+        setUnvalid(true);
+        u = true;
       }
-      );
-      Promise.all(checkTypes).then(() => {
-        if (u === false) {
-          files.map((file) => {
-            props.dropFunction(file);
-          }
-          )
-        }
-      });
+      return; 
     }
-  };
+    );
+    Promise.all(checkTypes).then(() => {
+      if (u === false) {
+        files.map((file) => {
+          props.dropFunction(file);
+          return;
+        }
+        )
+      }
+    });
+  }
   
   if (drag === true) {
 	  return (
