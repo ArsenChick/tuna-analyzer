@@ -20,13 +20,15 @@ const FileUploader = (props) => {
         props.setUnv(true);
         u = true;
       } 
+      return 1;
     }
+
     );
     Promise.all(checkTypes).then(() => {
       if (u === false) {
         [...fileUploaded].map((file) => {
           props.handleFile(file);
-          return;
+          return 1;
         }
         )
       }
@@ -101,14 +103,14 @@ export function DragAndDrop(props) {
         setUnvalid(true);
         u = true;
       }
-      return; 
+      return 1; 
     }
     );
     Promise.all(checkTypes).then(() => {
       if (u === false) {
         files.map((file) => {
           props.dropFunction(file);
-          return;
+          return 1;
         }
         )
       }
