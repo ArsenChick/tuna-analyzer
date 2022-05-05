@@ -5,12 +5,15 @@
 ––––––––––––––––––––––––––––––––– */
 .hint-area {
   position: fixed;
-  right: 40px;
-  bottom: 10px;
+  right: 26px;
+  bottom: 8px;
   top: auto;
   left: auto;
-
-  width: 400px;
+  width: 300px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: flex-end;
 
   ul {
     margin: 0;
@@ -32,10 +35,11 @@
 .hint-modal-window {
   position: relative;
   top: -10px;
-  padding: 20px;
+  padding: 10px;
   background: $hintBackgroundColor;
   border: 2px solid $hintBorderColor;
   color: $hintTextColor;
+  font-size: 12px;
   border-radius: 7px;
   display: none;
   z-index: 1;
@@ -56,7 +60,7 @@
 
 .hint-modal-window.active {
   display: block;
-  z-index: 1000;
+  z-index: 1;
   opacity: $hintBackgroundOpacity;
   border: 2px solid rgba($hintBorderColor, $hintBorderOpacity);
   pointer-events: auto;
@@ -72,9 +76,12 @@
 }
 
 .hint-button {
+
   position: relative;
-  left: 340px;
+  margin-left: auto;
+  margin-right: 0;
   padding: 7px 22px;
+
   //padding: 10px 15px;
   color: #ffffff;
   font-weight: bold;
