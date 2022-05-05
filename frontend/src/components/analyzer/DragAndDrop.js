@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../../scss/analyzer/drag_and_drop.scss";
 
 const FileUploader = (props) => {
@@ -6,21 +6,33 @@ const FileUploader = (props) => {
   const handleClick = (event) => {
     hiddenFileInput.current.click();
   };
+  var u = false;
   const handleChange = (event) => {
-    if (event.target.files.length === 1) {
-      const fileUploaded = event.target.files[0];
+    u = false;
+    const fileUploaded = event.target.files;
+    const checkTypes = [...fileUploaded].map((file) => {
       if (
-        fileUploaded.type === "audio/mpeg" ||
-        fileUploaded.type === "audio/ogg" ||
-        fileUploaded.type === "audio/wav" ||
-        fileUploaded.type === "audio/flac"
-      ) {
-        props.handleFile(fileUploaded);
-        props.setUnv(false);
-      } else {
+        file.type !== "audio/mpeg" &&
+        file.type !== "audio/ogg" &&
+        file.type !== "audio/wav" &&
+        file.type !== "audio/flac"
+      ){
         props.setUnv(true);
-      }
+        u = true;
+      } 
+      return 1;
     }
+
+    );
+    Promise.all(checkTypes).then(() => {
+      if (u === false) {
+        [...fileUploaded].map((file) => {
+          props.handleFile(file);
+          return 1;
+        }
+        )
+      }
+    });
   };
 
   return (
@@ -33,6 +45,7 @@ const FileUploader = (props) => {
         accept=".mp3,.wav,.ogg,.flac"
         ref={hiddenFileInput}
         onChange={handleChange}
+        multiple
         style={{ display: "none" }}
       />
     </>
@@ -42,13 +55,7 @@ const FileUploader = (props) => {
 export function DragAndDrop(props) {
   const [drag, setDrag] = useState(0);
   const [unvalid, setUnvalid] = useState(0);
-  const [file, setFile] = useState(0);
   var d = 0;
-
-  useEffect(() => {
-    const timer = setTimeout(() => {}, 5);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleDragEnter = (event) => {
     event.preventDefault();
@@ -78,22 +85,32 @@ export function DragAndDrop(props) {
     setDrag(false);
 
     let files = [...event.dataTransfer.files];
-    setFile(files);
     d = 0;
-
-    if (files.length === 1) {
+    let u = false;
+    u = false;
+    const checkTypes = files.map((file) => {
       if (
-        files[0].type === "audio/mpeg" ||
-        files[0].type === "audio/ogg" ||
-        files[0].type === "audio/wav" ||
-        files[0].type === "audio/flac"
-      ) {
-        return <div>{props.dropFunction(files[0])}</div>;
-      } else {
+        file.type !== "audio/mpeg" &&
+        file.type !== "audio/ogg" &&
+        file.type !== "audio/wav" &&
+        file.type !== "audio/flac"
+      ){
         setUnvalid(true);
+        u = true;
       }
+      return 1; 
     }
-  };
+    );
+    Promise.all(checkTypes).then(() => {
+      if (u === false) {
+        files.map((file) => {
+          props.dropFunction(file);
+          return 1;
+        }
+        )
+      }
+    });
+  }
   
   if (drag === true) {
 	  return (
@@ -125,6 +142,7 @@ export function DragAndDrop(props) {
         setUnv={setUnvalid}
         handleFile={props.dropFunction}
       ></FileUploader>
+      {/*
       {file.length > 1 && (
         <p
           className="dnd-unselectable-p"
@@ -133,6 +151,7 @@ export function DragAndDrop(props) {
           Drag files by one at time
         </p>
       )}
+      */}
       {unvalid === true && (
         <p
           className="dnd-unselectable-p"

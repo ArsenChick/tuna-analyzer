@@ -1,69 +1,78 @@
-import { render, screen, shallow } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import React from "react";
+import Enzyme from "enzyme";
+import { shallow, mount } from "enzyme";
 import App from "./App";
-import Analyzer from "./components/analyzer/Analyzer";
-import Auth from "./components/Auth";
-import Signup from "./components/Signup";
-import History from "./components/History";
+import { BrowserRouter } from "react-router-dom";
+import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
+import Cookies from "react-cookie";
 
-test("Example test", () => {
-  expect(1).toEqual(1);
-});
+Enzyme.configure({ adapter: new Adapter() });
 
-test("React render Ok", () => {
-  render(
+describe("App guest", () => {
+  const app = mount(
     <BrowserRouter>
       <App />
     </BrowserRouter>
   );
+
+  it("Check home link", () => {
+    expect(app.find("#logo-title").exists()).toBeTruthy();
+  });
+
+  it("Check history link", () => {
+    expect(app.find("#historyButton").exists()).toBeFalsy();
+  });
+
+  it("Check logout button", () => {
+    expect(app.find("#logoutButton").exists()).toBeFalsy();
+  });
+
+  it("Check login button", () => {
+    expect(app.find("#loginButton").exists()).toBeTruthy();
+  });
 });
 
-test("History render Ok", () => {
-  render(
-    <BrowserRouter>
-      <App>
-        <History />
-      </App>
-    </BrowserRouter>
-  );
-});
+describe("App authorized user", () => {
+  let app;
 
-test("Analyzer render Ok", () => {
-  render(
-    <BrowserRouter>
-      <App>
-        <Analyzer />
-      </App>
-    </BrowserRouter>
-  );
-});
+  // тут устанавливаем фейковые куки
+  // app создаем в каждом тесте чтобы загружались куки
+  beforeEach(() => {
+    Object.defineProperty(document, "cookie", {
+      writable: true,
+      value: "username=test; access_token=token;"
+    });
 
-test("Auth render Ok", () => {
-  render(
-    <BrowserRouter>
-      <App>
-        <Auth />
-      </App>
-    </BrowserRouter>
-  );
-});
+    app = mount(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+  });
 
-test("Signup render Ok", () => {
-  render(
-    <BrowserRouter>
-      <App>
-        <Signup />
-      </App>
-    </BrowserRouter>
-  );
-});
+  it("Check home link", () => {
+    expect(app.find("#logo-title").exists()).toBeTruthy();
+  });
 
-test("Render Tuna", () => {
-  render(
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-  const linkElement = screen.getByText(/Tuna/i);
-  expect(linkElement).toBeInTheDocument();
+  it("Check history link", () => {
+    expect(app.find("#historyButton").exists()).toBeTruthy();
+  });
+
+  it("Check logout button", () => {
+    expect(app.find("#logoutButton").exists()).toBeTruthy();
+  });
+
+  it("Check login button", () => {
+    expect(app.find("#loginButton").exists()).toBeFalsy();
+  });
+
+  it("Check logout", () => {
+    const logout_btn = app.find("#logoutButton");
+    expect(logout_btn.exists).toBeTruthy();
+    logout_btn.simulate("click");
+
+    expect(app.find("#loginButton").exists()).toBeTruthy();
+    expect(app.find("#logoutButton").exists()).toBeFalsy();
+    expect(app.find("#historyButton").exists()).toBeFalsy();
+  });
 });

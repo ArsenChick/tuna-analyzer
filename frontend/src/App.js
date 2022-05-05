@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import "./scss/app.scss";
 
 //Изображения
@@ -10,13 +10,17 @@ import * as Icon from "react-feather";
 
 function App() {
   let [user, setUser] = useState(null);
-  const [cookies, setCookie, removeCookie] = useCookies(['access_token', 'username']);
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "access_token",
+    "username"
+  ]);
   const navigate = useNavigate();
-  if(cookies.username && user == null){
-	  setUser(cookies.username);
+
+  if (cookies.username && user == null) {
+    setUser(cookies.username);
     setCookie("username", cookies.username);
   }
-  
+
   return (
     <div className="App">
       <div id="top-bar">
@@ -43,16 +47,15 @@ function App() {
                     <span>My History</span>
                     <Icon.List size={20} />
                   </NavLink>{" "}
-                </li>
-              }
+                </li>}
               <li>
                 {user
                   ? <button
                       className="navButton"
                       id="logoutButton"
                       onClick={() => {
-                        removeCookie('access_token');
-                        removeCookie('username');
+                        removeCookie("access_token");
+                        removeCookie("username");
                         setUser(null);
                         navigate("/");
                       }}
