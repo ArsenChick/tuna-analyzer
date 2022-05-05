@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../../scss/analyzer/drag_and_drop.scss";
 
+
 const FileUploader = (props) => {
   const hiddenFileInput = React.useRef(null);
   const handleClick = (event) => {

@@ -1,5 +1,6 @@
 import "../../scss/analyzer/hint.scss";
 
+
 export const Hint = ({active, setActive}) => {
   return (
     <div className="hint-area">

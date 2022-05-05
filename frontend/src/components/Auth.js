@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
+
 function Auth() {
   const [user, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);

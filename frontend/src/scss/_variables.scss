@@ -1,14 +1,13 @@
-/* 
- *  Цвета и шрифт 
- */
-//Основное
+/* Element Color
+––––––––––––––––––––––––––––––––– */
+// Main
 $logoTittleLeftColor: #51d9e5;
 $logoTittleRightColor: #e551e4;
 $bgPageColor: #ffffff;
 $textColor: #ffffff;
 $titleColor: #afafaf;
 $smallTitleColor: #afafaf;
-//Верхняя панель
+// Top Bar
 $bigTopNavColor: #001a3b;
 $bigTopNavColorDarkTheme: #0d1422;
 $smallTopNavColor: #bfb9ff;
@@ -24,7 +23,7 @@ $sliderColor: #e5e5e5;
 $sliderPointColor: #f7f7f7;
 $smallTopNavTextColor: #f7f7f7;
 $selectedButtonTextColor: #f48a9a;
-//История анализа
+// Analysis History
 $selectedTextColor: #9593d8;
 $recordTitleColor: #afafaf;
 $recordColor: #7fafe5;
@@ -35,7 +34,7 @@ $recordDownloadButtonColor: #97e862;
 $recordDeleteButtonColor: #e5638e;
 $pageNumColor: #bfb9ff;
 $currentPageNumColor: #bfb9ff;
-//Авторизация
+// Authorization
 $authTextColor: #8d9cda;
 $authAddTextColor: #7f7f7f;
 $authBoarderColor: #9593d8;
@@ -44,7 +43,7 @@ $authButtonTextColor: #9593d8;
 $authButtonPointColor: #ffffff;
 $authButtonPointBgColor: #e2e2e2;
 $authSelectedButtonPointBgColor: #9593d8;
-//Анализатор
+// Analyzer
 $mainTitleColor: #dedeff;
 $selectedWordColor: #9593d8;
 $dragAndDropZoneColor: #f5f5ff;
@@ -60,88 +59,88 @@ $hintBackgroundColor: #f7f7f7;
 $hintBorderColor: #838385;
 $hintTextColor: #4e4e50;
 
-/* 
- *  Прозрачность 
- */
-//Основное
+
+/* Opacity
+––––––––––––––––––––––––––––––––– */
+// Main
 $mainTitleOpacity: .37;
-//Запись
+// Record
 $recordOpacity: .10;
 $fileButtonOpacity: .57;
-//История анализа
+// Analysis History
 $pageNumOpacity: .22;
-//Авторизация
+// Authorization
 $authBoarderOpacity: .87;
 $authButtonTextOpacity: .87;
-//Анализатор
+// Analyzer
 $dragAndDropZoneOpacity: .93;
 $dragAndDropBorderZoneOpacity: .87;
 $foggingOpacity: .34;
 $selectFileButtonOpacity: .49;
 
-/* 
- *  Толщина рамок 
- */
-//Анализатор
+
+/* Border Size
+––––––––––––––––––––––––––––––––– */
+// Analyzer
 $dragAndDropZoneBorderSize: 3px;
 $dragAndDropSmallZoneBorderSize: 1.5px;
 $hintBorderSize: 1px;
 
-/* 
- *  Стиль рамки 
- */
-//Анализатор
+
+/* Border Style
+––––––––––––––––––––––––––––––––– */
+// Main
 $dragAndDropZoneBorderStyle: solid;
 $dragAndDropSmallZoneBorderStyle: dashed;
 $hintBorderStyle: solid;
 
-/* 
- *  Шрифты 
- */
+
+/* Font
+––––––––––––––––––––––––––––––––– */
 $mainFont: Fira Sans;
 
-/* 
- *  Стили шрифтов 
- */
+
+/* Font Style
+––––––––––––––––––––––––––––––––– */
 $mainFontStyle: Medium;
 
-/* 
- *  Размеры шрифтов 
- */
-//Основное
+
+/* Font Size
+––––––––––––––––––––––––––––––––– */
+// Main
 $logoFontSize: 65px;
 $textFontSize: 30px;
 $textSelectedColor: 30px;
 $titleFontSize: 30px;
 $smallTitleFontSize: 26px;
-//Верхняя панель
+// Top Bar
 $signFontSize: 18px;
 $navButtonFontSize: 36px;
-//Авторизация
+// Authorization
 $authButtonFontSize: 36px;
-//Анализатор
+// Analyzer
 $dragAndDropZoneTextFontSize: 50px;
 $selectFileButtonFontSize: 36px;
 $hintTextFontSize: 18px;
 $hintSignSize: 55px;
 
-/* 
- *  Скругления 
- */
-//Запись
+
+/* Border Rounding
+––––––––––––––––––––––––––––––––– */
+// Record
 $recordCornerRounding: 15px;
 $recordPlayButtonCornerRounding: 15px;
 $recordDownloadButtonCornerRounding: 15px;
 $recordDeleteButtonCornerRounding: 15px;
 
-/* 
- *  Градиент
- */
+
+/* Gradient
+––––––––––––––––––––––––––––––––– */
 $logoTittleColor: linear-gradient(to right, $logoTittleLeftColor, $logoTittleRightColor);
 
-/*
- *  Размеры
- */
+
+/* Element Size
+––––––––––––––––––––––––––––––––– */
 $bigTopBarHight: 100px;
 $scrinVerticalSpaceSize: calc((100vh / 25) * 1.563);
 $scrinHorizontalSpaceSize: calc((100vw / 25) * 1.563);

@@ -3,7 +3,7 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "./scss/app.scss";
 
-//Изображения
+
 import logo_icon from "./img/tuna_neon_logo.svg";
 
 import * as Icon from "react-feather";

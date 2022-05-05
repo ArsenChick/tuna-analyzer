@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import * as Yup from "yup";
 import '../scss/signup/sign_up.scss';
 
+
 function Signup() {
   const [user, setUser] = useOutletContext();
   const [, setCookie] = useCookies(['access_token', 'username']);

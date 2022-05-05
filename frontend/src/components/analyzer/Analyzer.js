@@ -13,6 +13,7 @@ const extractorWorkerPath = "./workers/model_extractor.worker.js";
 const moodWorkerPath = "./workers/mood_inference.worker.js";
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
 
+
 class Analyzer extends React.Component {
   constructor(props) {
     super(props);
