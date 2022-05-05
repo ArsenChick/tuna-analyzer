@@ -27,7 +27,7 @@ function App() {
         <div id="big-top-bar">
           <header>
             <Link to="/" className="page-link">
-              <img src={logo_icon} width="70px" alt="" />
+              <img src={logo_icon} width="50px" alt="" />
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>

@@ -9,11 +9,6 @@
   color: $selectedWordColor;
 }
 
-.special-word {
-  color: $selectedWordColor;
-  font-weight: bold;
-}
-
 .description {
   max-width:870px;
 
@@ -31,11 +26,11 @@
   margin: 0;
   padding: 10px 30px;
   border-radius: 7px;
-  background: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+  background: rgba($dragAndDropZoneColor, $projectInfoOpacity);
 }
 
 @media (prefers-color-scheme: dark) {
   .project-info {
-    background: rgba($dragAndDropZoneColor, calc(1 - $dragAndDropZoneOpacity));
+    background: rgba($dragAndDropZoneColor, calc(1 - $projectInfoOpacity));
   }
 }
