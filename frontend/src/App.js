@@ -45,7 +45,7 @@ function App() {
                     to="/history"
                   >
                     <span>My History</span>
-                    <Icon.List size={20} />
+                    <Icon.BookOpen size={20} />
                   </NavLink>{" "}
                 </li>}
               <li>
