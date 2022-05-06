@@ -1,0 +1,123 @@
+@import './../_variables.scss';
+// Jenka
+
+
+
+/* --- Light Theme --- */
+
+/*   Desktop   */
+
+@media all and (max-width: 1920px) {
+  /* Hint
+  ––––––––––––––––––––––––––––––––– */
+  .hint-area {
+    position: fixed;
+    right: 26px;
+    bottom: 8px;
+    top: auto;
+    left: auto;
+    width: 300px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    ul {
+      margin: 0;
+      * {
+        padding: 8px 0;
+      }
+
+      span {
+        font-weight: bold;
+      }
+
+      li {
+
+      }
+    }
+  }
+
+  .hint-modal-window {
+    position: relative;
+    top: -10px;
+    padding: 10px;
+    background: $hintBackgroundColor;
+    border: 2px solid $hintBorderColor;
+    color: $hintTextColor;
+    font-size: 12px;
+    border-radius: 7px;
+    display: none;
+    z-index: 1;
+    opacity: 0;
+    pointer-events: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    // Transition не работает с display:none
+    //-webkit-transition: opacity 200ms ease-in;
+    //-moz-transition: opacity 200ms ease-in;
+    //transition: opacity 200ms ease-in;
+    visibility: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .hint-modal-window.active {
+    display: block;
+    z-index: 1;
+    opacity: $hintBackgroundOpacity;
+    border: 2px solid rgba($hintBorderColor, $hintBorderOpacity);
+    pointer-events: auto;
+    -moz-user-select: auto;
+    -khtml-user-select: auto;
+    -webkit-user-select: auto;
+    user-select: auto;
+    visibility: visible;
+  }
+
+  .hint-content {
+
+  }
+
+  .hint-button {
+    position: relative;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 7px 22px;
+
+    //padding: 10px 15px;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 20px;
+    background: $logoTittleColor;
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    opacity: 0.9;
+    z-index: 1000;
+  }
+
+  .hint-button:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+
+/*   Mobile   */
+
+@media (max-width: 768px) {
+
+}
+
+/* --- Dark Theme --- */
+
+
+
+@media (prefers-color-scheme: dark) {
+  .hint-modal-window {
+    background: $hintBackgroundColorDarkTheme;
+    border: 2px solid $hintBorderColorDarkTheme;
+    color: $hintTextColorDarkTheme;
+  }
+}

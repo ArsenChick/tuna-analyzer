@@ -3,7 +3,7 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import "./scss/app.scss";
 
-//Изображения
+
 import logo_icon from "./img/tuna_neon_logo.svg";
 
 import * as Icon from "react-feather";
@@ -27,7 +27,7 @@ function App() {
         <div id="big-top-bar">
           <header>
             <Link to="/" className="page-link">
-              <img src={logo_icon} width="70px" alt="" />
+              <img src={logo_icon} className="logo-icon" width="50px" alt="" />
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
@@ -45,7 +45,7 @@ function App() {
                     to="/history"
                   >
                     <span>My History</span>
-                    <Icon.List size={20} />
+                    <Icon.BookOpen size={20} />
                   </NavLink>{" "}
                 </li>}
               <li>
@@ -63,7 +63,7 @@ function App() {
                       <span id="userLogin">
                         {user}
                       </span>
-                      <Icon.LogIn size={20} />
+                      <Icon.LogOut size={20} />
                     </button>
                   : <NavLink
                       // TODO добавить стили и изменить style на className

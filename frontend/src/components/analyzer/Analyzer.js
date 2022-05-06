@@ -4,9 +4,10 @@ import { instanceOf } from 'prop-types';
 import { preprocess, shortenAudio } from "../../scripts/audioUtils";
 import { toBase64 } from "../../scripts/fileUtils";
 
+import { Description } from "./Description";
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
-import "../../scss/analyzer.scss";
+import "../../scss/analyzer/analyzer.scss";
 
 const moodModelNames = ["mood_happy", "mood_aggressive", "danceability"];
 
@@ -15,26 +16,6 @@ const extractorWorkerPath = "./workers/model_extractor.worker.js";
 const moodWorkerPath = "./workers/mood_inference.worker.js";
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
 
-const Description = () => {
-  return (
-    <div className="description">
-      <p className="project-info">
-        <span className="project-name">Tuna </span>
-        is a web service for music composition analysis.
-      </p>
-      <p className="project-propose">
-        Each user can upload their own musical composition
-        for which the service will determine the&nbsp;
-        <span className="special-word">tempo</span>,&nbsp;
-        <span className="special-word">tonality</span> and
-        evaluate several subjective characteristics:&nbsp;
-        <span className="special-word">energy</span>,&nbsp;
-        <span className="special-word">happiness</span> and&nbsp;
-        <span className="special-word">danceability</span>.
-      </p>
-    </div>
-  );
-}
 
 class Analyzer extends React.Component {
   static propTypes = {
@@ -139,7 +120,7 @@ class Analyzer extends React.Component {
   showQueued(filename) {
     const prevState = this.state.resultsView.slice();
     const tableRow = (
-      <tr key={prevState.length}>
+      <tr key={prevState.length} className="record-row waiting">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Waiting...</td>
@@ -156,7 +137,7 @@ class Analyzer extends React.Component {
   showAnalyzing(queueNo, filename) {
     const prevState = this.state.resultsView.slice();
     const tableRow = (
-      <tr key={queueNo}>
+      <tr key={queueNo} className="record-row loading">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Loading...</td>
@@ -259,17 +240,16 @@ class Analyzer extends React.Component {
     const filename = specificResult.filename;
 
     const tableRow = (
-      <tr key={queueNo}>
-        <td>{filename}</td>
-        <td>{specificResult.bpm}</td>
-        <td>{specificResult.key}</td>
-        <td>{specificResult.happy}</td>
-        <td>{specificResult.energy}</td>
-        <td>{specificResult.dance}</td>
+      <tr key={queueNo} className="record-row">
+        <td className="record-name">{filename}</td>
+        <td className="record-tone">{specificResult.bpm}</td>
+        <td className="record-key">{specificResult.key}</td>
+        <td className="record-happiness">{specificResult.happy}</td>
+        <td className="record-aggressiveness">{specificResult.energy}</td>
+        <td className="record-danceability">{specificResult.dance}</td>
         {this.accessToken && <td>Waiting...</td>}
       </tr>
     );
-    
     prevState[queueNo] = tableRow;
     this.setState({
       resultsView: prevState
@@ -326,13 +306,13 @@ class Analyzer extends React.Component {
     const filename = specificResult.filename;
 
     const tableRow = (
-      <tr key={queueNo}>
-        <td>{filename}</td>
-        <td>{specificResult.bpm}</td>
-        <td>{specificResult.key}</td>
-        <td>{specificResult.happy}</td>
-        <td>{specificResult.energy}</td>
-        <td>{specificResult.dance}</td>
+      <tr key={queueNo} className="record-row">
+        <td className="record-name">{filename}</td>
+        <td className="record-tone">{specificResult.bpm}</td>
+        <td className="record-key">{specificResult.key}</td>
+        <td className="record-happiness">{specificResult.happy}</td>
+        <td className="record-aggressiveness">{specificResult.energy}</td>
+        <td className="record-danceability">{specificResult.dance}</td>
         <td>Saving...</td>
       </tr>
     );
@@ -349,13 +329,13 @@ class Analyzer extends React.Component {
     const filename = specificResult.filename;
 
     const tableRow = (
-      <tr key={queueNo}>
-        <td>{filename}</td>
-        <td>{specificResult.bpm}</td>
-        <td>{specificResult.key}</td>
-        <td>{specificResult.happy}</td>
-        <td>{specificResult.energy}</td>
-        <td>{specificResult.dance}</td>
+      <tr key={queueNo} className="record-row">
+        <td className="record-name">{filename}</td>
+        <td className="record-tone">{specificResult.bpm}</td>
+        <td className="record-key">{specificResult.key}</td>
+        <td className="record-happiness">{specificResult.happy}</td>
+        <td className="record-aggressiveness">{specificResult.energy}</td>
+        <td className="record-danceability">{specificResult.dance}</td>
         <td>{response ? "Saved" : "Error"}</td>
       </tr>
     );
@@ -373,10 +353,10 @@ class Analyzer extends React.Component {
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
-        <div>
+        <div className="analysis-history">
           <table>
             <thead>
-              <tr>
+              <tr className="titles">
                 <th>Filename</th>
                 <th>BPM</th>
                 <th>Key</th>

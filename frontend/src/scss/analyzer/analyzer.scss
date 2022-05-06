@@ -1,0 +1,84 @@
+@import './../_variables.scss';
+// Jenka
+
+/*   Desktop   */
+
+@media all and (max-width: 1920px) {
+  /* Positioning Elements
+  ––––––––––––––––––––––––––––––––– */
+  .in-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-flow: space-between;
+    margin-bottom: 10px;
+  }
+
+  .flex-item {
+    flex: 1 1 auto;
+    margin: 0 10px;
+      transition: 300ms;
+  }
+
+  /* Analysis History
+  ––––––––––––––––––––––––––––––––– */
+  .analysis-history {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    table{
+      tbody{
+        border: 1px solid $recordColor;
+        tr {
+          background: rgba($recordColor, 1 - $dragAndDropZoneOpacity);
+        }
+
+        td {
+          padding:7px 10px;
+        }
+      }
+    }
+  }
+
+  .titles {
+    th {
+      border-color: $recordTitleColor;
+      color: $recordTitleColor;
+    }
+  }
+
+  @media (max-width: 1570px) {
+    .description {
+      max-width: none;
+    }
+  }
+
+  /* Record
+  ––––––––––––––––––––––––––––––––– */
+  .record-row{
+    border: 1px solid black;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+}
+
+
+
+
+@media (max-width: 768px) {
+
+}
+
+
+
+/* --- Dark Theme --- */
+
+
+
+@media (prefers-color-scheme: dark) {
+  .titles {
+    th {
+      border-color: var(--gray-500);
+      color: var(--gray-500);
+    }
+  }
+}

@@ -1,4 +1,5 @@
-import "../../scss/analyzer.scss";
+import "../../scss/analyzer/hint.scss";
+
 
 export const Hint = ({active, setActive}) => {
   return (
@@ -9,26 +10,26 @@ export const Hint = ({active, setActive}) => {
         <ul className="hint-content">
           <span>Characteristics description:</span>
           <li>
-            <b>BPM</b> (Beats Per Minute) a musical term
+            <span className="special-word">BPM</span> (Beats Per Minute) a musical term
             that means measuring the tempo of the
             music.
           </li>
           <li>
-            <b>Key</b> is the group of pitches, or scale, that
+            <span className="special-word">Key</span> is the group of pitches, or scale, that
             forms the basis of a music composition
             in classical.
           </li>
           <li>
             Elements that give the composition more&nbsp;
-            <b>energy</b>: higher tones, fast and irregular
+            <span className="special-word">energy</span>: higher tones, fast and irregular
             rhythms, dissonant harmony.
           </li>
           <li>
-            <b>Happiness</b> of the music is usually expressed
+            <span className="special-word">Happiness</span> of the music is usually expressed
             in a fast tempo and in a major key
           </li>
           <li>
-            <b>Danceability</b> is measured using a mixture
+            <span className="special-word">Danceability</span> is measured using a mixture
             of song features such as beat strength,
             tempo stability, and overall tempo.
           </li>
