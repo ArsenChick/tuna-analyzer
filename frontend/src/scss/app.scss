@@ -74,6 +74,10 @@
     transition: all ease-out .3s;
   }
 
+  img {
+    transition: all ease-out .3s;
+  }
+
   nav {
     margin: 0;
     padding: 0;
@@ -221,6 +225,7 @@
     -webkit-transform: scale(2);
     -o-transform: scale(2);
     -moz-transform: scale(2);
+    margin-right: 30px;
   }
 }
 
