@@ -154,6 +154,27 @@ def get_file():
                }
     }, 200
 
+## Функция получения имени загруженного аудиофайла.
+#
+#  Отправляет имя ранее сохраненного аудиофайла по его идентификатору.
+#  Метод GET.
+@data_manager.route('/api/get_file_name', methods=['GET'])
+@jwt_required()
+def get_file_name():
+    id_res = request.args.get("id")
+    if id_res == None:
+        return {'msg': 'No id'}, 422
+    result: Result = Result.query.filter_by(id=id_res).first()
+    if result == None:
+        return {'msg': 'No such entry'}, 404
+
+    file_name = os.path.basename(result.file)
+    return {
+        "msg": "Request done",
+        "filename": file_name
+    }, 200
+
+
 ## Функция получения результатов анализа.
 #
 #  Отправляет ранее сохраненные результаты анализа по их идентификатору.

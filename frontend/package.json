@@ -53,7 +53,8 @@
   "jest": {
     "coveragePathIgnorePatterns": [
       "src/reportWebVitals.js",
-      "src/scripts/audioUtils.js"
+      "src/scripts/audioUtils.js",
+      "src/scripts/fileUtils.js"
     ]
   }
 }

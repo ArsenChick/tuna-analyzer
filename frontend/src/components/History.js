@@ -339,10 +339,10 @@ export default function History() {
       const requests = curIds.map(async (id) => {
         var name;
 
-        await fetch("/api/get_file?id=" + id, requestOptions)
+        await fetch("/api/get_file_name?id=" + id, requestOptions)
           .then((response) => response.json())
           .then((data) => {
-            name = data.file.filename;
+            name = data.filename;
           });
         await fetch("/api/get_result?id=" + id, requestOptions)
           .then((response) => response.json())
