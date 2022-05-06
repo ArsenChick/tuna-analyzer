@@ -341,7 +341,7 @@ export default function History() {
         await fetch("/api/get_file?id=" + id, requestOptions)
           .then((response) => response.json())
           .then((data) => {
-            name = data.file.filename;
+            name = data.filename;
           });
         await fetch("/api/get_result?id=" + id, requestOptions)
           .then((response) => response.json())
