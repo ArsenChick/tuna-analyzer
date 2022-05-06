@@ -1,5 +1,8 @@
 import React from "react";
+import { withCookies, Cookies } from 'react-cookie';
+import { instanceOf } from 'prop-types';
 import { preprocess, shortenAudio } from "../../scripts/audioUtils";
+import { toBase64 } from "../../scripts/fileUtils";
 
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
@@ -34,19 +37,29 @@ const Description = () => {
 }
 
 class Analyzer extends React.Component {
+  static propTypes = {
+    cookies: instanceOf(Cookies).isRequired
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       hintActive: false,
       resultsView: []
     }
+
+    const { cookies } = props;
+    this.accessToken = cookies.get('access_token') || false;
     
     this.handleUpload = this.handleUpload.bind(this);
     this.setHintActive = this.setHintActive.bind(this);
     
     this.actx = null;
     this.resultsData = [];
+    this.audioFiles = [];
+
     this.analyzesInQueue = [];
+    this.currentInSend = null;
 
     this.workers = {
       keyBpm: null,
@@ -65,6 +78,13 @@ class Analyzer extends React.Component {
       this.workers.moodInference[mood].postMessage({ name: mood });
     });
   }
+
+  componentWillUnmount() {
+    this.workers.keyBpm.terminate();
+    this.workers.featureExtraction.terminate();
+    moodModelNames.forEach((mood) =>
+      this.workers.moodInference[mood].terminate());
+  }
   
   setHintActive(state) {
     this.setState({
@@ -82,8 +102,9 @@ class Analyzer extends React.Component {
       }
     }
 
-    const queueNo = this.resultsData.length;
-    this.resultsData.push({ file: file });
+    const queueNo = this.state.resultsView.length;
+    this.resultsData.push({ filename: file.name });
+    this.audioFiles.push({ file: file, ticket: queueNo });
     this.showQueued(file.name);
 
     this.analyzesInQueue.push(new Promise(async (resolve) => {
@@ -99,6 +120,17 @@ class Analyzer extends React.Component {
           .then((results) => {
             this.saveResults(queueNo, ...results);
             this.outputResults(queueNo);
+
+            if (this.accessToken) {
+              this.currentInSend = new Promise((resolve) => {
+                this.sendResults(queueNo)
+                  .then((response) => {
+                    this.showServerSaved(queueNo, response);
+                    resolve(response);
+                  });
+              });
+            }
+
             resolve(this.analyzesInQueue.length);
           }));
     }));
@@ -112,6 +144,7 @@ class Analyzer extends React.Component {
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Waiting...</td>
         )}
+        {this.accessToken && <td>Waiting...</td>}
       </tr>
     );
 
@@ -128,6 +161,7 @@ class Analyzer extends React.Component {
         {[...Array(5).keys()].map((num) =>
           <td key={num}>Loading...</td>
         )}
+        {this.accessToken && <td>Waiting...</td>}
       </tr>
     );
     
@@ -213,16 +247,16 @@ class Analyzer extends React.Component {
   saveResults(queueNo, keyBpmData, happy, aggressive, dance) {
     let specificResult = this.resultsData[queueNo];
     specificResult.key = `${keyBpmData.keyData.key} ${keyBpmData.keyData.scale}`;
-    specificResult.bpm = Math.ceil(keyBpmData.bpm);
-    specificResult.happy = (10 * happy).toPrecision(2);
-    specificResult.energy = (10 * aggressive).toPrecision(2);
-    specificResult.dance = (10 * dance).toPrecision(2);
+    specificResult.bpm = Math.round(keyBpmData.bpm);
+    specificResult.happy = Math.round(10 * happy);
+    specificResult.energy = Math.round(10 * aggressive);
+    specificResult.dance = Math.round(10 * dance);
   }
 
   outputResults(queueNo) {
     const prevState = this.state.resultsView.slice();
     const specificResult = this.resultsData[queueNo];
-    const filename = specificResult.file.name;
+    const filename = specificResult.filename;
 
     const tableRow = (
       <tr key={queueNo}>
@@ -232,9 +266,100 @@ class Analyzer extends React.Component {
         <td>{specificResult.happy}</td>
         <td>{specificResult.energy}</td>
         <td>{specificResult.dance}</td>
+        {this.accessToken && <td>Waiting...</td>}
       </tr>
     );
     
+    prevState[queueNo] = tableRow;
+    this.setState({
+      resultsView: prevState
+    });
+  }
+
+  async sendResults(queueNo) {
+    this.showSending(queueNo);
+
+    const fileRecord = this.audioFiles.find((record) => record.ticket === queueNo);
+    const base64 = await toBase64(fileRecord.file);
+    const jsonBody = this.getResultJSON(queueNo, base64);
+
+    const requestOptions = {
+      mode: "cors",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: "Bearer " + this.accessToken,
+        "Content-Type": "application/json",
+      },
+      body: jsonBody
+    };
+    
+    return await fetch("/api/save_results", requestOptions)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        if (json.msg === "Upload done") return true;
+        else return false;
+      });
+  }
+
+  getResultJSON(queueNo, base64File) {
+    const resultToSend = this.resultsData[queueNo];
+    let jsonObj = {
+      bpm: resultToSend.bpm,
+      tone: resultToSend.key,
+      dance: resultToSend.dance,
+      energy: resultToSend.energy,
+      happiness: resultToSend.happy,
+      version: "0",
+      file: {
+        filename: resultToSend.filename,
+        content: base64File
+      }
+    };
+    return JSON.stringify(jsonObj);
+  }
+
+  showSending(queueNo) {
+    const prevState = this.state.resultsView.slice();
+    const specificResult = this.resultsData[queueNo];
+    const filename = specificResult.filename;
+
+    const tableRow = (
+      <tr key={queueNo}>
+        <td>{filename}</td>
+        <td>{specificResult.bpm}</td>
+        <td>{specificResult.key}</td>
+        <td>{specificResult.happy}</td>
+        <td>{specificResult.energy}</td>
+        <td>{specificResult.dance}</td>
+        <td>Saving...</td>
+      </tr>
+    );
+
+    prevState[queueNo] = tableRow;
+    this.setState({
+      resultsView: prevState
+    });
+  }
+
+  showServerSaved(queueNo, response) {
+    const prevState = this.state.resultsView.slice();
+    const specificResult = this.resultsData[queueNo];
+    const filename = specificResult.filename;
+
+    const tableRow = (
+      <tr key={queueNo}>
+        <td>{filename}</td>
+        <td>{specificResult.bpm}</td>
+        <td>{specificResult.key}</td>
+        <td>{specificResult.happy}</td>
+        <td>{specificResult.energy}</td>
+        <td>{specificResult.dance}</td>
+        <td>{response ? "Saved" : "Error"}</td>
+      </tr>
+    );
+
     prevState[queueNo] = tableRow;
     this.setState({
       resultsView: prevState
@@ -258,6 +383,7 @@ class Analyzer extends React.Component {
                 <th>Happiness</th>
                 <th>Energy</th>
                 <th>Danceability</th>
+                {this.accessToken && <th>Saved</th>}
               </tr>
             </thead>
             <tbody>
@@ -274,5 +400,5 @@ class Analyzer extends React.Component {
   }
 }
 
-export default Analyzer;
+export default withCookies(Analyzer);
 

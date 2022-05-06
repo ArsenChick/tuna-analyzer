@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+import { useCookies, CookiesProvider } from "react-cookie";
 import "./scss/app.scss";
 
 //Изображения
@@ -83,7 +83,9 @@ function App() {
         </div>
         <div id="small-top-bar" />
       </div>
-      <Outlet context={[user, setUser]} />
+      <CookiesProvider>
+        <Outlet context={[user, setUser]} />
+      </CookiesProvider>
     </div>
   );
 }
