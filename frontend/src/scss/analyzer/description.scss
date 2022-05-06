@@ -1,33 +1,53 @@
 @import './../_variables.scss';
 // Jenka
 
-/* Analyzer Info
-––––––––––––––––––––––––––––––––– */
-.project-name {
-  font-size: 30px;
-  font-weight: bold;
-  color: $selectedWordColor;
-}
 
-.description {
-  max-width:870px;
 
-  p {
-    font-size: 18px;
+/* --- Light Theme --- */
+
+/*   Desktop   */
+
+@media all and (max-width: 1920px) {
+  /* Analyzer Info
+  ––––––––––––––––––––––––––––––––– */
+  .project-name {
+    font-size: 30px;
+    font-weight: bold;
+    color: $selectedWordColor;
   }
 
-  * {
-    margin: 25px 0;
-  };
+  .description {
+    max-width:870px;
+    p {
+      font-size: 18px;
+    }
+
+    * {
+      margin: 25px 0;
+    };
+
+  }
+
+  .project-info {
+    margin: 0;
+    padding: 10px 30px;
+    border-radius: 7px;
+    background: rgba($dragAndDropZoneColor, $projectInfoOpacity);
+  }
+}
+
+
+// Mobile
+
+@media (max-width: 768px) {
 
 }
 
-.project-info {
-  margin: 0;
-  padding: 10px 30px;
-  border-radius: 7px;
-  background: rgba($dragAndDropZoneColor, $projectInfoOpacity);
-}
+
+
+/* --- Dark Theme --- */
+
+
 
 @media (prefers-color-scheme: dark) {
   .project-info {

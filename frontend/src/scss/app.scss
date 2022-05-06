@@ -5,7 +5,6 @@
 
 /* --- Light Theme --- */
 
-
 /*   Desktop   */
 
 @media all {
@@ -17,6 +16,10 @@
     flex-direction: column;
     //margin: 25px 0;
     padding: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
+    h2, form, label, button, p {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 
   main {
@@ -208,7 +211,6 @@
     text-overflow: ellipsis;
   }
 }
-
 
 /*   Mobile   */
 

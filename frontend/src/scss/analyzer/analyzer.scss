@@ -1,53 +1,78 @@
 @import './../_variables.scss';
 // Jenka
 
-/* Positioning Elements
-––––––––––––––––––––––––––––––––– */
-.in-line {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  flex-flow: space-between;
-  margin-bottom: 10px;
-}
+/*   Desktop   */
 
-.flex-item {
-  flex: 1 1 auto;
-  margin: 0 10px;
-    transition: 300ms;
-}
-
-@media (max-width: 1570px) {
-  .description {
-    max-width: none;
+@media all and (max-width: 1920px) {
+  /* Positioning Elements
+  ––––––––––––––––––––––––––––––––– */
+  .in-line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-flow: space-between;
+    margin-bottom: 10px;
   }
-}
 
-/* Analysis History
-––––––––––––––––––––––––––––––––– */
-.analysis-history {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  table{
-    tbody{
-      border: 1px solid $recordColor;
-      tr {
-        background: rgba($recordColor, 1 - $dragAndDropZoneOpacity);
-      }
+  .flex-item {
+    flex: 1 1 auto;
+    margin: 0 10px;
+      transition: 300ms;
+  }
 
-      td {
-        padding:7px 10px;
+  /* Analysis History
+  ––––––––––––––––––––––––––––––––– */
+  .analysis-history {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    table{
+      tbody{
+        border: 1px solid $recordColor;
+        tr {
+          background: rgba($recordColor, 1 - $dragAndDropZoneOpacity);
+        }
+
+        td {
+          padding:7px 10px;
+        }
       }
     }
   }
-}
 
-.titles {
-  th {
-    border-color: $recordTitleColor;
-    color: $recordTitleColor;
+  .titles {
+    th {
+      border-color: $recordTitleColor;
+      color: $recordTitleColor;
+    }
+  }
+
+  @media (max-width: 1570px) {
+    .description {
+      max-width: none;
+    }
+  }
+
+  /* Record
+  ––––––––––––––––––––––––––––––––– */
+  .record-row{
+    border: 1px solid black;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 }
+
+
+
+
+@media (max-width: 768px) {
+
+}
+
+
+
+/* --- Dark Theme --- */
+
+
 
 @media (prefers-color-scheme: dark) {
   .titles {
@@ -56,12 +81,4 @@
       color: var(--gray-500);
     }
   }
-}
-
-/* Record
-––––––––––––––––––––––––––––––––– */
-.record-row{
-  border: 1px solid black;
-  border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px;
 }
