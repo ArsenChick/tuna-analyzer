@@ -25,7 +25,12 @@
     * {
       margin: 25px 0;
     };
+  }
 
+  @media (max-width: 1570px) {
+    .description {
+      max-width: none;
+    }
   }
 
   .project-info {
@@ -34,13 +39,23 @@
     border-radius: 7px;
     background: rgba($dragAndDropZoneColor, $projectInfoOpacity);
   }
+
+
 }
+
 
 
 // Mobile
 
 @media (max-width: 768px) {
-
+  .project-name {
+    font-size: 34px;
+  }
+  .description {
+    p {
+      font-size: 22px;
+    }
+  }
 }
 
 

@@ -229,6 +229,15 @@
     -moz-transform: scale(2);
     margin-right: 30px;
   }
+
+  nav {
+    a {
+      transform: scale(1.3);
+      -webkit-transform: scale(1.3);
+      -o-transform: scale(1.3);
+      -moz-transform: scale(1.3);
+    }
+  }
 }
 
 
