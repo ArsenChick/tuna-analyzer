@@ -16,10 +16,6 @@
     flex-direction: column;
     //margin: 25px 0;
     padding: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
-    h2, form, label, button, p {
-      margin-left: auto;
-      margin-right: auto;
-    }
   }
 
   main {
@@ -209,6 +205,15 @@
     -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* Sign Up and Log In
+  ––––––––––––––––––––––––––––––––– */
+  .sign-up-page, .log-in-page {
+    h2, form, label, button, p {
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 }
 
