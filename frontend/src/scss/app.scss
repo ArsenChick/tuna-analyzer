@@ -210,7 +210,9 @@
   /* Sign Up and Log In
   ––––––––––––––––––––––––––––––––– */
   .sign-up-page, .log-in-page {
+    transition: all ease-out .3s;
     h2, form, label, button, p {
+      transition: all ease-out .3s;
       margin-left: auto;
       margin-right: auto;
     }
@@ -243,6 +245,17 @@
       -moz-transform: scale(1.3);
     }
   }
+
+  /* Sign Up and Log In
+  ––––––––––––––––––––––––––––––––– */
+  .sign-up-page, .log-in-page {
+    h2, button, p {
+      transform: scale(1.3);
+      -webkit-transform: scale(1.3);
+      -o-transform: scale(1.3);
+      -moz-transform: scale(1.3);
+    }
+  }
 }
 
 
@@ -268,7 +281,7 @@
       background-color: $navButtonColorDarkTheme;
       border-color: $navButtonColorDarkTheme;
       color: $navButtonTextColor;
-    }
+  }
 }
 
 
