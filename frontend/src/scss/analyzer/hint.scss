@@ -107,7 +107,12 @@
 /*   Mobile   */
 
 @media (max-width: 768px) {
-
+  .hint-area {
+    transform: scale(1.15);
+    position: fixed;
+    right: 45px;
+    bottom: 30px;
+  }
 }
 
 /* --- Dark Theme --- */
