@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
+import { isMobile } from "./scripts/mobileDetect";
 import "./scss/app.scss";
-
+import "./scss/app.scss";
 
 
 import logo_icon from "./img/tuna_neon_logo.svg";
