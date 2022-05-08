@@ -23,9 +23,8 @@
   /* Analysis History
   ––––––––––––––––––––––––––––––––– */
   .analysis-history {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    table{
+    table {
+      margin: 20px 0;
       tbody{
         border: 1px solid $recordColor;
         tr {

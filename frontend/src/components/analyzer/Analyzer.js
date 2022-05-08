@@ -349,7 +349,7 @@ class Analyzer extends React.Component {
   render() {
     return (
       <main className="page-content analyzer-page">
-        <div className="in-line">
+        <div className="in-line inside-padding">
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
