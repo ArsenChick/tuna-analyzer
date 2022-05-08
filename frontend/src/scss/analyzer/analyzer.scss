@@ -40,9 +40,13 @@
 
   .titles {
     th {
+
+      padding-left: 10px;
+      padding-right: 10px;
       border-color: $recordTitleColor;
       color: $recordTitleColor;
     }
+
   }
 
   /* Record
