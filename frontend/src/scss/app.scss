@@ -58,7 +58,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
   }
 
   #logo-title {
@@ -67,17 +67,17 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 45px;
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
   }
 
   #small-top-bar {
     height: 30px;
     background: $smallTopNavColor;
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
   }
 
   img {
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
   }
 
   nav {
@@ -213,9 +213,9 @@
   /* Sign Up and Log In
   ––––––––––––––––––––––––––––––––– */
   .sign-up-page, .log-in-page {
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
     h2, form, label, button, p {
-      transition: all ease-out .3s;
+      transition: transform .3s ease 0;
       margin-left: auto;
       margin-right: auto;
     }
