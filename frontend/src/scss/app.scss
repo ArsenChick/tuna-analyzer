@@ -33,16 +33,20 @@
     font-weight: bold;
   }
 
-  .question-info {
-    font-size: 14px;
-    opacity: .77;
+  .cursor-point {
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
   }
-  .question-info:hover {
+
+  .question-sign {
+    font-size: 14px;
+    opacity: .77;
+  }
+
+  .question-sign:hover {
     opacity: 1;
   }
 

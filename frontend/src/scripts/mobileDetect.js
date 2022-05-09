@@ -48,13 +48,5 @@ if (isMobile.any()) {
   document.body.classList.add('_touch');
 } else {
   document.body.classList.add('_pc');
-
-  let elements = document.querySelectorAll('.mobile');
-
-  if (elements.length > 0) {
-    for (let i = 0; i < elements.length; i++) {
-
-    }
-  }
 }
 

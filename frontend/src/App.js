@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import { isMobile } from "./scripts/mobileDetect";
+//import "./scripts/hintInteraction";
 import "./scss/app.scss";
 
 

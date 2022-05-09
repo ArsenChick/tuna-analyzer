@@ -357,13 +357,17 @@ class Analyzer extends React.Component {
           <table>
             <thead>
               <tr className="titles">
-                <th>Filename</th>
-                <th>BPM <span className="question-info bpm">(?)</span></th>
-                <th>Key</th>
-                <th>H <span className="question-info happiness">(?)</span></th>
-                <th>E <span className="question-info energy">(?)</span></th>
-                <th>D <span className="question-info danceability">(?)</span></th>
-                {this.accessToken && <th>Saved</th>}
+                <th className="title filename"><span>Filename </span></th>
+                <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Bits Per Minute</li></ul></th>
+                <th className="title key"><span>Key </span></th>
+                <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
+                <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
+                <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
+                {this.accessToken && <th className="title saved"><span>Saved </span></th>}
               </tr>
             </thead>
             <tbody>
