@@ -1,100 +1,102 @@
 @import './../_variables.scss';
 // Mixturkin
 
+
 /* DnD Element
 ––––––––––––––––––––––––––––––––– */
 .dnd-container {
+  display: block;
+  justify-content: center;
+  align-items: center;
   height: 300px;
   width: 450px;
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  border: 4.6px dashed $dragAndDropZoneBorderColor;
-  background-color: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
   padding: 45px;
-  align-items: center;
-  justify-content: center;
+  background-color: rgba($dragAndDropZoneColor, $dragAndDropZoneOpacity);
+  border: 4.6px dashed $dragAndDropZoneBorderColor;
 }
 
 .dnd-container-active {
+  display: block;
+  justify-content: center;
+  align-items: center;
   height: 300px;
   width: 450px;
-  display: block;
   margin-left: auto;
   margin-right: auto;
+  padding: 45px;
   border: 4.6px dashed $dragAndDropZoneBorderColor;
   background-color: rgba($dragAndDropActiveZoneColor, .6);
-  padding: 45px;
-  align-items: center;
-  justify-content: center;
 }
 
 .dnd-unselectable-p {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
   text-align: center;
   color: #9593d8;
   font-size: 36px;
   font-weight: bold;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
 }
 
 .dnd-select-button{
   display: block;
+  text-align: center;
   width: 300px;
   height: 50px;
-  border-radius: 10px;
   margin: auto;
   background-color: $selectButtonColor;
   border: 2px solid $selectButtonColor;
+  border-radius: 10px;
   color: $selectButtonTextColor;
-  text-align: center;
 }
 
 
 
 // Jenka
 
+
 /* DnD Element
 ––––––––––––––––––––––––––––––––– */
 .dnd-container {
-   border-radius: 7px;
    margin-top: 20px;
    margin-bottom: 20px;
+   border-radius: 7px;
    transition: 200ms;
 }
 
 .dnd-container-active {
-  border-radius: 7px;
+  text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  transition: 200ms;
   line-height: 200px;
-  text-align: center;
+  border-radius: 7px;
+  transition: 200ms;
 
   :first-child {
+    margin-bottom: 0;
     white-space: nowrap;
     overflow: hidden;
-    margin-bottom: 0;
   }
 
   :not(:first-child) {
-    visibility: hidden;
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
+    user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
-    user-select: none;
   }
 }
 
 @media (hover: hover){
   .dnd-select-button:hover {
-    color: $selectButtonColor;
     background-color: $selectButtonTextColor;
     border-color: $selectButtonTextColor;
+    color: $selectButtonColor;
   }
 }
 
@@ -109,16 +111,16 @@
   }
 
   .dnd-select-button {
-    color: $selectButtonTextColorDarkTheme;
     background-color: $selectButtonColorDarkTheme;
     border-color: $selectButtonColorDarkTheme;
+    color: $selectButtonTextColorDarkTheme;
   }
 }
 
 @media (hover: hover) and (prefers-color-scheme: dark) {
   .dnd-select-button:hover {
-    color: $selectButtonColorDarkTheme;
     background-color: $selectButtonTextColorDarkTheme;
     border-color: $selectButtonTextColorDarkTheme;
+    color: $selectButtonColorDarkTheme;
   }
 }

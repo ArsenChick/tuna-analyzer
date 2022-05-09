@@ -1,8 +1,8 @@
 @import './../_variables.scss';
 // Jenka
 
-/*   Desktop   */
 
+/*   Desktop   */
 @media all and (max-width: 1920px) {
   /* Positioning Elements
   ––––––––––––––––––––––––––––––––– */
@@ -17,7 +17,7 @@
   .flex-item {
     flex: 1 1 auto;
     margin: 0 10px;
-      transition: 300ms;
+    transition: 300ms;
   }
 
   /* Analysis History
@@ -40,13 +40,11 @@
 
   .titles {
     th {
-
       padding-left: 10px;
       padding-right: 10px;
       border-color: $recordTitleColor;
       color: $recordTitleColor;
     }
-
   }
 
   /* Record
@@ -59,19 +57,13 @@
 }
 
 
-
 /*   Mobile   */
-
 @media (max-width: 768px) {
 
 }
 
 
-
 /* --- Dark Theme --- */
-
-
-
 @media (prefers-color-scheme: dark) {
   .titles {
     th {
