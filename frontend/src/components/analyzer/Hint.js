@@ -34,6 +34,7 @@ export const Hint = ({active, setActive}) => {
             tempo stability, and overall tempo.
           </li>
         </ul>
+        <div className="triangle-down right-triangle-align"></div>
       </div>
       <button
         className="hint-button"

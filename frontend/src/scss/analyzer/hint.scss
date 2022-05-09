@@ -39,13 +39,6 @@
 
   .hint-modal-window {
     position: relative;
-    top: -10px;
-    padding: 10px;
-    background: $hintBackgroundColor;
-    border: 2px solid $hintBorderColor;
-    color: $hintTextColor;
-    font-size: 12px;
-    border-radius: 7px;
     display: none;
     z-index: 1;
     opacity: 0;
@@ -54,34 +47,54 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
     user-select: none;
+    visibility: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     // Transition не работает с display:none
     //-webkit-transition: opacity 200ms ease-in;
     //-moz-transition: opacity 200ms ease-in;
     //transition: opacity 200ms ease-in;
-    visibility: hidden;
-    overflow-y: auto;
-    overflow-x: hidden;
   }
 
   .hint-modal-window.active {
     display: block;
     z-index: 1;
     opacity: $hintBackgroundOpacity;
-    border: 2px solid rgba($hintBorderColor, $hintBorderOpacity);
     pointer-events: auto;
     -moz-user-select: auto;
     -khtml-user-select: auto;
     -webkit-user-select: auto;
     user-select: auto;
     visibility: visible;
+
   }
 
   .hint-content {
+    padding: 10px;
+    background: $hintBackgroundColor;
+    border: 2px solid $hintBorderColor;
+    color: $hintTextColor;
+    font-size: 12px;
+    border-radius: 7px;
+    z-index: 10;
+  }
 
+  .triangle-down {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 10px solid $hintBorderColor;
+  }
+
+  .right-triangle-align {
+    margin-right: 24px;
+    margin-left: auto;
   }
 
   .hint-button {
     position: relative;
+    margin-top: 4px;
     margin-left: auto;
     margin-right: 0;
     padding: 7px 22px;
@@ -123,7 +136,7 @@
 
 
 @media (prefers-color-scheme: dark) {
-  .hint-modal-window {
+  .hint-content {
     background: $hintBackgroundColorDarkTheme;
     border: 2px solid $hintBorderColorDarkTheme;
     color: $hintTextColorDarkTheme;

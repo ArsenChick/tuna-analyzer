@@ -46,7 +46,7 @@
     min-height: 100px;
     padding: (-$scrinVerticalSpaceSize) (-$scrinHorizontalSpaceSize) 0 (-$scrinHorizontalSpaceSize);
     opacity: 1;
-    z-index: 1;
+    z-index: 10;
     align-items: center;
     min-width: 450px;
   }
