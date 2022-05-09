@@ -32,6 +32,7 @@ function Result(props) {
         <td>
           {
             <button
+              id={"download"+props.id}
               style={{
                 backgroundColor: "lightgreen",
                 display: "block",
@@ -48,6 +49,7 @@ function Result(props) {
         <td>
           {
             <button
+              id={"delete"+props.id}
               style={{
                 backgroundColor: "red",
                 display: "block",
@@ -86,7 +88,7 @@ function DataList(props) {
     );
   });
   if (results.length < 1) {
-    return <div>No results were yet saved</div>;
+    return <div id="noSaves">No results were yet saved</div>;
   }
 
   return <>{results}</>;
@@ -95,7 +97,7 @@ function DataList(props) {
 function Table(props) {
   return (
     <div>
-      <table>
+      <table id="resultTable">
         <tr>
           <th>Date</th>
           <th>Name</th>
@@ -107,7 +109,7 @@ function Table(props) {
           <th>Version</th>
 
           <th style={{ textAlign: "center" }}>Play</th>
-          <th style={{ textAlign: "center" }}>Upload</th>
+          <th style={{ textAlign: "center" }}>Download</th>
           <th style={{ textAlign: "center" }}>Delete</th>
         </tr>
         <DataList 
@@ -138,6 +140,7 @@ function PageButton(props) {
   return (
     <>
       <button
+        id={"page"+props.id}
         style={{ display: "inline-block" }}
         onClick={() => {
           props.handler(props.id);
@@ -172,7 +175,7 @@ function Footer(props) {
     );
   });
   return(
-  <div>
+  <div id="paginationFooter">
   {pageList.length > 0 &&
     <div style={{ width: "100%", textAlign: "center" }}>
       <button
@@ -221,13 +224,13 @@ export default function History() {
   const [mdata, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
-  const elementsPerPage = 2;
+  const elementsPerPage = 5;
   const maxPages = 5;
   var pages = 1;
   const navigate = useNavigate();
 
   if (cookies.access_token == null) {
-    navigate("/");
+    navigate("/login");
   }
   const updateState = (val) => {
 	if (val < 1) {
@@ -368,7 +371,7 @@ export default function History() {
       });
     }
     if (cookies.access_token == null) {
-      navigate("/");
+      navigate("/login");
     } else if (ids === null) {
       GI();
     } else {
@@ -379,7 +382,7 @@ export default function History() {
   if (mdata === null) {
     return (
       <main className="page-content history-page">
-        <h1>Loading...</h1>
+        <h1 id="load">Loading...</h1>
       </main>
     );
   } else {
@@ -392,7 +395,7 @@ export default function History() {
           deleteRes={deleteRes}
           downloadFile={downloadFile}
 		    />
-        <Footer
+        <Footer 
           handler={updateState}
           curPage={page}
           elems={elementsPerPage}

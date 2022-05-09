@@ -7,17 +7,17 @@ import "../scss/auth/auth.scss";
 
 
 function Auth() {
-  const [user, setUser] = useOutletContext();
+  //const [user, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);
-  const [, setCookie] = useCookies([
+  const [cookies, setCookie] = useCookies([
     "access_token",
     "username",
   ]);
   const navigate = useNavigate();
 
-  if (user)
+  if (cookies.username)
     return (
-      <div>
+      <div id="authError">
         <h2>You should logout first!</h2>
       </div>
     );
@@ -57,7 +57,7 @@ function Auth() {
                 setCookie("username", values.username);
                 console.log(data.access_token);
                 setSubmitting(false);
-                setUser(values.username);
+                //setUser(values.username);
                 navigate("/");
               } else {
                 setFail(true);
@@ -65,7 +65,7 @@ function Auth() {
             });
         }}
       >
-        <Form>
+        <Form id = "loginForm">
           <label htmlFor="username">Username</label>
           <Field name="username" type="text" />
           <ErrorMessage
@@ -79,11 +79,11 @@ function Auth() {
             render={(msg) => <div className="error">{msg}</div>}
           />
 
-          <button type="submit">Log in</button>
+          <button type="submit" id="submitButton">Log in</button>
         </Form>
       </Formik>
-      {fail && <p style={{ color: "red" }}>Login failed</p>}
-      <p>
+      {fail && <p id="errorMessage" style={{ color: "red" }} >Login failed</p>}
+      <p id="signupLink">
         Don't have an account? <Link to="/signup">Sign up</Link> now!
       </p>
     </div>

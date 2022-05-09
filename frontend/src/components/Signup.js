@@ -4,13 +4,12 @@ import { useCookies } from 'react-cookie';
 import * as Yup from "yup";
 import '../scss/signup/sign_up.scss';
 
-
 function Signup() {
-  const [user, setUser] = useOutletContext();
-  const [, setCookie] = useCookies(['access_token', 'username']);
+  //const [user, setUser] = useOutletContext();
+  const [cookies, setCookie] = useCookies(['access_token', 'username']);
   const navigate = useNavigate();
 
-  if (user)
+  if (cookies.username)
     return (
       <div>
         <h2>You should logout first!</h2>
@@ -61,7 +60,7 @@ function Signup() {
                 setCookie('access_token', data.access_token);
                 setCookie('username', values.username);
                 setSubmitting(false);
-                setUser(values.username);
+                //setUser(values.username);
                 navigate("/");
               }
             });
