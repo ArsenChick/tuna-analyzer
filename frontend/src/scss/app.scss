@@ -33,6 +33,19 @@
     font-weight: bold;
   }
 
+  .question-info {
+    font-size: 14px;
+    opacity: .77;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
+  .question-info:hover {
+    opacity: 1;
+  }
+
    /* Top Bar
   ––––––––––––––––––––––––––––––––– */
   #top-bar {
@@ -111,6 +124,9 @@
 
   header {
     user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
     a {
       display: flex;
       flex-direction: row;
@@ -153,8 +169,11 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     -webkit-touch-callout: none;
-    -webkit-user-select: none;
     user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+
   }
 
   .navButton {

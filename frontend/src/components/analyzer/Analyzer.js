@@ -358,11 +358,11 @@ class Analyzer extends React.Component {
             <thead>
               <tr className="titles">
                 <th>Filename</th>
-                <th>BPM <span className="add-info bpm">(?)</span></th>
+                <th>BPM <span className="question-info bpm">(?)</span></th>
                 <th>Key</th>
-                <th>H <span className="add-info happiness">(?)</span></th>
-                <th>E <span className="add-info energy">(?)</span></th>
-                <th>D <span className="add-info danceability">(?)</span></th>
+                <th>H <span className="question-info happiness">(?)</span></th>
+                <th>E <span className="question-info energy">(?)</span></th>
+                <th>D <span className="question-info danceability">(?)</span></th>
                 {this.accessToken && <th>Saved</th>}
               </tr>
             </thead>
