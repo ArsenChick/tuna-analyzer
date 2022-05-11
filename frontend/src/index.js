@@ -9,16 +9,18 @@ import Analyzer from './components/analyzer/Analyzer';
 import Auth from './components/Auth';
 import Signup from './components/Signup';
 import History from './components/History';
+import PageNotFound from './components/PageNotFound';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Analyzer />} />
-          <Route path="login" element={<Auth />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="history" element={<History />} />
+          <Route exact index element={<Analyzer />} />
+          <Route exact path="login" element={<Auth />} />
+          <Route exact path="signup" element={<Signup />} />
+          <Route exact path="history" element={<History />} />
+          <Route path="*" element={<PageNotFound/>} />
         </Route>
       </Routes>
     </BrowserRouter>

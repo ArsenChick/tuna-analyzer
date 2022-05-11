@@ -118,7 +118,6 @@
       }
 
       li {
-
         margin-bottom: 6px;
         list-style-type:none;
         a {
@@ -239,9 +238,9 @@
 
   /* Sign Up and Log In
   ––––––––––––––––––––––––––––––––– */
-  .sign-up-page, .log-in-page {
+  .center-page-align {
     transition: transform .3s ease 0;
-    h2, form, label, button, p {
+    h1, h2, form, label, button, p, ul, li, a{
       margin-left: auto;
       margin-right: auto;
       transition: transform .3s ease 0;
