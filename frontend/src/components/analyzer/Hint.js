@@ -4,7 +4,7 @@ import "../../scss/analyzer/hint.scss";
 export const Hint = ({active, setActive}) => {
   return (
     <div className="hint-area">
-      <div className={active ? "hint-modal-window active" : "hint-modal-window"}
+      <div className={active ? "hint-modal-window _active" : "hint-modal-window"}
         onClick={e => e.stopPropagation()
       }>
         <ul className="hint-content">

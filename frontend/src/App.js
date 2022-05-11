@@ -3,6 +3,7 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import { isMobile } from "./scripts/mobileDetect";
 //import "./scripts/hintInteraction";
+import "./scripts/topBarBurgerMenu";
 import "./scss/app.scss";
 
 
@@ -33,6 +34,7 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
+          <div className="top-bar-icon"> <span> </span> </div>
           <nav className="sections">
             <ul>
               {user &&

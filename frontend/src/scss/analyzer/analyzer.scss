@@ -25,6 +25,7 @@
   .analysis-history {
     table {
       margin: 20px 0;
+      overflow: auto;
       tbody{
         border: 1px solid $recordColor;
         tr {
@@ -51,8 +52,7 @@
     position: absolute;
     margin-left: 0;
     padding-left: 0;
-    padding: 4px;
-    min-width: 150px;
+    padding: 2px 8px;
     background: $hintBackgroundColor;
     border: 2px solid transparent;
     border-radius: 5px;
@@ -92,6 +92,7 @@
     -webkit-user-select: auto;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
+
   /* Record
   ––––––––––––––––––––––––––––––––– */
   .record-row{

@@ -58,7 +58,7 @@
     //transition: opacity 200ms ease-in;
   }
 
-  .hint-modal-window.active {
+  .hint-modal-window._active {
     display: block;
     z-index: 1;
     opacity: $hintBackgroundOpacity;

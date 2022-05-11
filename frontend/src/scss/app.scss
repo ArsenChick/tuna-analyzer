@@ -69,7 +69,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 70px;
+    min-height: 70px;
     padding: 20px $scrinHorizontalSpaceSize;
     background: $bigTopNavColor;
     transition: transform .3s ease 0;
@@ -88,6 +88,10 @@
     height: 30px;
     background: $smallTopNavColor;
     transition: transform .3s ease 0;
+  }
+
+  #top-bar-icon {
+    display: none;
   }
 
   img {
@@ -114,6 +118,8 @@
       }
 
       li {
+
+        margin-bottom: 6px;
         list-style-type:none;
         a {
           text-decoration: none;
@@ -251,6 +257,7 @@
   #big-top-bar {
     height: 110px;
   }
+
   #logo-title {
     font-size: 60px;
   }
@@ -270,6 +277,130 @@
       -o-transform: scale(1.3);
       -moz-transform: scale(1.3);
     }
+  }
+
+  /* Top Bar Burger Menu
+  ––––––––––––––––––––––––––––––––– */
+  .body.lock {
+    overflow: hidden;
+  }
+
+  .top-bar-icon {
+    z-index: 5;
+    display: block;
+    position: absolute;
+    right: calc((100vw / 25) * 1.563);
+    width: 40px;
+    height: 26px;
+    cursor: pointer;
+  }
+
+  .top-bar-icon span,
+  .top-bar-icon::before,
+  .top-bar-icon::after {
+    position: absolute;
+    left: 0;
+    height: $topBarIconPos;
+    width: 100%;
+    background-color: #718096;
+    border-radius: 25px;
+    transition: all 0.3s ease 0s;
+  }
+
+  .top-bar-icon.active span,
+  .top-bar-icon.active::before,
+  .top-bar-icon.active::after {
+    background-color: #e2e8f0;
+  }
+
+  .top-bar-icon::before,
+  .top-bar-icon::after {
+    content: "";
+  }
+
+  .top-bar-icon::before {
+    top: 0;
+  }
+
+  .top-bar-icon::after {
+    bottom: 0;
+  }
+
+  .top-bar-icon span {
+    top: calc(50% - ($topBarIconPos / 2));
+    transform: scale (1) translate(0, -50%);
+  }
+
+  .sections::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110px;
+    background-color: $bigTopNavColor;
+    border-bottom-width: 30px;
+    border-bottom-style: solid;
+    border-bottom-color: $smallTopNavColor;
+    content: "";
+    z-index: 2;
+    opacity: 0;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .sections::before {
+      background-color: $bigTopNavColorDarkTheme;
+      border-bottom-color: $smallTopNavColorDarkTheme;
+    }
+  }
+
+  .sections {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    padding: 100px 30px 30px 30px;
+    transition: all 0.3s ease 0s;
+    transform: translate(100%, 0);
+    overflow: auto;
+    ul {
+      //justify-content: flex-start;
+      flex-direction: column;
+      flex-wrap: wrap-reverse;
+      position: absolute;
+      top: 170px;
+      right: calc((100vw / 25) * 1.563);
+      li {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      :first-child {
+        margin-top: 0;
+      }
+
+      :last-child {
+        margin-bottom: 0;
+      }
+
+      a {
+        font-size: 20px;
+      }
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  .sections.active {
+    background: rgba(0, 0, 0, 0.9);
+    transform: translate(0, 0);
+  }
+
+  .sections.active::before {
+    opacity: 1;
   }
 
   /* Sign Up and Log In
