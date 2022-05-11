@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from "react-router-dom";
 import "./../scss/page_not_found/page_not_found.scss";
 
 function PageNotFound() {
@@ -10,8 +10,12 @@ function PageNotFound() {
       <br></br>
       <p> In the meantime, try these links: </p>
       <ul>
-        <li><a> Analyzer </a></li>
-        <li><a> Log in </a></li>
+        <li>
+          <Link to="/" className="page-link"> Analyzer </Link>
+        </li>
+        <li>
+          <Link to="/login" className="page-link"> Amogus </Link>
+        </li>
       </ul>
     </div>
   );
