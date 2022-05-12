@@ -28,7 +28,6 @@ class Analyzer extends React.Component {
       hintActive: false,
       resultsView: []
     }
-
     const { cookies } = props;
     this.accessToken = cookies.get('access_token') || false;
     
@@ -65,12 +64,6 @@ class Analyzer extends React.Component {
     this.workers.featureExtraction.terminate();
     moodModelNames.forEach((mood) =>
       this.workers.moodInference[mood].terminate());
-  }
-  
-  setHintActive(state) {
-    this.setState({
-      hintActive: state
-    });
   }
 
   handleUpload(file) {    
@@ -343,6 +336,12 @@ class Analyzer extends React.Component {
     prevState[queueNo] = tableRow;
     this.setState({
       resultsView: prevState
+    });
+  }
+
+  setHintActive(state) {
+    this.setState({
+      hintActive: state
     });
   }
 

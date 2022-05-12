@@ -3,43 +3,13 @@ import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import { isMobile } from "./scripts/mobileDetect";
+
+import BurgerMenu from "./components/BurgerMenu";
 //import "./scripts/hintInteraction";
 
 import "./scss/app.scss";
 import logo_icon from "./img/tuna_neon_logo.svg";
 import * as Icon from "react-feather";
-
-import "./scss/top_bar/burger_menu.scss";
-
-
-class IconMenu extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      iconMenuActive: false,
-      resultsView: []
-    }
-
-    this.setIconMenuActive = this.setIconMenuActive.bind(this);
-  }
-
-  render() {
-    return (
-      <div className="top-bar-icon"
-        active={this.state.iconMenuActive}
-        setActive={this.setIconMenuActive}>
-        <span>
-        </span>
-      </div>
-    );
-  }
-
-  setIconMenuActive(state) {
-    this.setState({
-      iconMenuActive: state
-    });
-  }
-}
 
 
 function App() {
@@ -49,7 +19,7 @@ function App() {
     "username"
   ]);
   const navigate = useNavigate();
-  const [active, setActive] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
 
   if (cookies.username && user == null) {
     setUser(cookies.username);
@@ -66,11 +36,8 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <IconMenu
-             onClick={() => { active ? setActive(false) : setActive(true)}}
-          />
-          <nav className={active ? "sections _active" : "sections"}
-                   onClick={e => e.stopPropagation()
+          <BurgerMenu/>
+          <nav className={`sections ${menuActive ? 'active' : ''}`
           }>
             <ul>
               {user &&
