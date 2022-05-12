@@ -4,8 +4,8 @@ import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import { isMobile } from "./scripts/mobileDetect";
 
-import BurgerMenu from "./components/BurgerMenu";
 //import "./scripts/hintInteraction";
+import "./scss/top_bar/burger_menu.scss";
 
 import "./scss/app.scss";
 import logo_icon from "./img/tuna_neon_logo.svg";
@@ -26,6 +26,18 @@ function App() {
     setCookie("username", cookies.username);
   }
 
+  const BurgerMenu = ({menuActive, setMenuActive}) => {
+    return (
+      <div
+        className= {`top-bar-icon ${ menuActive ? '_active' : ''}`}
+      >
+        <span>
+        </span>
+      </div>
+    );
+  }
+
+
   return (
     <div className="App">
       <div id="top-bar">
@@ -36,8 +48,10 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <BurgerMenu/>
-          <nav className={`sections ${menuActive ? 'active' : ''}`
+          <BurgerMenu
+            onClick={() => { menuActive ? setMenuActive(false) : setMenuActive(true)
+          }}/>
+          <nav className={`sections ${menuActive ? '_active' : ''}`
           }>
             <ul>
               {user &&
