@@ -1,12 +1,10 @@
 import React from "react";
-import Enzyme, { render } from "enzyme";
-import { screen, act, waitFor } from "@testing-library/react"
-import { shallow, mount } from "enzyme";
-import { unmountComponentAtNode } from "react-dom";
+import Enzyme from "enzyme";
+import { act } from "@testing-library/react"
+import { mount } from "enzyme";
 import History from "./History";
 import { BrowserRouter } from "react-router-dom";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Cookies from "react-cookie";
 import { enableFetchMocks } from 'jest-fetch-mock';
 
 enableFetchMocks();

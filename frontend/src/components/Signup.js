@@ -12,7 +12,7 @@ function Signup() {
   if (cookies.username)
     return (
       <div>
-        <h2>You should logout first!</h2>
+        <h2 id="ErrorMessage">You should logout first!</h2>
       </div>
     );
 
@@ -67,7 +67,7 @@ function Signup() {
         }}
       >
         {(formik) => (
-          <Form>
+          <Form id="signupForm">
             <label htmlFor="username">Username</label>
             <Field name="username" type="text" />
             <ErrorMessage
