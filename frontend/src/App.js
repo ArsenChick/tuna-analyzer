@@ -1,16 +1,45 @@
+import React from "react";
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
 import { isMobile } from "./scripts/mobileDetect";
-import "./scripts/burgerMenu";
 //import "./scripts/hintInteraction";
 
 import "./scss/app.scss";
 import logo_icon from "./img/tuna_neon_logo.svg";
 import * as Icon from "react-feather";
 
-import { IconMenu } from "./components/BurgerMenu";
 import "./scss/top_bar/burger_menu.scss";
+
+
+class IconMenu extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      iconMenuActive: false,
+      resultsView: []
+    }
+
+    this.setIconMenuActive = this.setIconMenuActive.bind(this);
+  }
+
+  render() {
+    return (
+      <div className="top-bar-icon"
+        active={this.state.iconMenuActive}
+        setActive={this.setIconMenuActive}>
+        <span>
+        </span>
+      </div>
+    );
+  }
+
+  setIconMenuActive(state) {
+    this.setState({
+      iconMenuActive: state
+    });
+  }
+}
 
 
 function App() {
@@ -20,21 +49,12 @@ function App() {
     "username"
   ]);
   const navigate = useNavigate();
+  const [active, setActive] = useState(false);
 
   if (cookies.username && user == null) {
     setUser(cookies.username);
     setCookie("username", cookies.username);
   }
-
-  /*
-  setIconMenuActive(state) {
-    this.setState({
-      iconMenuActive: state
-    });
-  }
-
-  this.setIconMenuActive = this.setIconMenuActive.bind(this);
-  */
 
   return (
     <div className="App">
@@ -46,11 +66,12 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <IconMenu /*
-            active={this.state.setIconMenuActive}
-            setActive={this.setIconMenuActive}*/
+          <IconMenu
+             onClick={() => { active ? setActive(false) : setActive(true)}}
           />
-          <nav className="sections">
+          <nav className={active ? "sections _active" : "sections"}
+                   onClick={e => e.stopPropagation()
+          }>
             <ul>
               {user &&
                 <li>
