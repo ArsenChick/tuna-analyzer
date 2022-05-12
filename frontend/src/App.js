@@ -27,9 +27,9 @@ function App() {
   }
 
  const handleToggle = () => {
-    setMenuActive(!menuActive);
-    //console.log("changed");
-  };
+  setMenuActive(!menuActive);
+  //console.log("changed");
+ };
 
 
   return (
@@ -42,13 +42,13 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <div
-            className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
-            onClick={ handleToggle }
-          >
-            <span>
-            </span>
-          </div>
+            <div
+              className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
+              onClick={ handleToggle }
+            >
+              <span>
+              </span>
+            </div>
           <nav className={`sections ${menuActive ? '_active' : ''}`
           }>
             <ul>

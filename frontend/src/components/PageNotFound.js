@@ -4,7 +4,7 @@ import "./../scss/page_not_found/page_not_found.scss";
 
 function PageNotFound() {
   return (
-    <div className="page-content not-found center-page-align">
+    <div className="page-content not-found center-page-align inside-padding">
       <h1> Oh, no! </h1>
       <h2> #404 (Page not found) </h2>
       <br></br>

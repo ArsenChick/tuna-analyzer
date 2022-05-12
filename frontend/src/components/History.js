@@ -378,14 +378,14 @@ export default function History() {
 
   if (mdata === null) {
     return (
-      <main className="page-content history-page">
+      <main className="page-content history-page center-page-align inside-padding">
         <h1>Loading...</h1>
       </main>
     );
   } else {
     pages = Math.ceil(ids.length / elementsPerPage);
     return (
-      <main className="page-content history-page">
+      <main className="page-content history-page inside-padding">
         <h2>History!</h2>
         <Table 
 		      data={mdata.data} 

@@ -23,7 +23,7 @@ function Auth() {
     );
 
   return (
-    <div className="page-content log-in-page center-page-align">
+    <div className="page-content log-in-page center-page-align inside-padding">
       <h2>Log in</h2>
       <Formik
         initialValues={{
