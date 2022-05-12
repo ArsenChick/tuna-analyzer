@@ -26,10 +26,16 @@ function App() {
     setCookie("username", cookies.username);
   }
 
+ const handleToggle = () => {
+    setMenuActive(!menuActive);
+    //console.log("changed");
+  };
+
   const BurgerMenu = ({menuActive, setMenuActive}) => {
     return (
       <div
-        className= {`top-bar-icon ${ menuActive ? '_active' : ''}`}
+        className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
+        onClick={ handleToggle }
       >
         <span>
         </span>
@@ -48,9 +54,7 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <BurgerMenu
-            onClick={() => { menuActive ? setMenuActive(false) : setMenuActive(true)
-          }}/>
+          <BurgerMenu/>
           <nav className={`sections ${menuActive ? '_active' : ''}`
           }>
             <ul>
