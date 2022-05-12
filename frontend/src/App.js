@@ -31,18 +31,6 @@ function App() {
     //console.log("changed");
   };
 
-  const BurgerMenu = ({menuActive, setMenuActive}) => {
-    return (
-      <div
-        className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
-        onClick={ handleToggle }
-      >
-        <span>
-        </span>
-      </div>
-    );
-  }
-
 
   return (
     <div className="App">
@@ -54,7 +42,13 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <BurgerMenu/>
+          <div
+            className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
+            onClick={ handleToggle }
+          >
+            <span>
+            </span>
+          </div>
           <nav className={`sections ${menuActive ? '_active' : ''}`
           }>
             <ul>
