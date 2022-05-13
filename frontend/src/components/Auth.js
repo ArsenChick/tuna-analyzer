@@ -5,19 +5,15 @@ import { useCookies } from "react-cookie";
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
-
 function Auth() {
   const [user, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);
-  const [, setCookie] = useCookies([
-    "access_token",
-    "username",
-  ]);
+  const [cookies, setCookie] = useCookies(["access_token", "username"]);
   const navigate = useNavigate();
 
-  if (user)
+  if (cookies.username)
     return (
-      <div>
+      <div id="authError">
         <h2>You should logout first!</h2>
       </div>
     );
@@ -28,14 +24,14 @@ function Auth() {
       <Formik
         initialValues={{
           username: "",
-          password: "",
+          password: ""
         }}
         validationSchema={Yup.object({
           username: Yup.string()
             .max(20, "Invalid username")
             .matches(/^[\w_]+$/i, "Invalid username")
             .required("Enter the username"),
-          password: Yup.string().required("Enter the password"),
+          password: Yup.string().required("Enter the password")
         })}
         onSubmit={(values, { setSubmitting }) => {
           var m = JSON.stringify(values, null, 2);
@@ -44,13 +40,13 @@ function Auth() {
             method: "POST",
             headers: {
               Accept: "application/json",
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
-            body: m,
+            body: m
           };
           fetch("/api/login", requestOptions)
-            .then((response) => response.json())
-            .then((data) => {
+            .then(response => response.json())
+            .then(data => {
               if ("access_token" in data) {
                 setFail(false);
                 setCookie("access_token", data.access_token);
@@ -65,25 +61,36 @@ function Auth() {
             });
         }}
       >
-        <Form>
+        <Form id="loginForm">
           <label htmlFor="username">Username</label>
           <Field name="username" type="text" />
           <ErrorMessage
             name="username"
-            render={(msg) => <div className="error">{msg}</div>}
+            render={msg =>
+              <div className="error">
+                {msg}
+              </div>}
           />
           <label htmlFor="password">Password</label>
           <Field name="password" type="password" />
           <ErrorMessage
             name="password"
-            render={(msg) => <div className="error">{msg}</div>}
+            render={msg =>
+              <div className="error">
+                {msg}
+              </div>}
           />
 
-          <button type="submit">Log in</button>
+          <button type="submit" id="submitButton">
+            Log in
+          </button>
         </Form>
       </Formik>
-      {fail && <p style={{ color: "red" }}>Login failed</p>}
-      <p>
+      {fail &&
+        <p id="errorMessage" style={{ color: "red" }}>
+          Login failed
+        </p>}
+      <p id="signupLink">
         Don't have an account? <Link to="/signup">Sign up</Link> now!
       </p>
     </div>

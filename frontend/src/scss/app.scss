@@ -1,4 +1,17 @@
 @import './_variables.scss';
+// NiconP
+
+@media all {
+  /* Top Bar Button
+  ––––––––––––––––––––––––––––––––– */
+  .navButton {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+}
+
+
 // Jenka
 
 
@@ -183,7 +196,6 @@
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;
-
   }
 
   .navButton {
