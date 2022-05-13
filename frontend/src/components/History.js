@@ -3,6 +3,8 @@ import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+import * as Icon from "react-feather";
+
 
 function Result(props) {
   return (
@@ -25,7 +27,7 @@ function Result(props) {
                 margin: "auto",
               }}
             >
-              ▶
+              <Icon.Play size={20} />
             </button>
           }
         </td>
@@ -42,7 +44,7 @@ function Result(props) {
                 props.downloadFile(props.id);
               }}
             >
-              Ы
+              <Icon.Download size={20} />
             </button>
           }
         </td>
@@ -59,7 +61,7 @@ function Result(props) {
                 props.deleteRes(props.id);
               }}
             >
-              X
+              <Icon.Trash2 size={20} />
             </button>
           }
         </td>
