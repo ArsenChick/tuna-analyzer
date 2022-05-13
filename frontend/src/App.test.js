@@ -1,10 +1,9 @@
 import React from "react";
 import Enzyme from "enzyme";
-import { shallow, mount } from "enzyme";
+import { mount } from "enzyme";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Cookies from "react-cookie";
 
 Enzyme.configure({ adapter: new Adapter() });
 
