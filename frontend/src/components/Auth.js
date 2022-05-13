@@ -2,12 +2,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useOutletContext } from 'react-router-dom';
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
 
 function Auth() {
-  //const [user, setUser] = useOutletContext();
+  const [user, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);
   const [cookies, setCookie] = useCookies([
     "access_token",
@@ -57,7 +58,7 @@ function Auth() {
                 setCookie("username", values.username);
                 console.log(data.access_token);
                 setSubmitting(false);
-                //setUser(values.username);
+                setUser(values.username);
                 navigate("/");
               } else {
                 setFail(true);

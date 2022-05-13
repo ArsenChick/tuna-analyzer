@@ -2,7 +2,8 @@ import React from "react";
 import Enzyme from "enzyme";
 import { mount } from "enzyme";
 import Signup from "./Signup";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate, useOutletContext } from "react-router-dom";
+import ReactRouterDom from "react-router-dom";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import { act, waitFor } from "@testing-library/react"
 import { enableFetchMocks } from 'jest-fetch-mock';
@@ -14,10 +15,12 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+
 const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
    useNavigate: () => mockedUsedNavigate,
+   useOutletContext: () => [0, jest.fn()]
  }));
 
 

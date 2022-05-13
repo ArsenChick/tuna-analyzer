@@ -1,11 +1,12 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { useOutletContext } from 'react-router-dom';
 import * as Yup from "yup";
 import '../scss/signup/sign_up.scss';
 
 function Signup() {
-  //const [user, setUser] = useOutletContext();
+  const [user, setUser] = useOutletContext();
   const [cookies, setCookie] = useCookies(['access_token', 'username']);
   const navigate = useNavigate();
 
@@ -60,7 +61,7 @@ function Signup() {
                 setCookie('access_token', data.access_token);
                 setCookie('username', values.username);
                 setSubmitting(false);
-                //setUser(values.username);
+                setUser(values.username);
                 navigate("/");
               }
             });
