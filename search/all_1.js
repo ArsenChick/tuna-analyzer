@@ -11,11 +11,10 @@ var searchData=
   ['auth_8',['auth',['../namespaceapp_1_1auth.html',1,'app.auth'],['../namespaceapp_1_1auth.html#ab84e377c22a682d214e5fc202fccafff',1,'app.auth.auth()']]],
   ['auth_2ejs_9',['Auth.js',['../Auth_8js.html',1,'']]],
   ['auth_2epy_10',['auth.py',['../auth_8py.html',1,'']]],
-  ['auth_2etest_2ejs_11',['Auth.test.js',['../Auth_8test_8js.html',1,'']]],
-  ['config_12',['config',['../namespaceapp_1_1config.html',1,'app']]],
-  ['conftest_13',['conftest',['../namespaceapp_1_1conftest.html',1,'app']]],
-  ['data_5fmanager_14',['data_manager',['../namespaceapp_1_1data__manager.html',1,'app']]],
-  ['main_15',['main',['../namespaceapp_1_1main.html',1,'app']]],
-  ['models_16',['models',['../namespaceapp_1_1models.html',1,'app']]],
-  ['tones_17',['tones',['../namespaceapp_1_1tones.html',1,'app']]]
+  ['config_11',['config',['../namespaceapp_1_1config.html',1,'app']]],
+  ['conftest_12',['conftest',['../namespaceapp_1_1conftest.html',1,'app']]],
+  ['data_5fmanager_13',['data_manager',['../namespaceapp_1_1data__manager.html',1,'app']]],
+  ['main_14',['main',['../namespaceapp_1_1main.html',1,'app']]],
+  ['models_15',['models',['../namespaceapp_1_1models.html',1,'app']]],
+  ['tones_16',['tones',['../namespaceapp_1_1tones.html',1,'app']]]
 ];
