@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import "../scss/signup/sign_up.scss";
 
 function Signup() {
-  const [user, setUser] = useOutletContext();
+  const [_, setUser] = useOutletContext();
   const [cookies, setCookie] = useCookies(["access_token", "username"]);
   const navigate = useNavigate();
 
