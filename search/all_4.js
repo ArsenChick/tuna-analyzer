@@ -9,5 +9,6 @@ var searchData=
   ['delete_5fresult_6',['delete_result',['../namespaceapp_1_1data__manager.html#a7d8b669fb08dabe414db41b36569dc6c',1,'app::data_manager']]],
   ['description_2ejs_7',['Description.js',['../Description_8js.html',1,'']]],
   ['dev_8',['Dev',['../classapp_1_1config_1_1Dev.html',1,'app::config']]],
-  ['draganddrop_2ejs_9',['DragAndDrop.js',['../DragAndDrop_8js.html',1,'']]]
+  ['draganddrop_2ejs_9',['DragAndDrop.js',['../DragAndDrop_8js.html',1,'']]],
+  ['draganddrop_2etest_2ejs_10',['DragAndDrop.test.js',['../DragAndDrop_8test_8js.html',1,'']]]
 ];
