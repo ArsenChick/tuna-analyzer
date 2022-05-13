@@ -3,6 +3,8 @@ import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+import * as Icon from "react-feather";
+
 
 function Result(props) {
   return (
@@ -41,7 +43,7 @@ function Result(props) {
                 props.downloadFile(props.id);
               }}
             >
-              Ы
+              <Icon.Download size={16} />
             </button>
           }
         </td>
