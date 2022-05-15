@@ -1,25 +1,35 @@
 @import './_variables.scss';
-// Jenka
+// NiconP
 
+@media all {
+  /* Top Bar Button
+  ––––––––––––––––––––––––––––––––– */
+  .navButton {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+  }
+}
+
+
+// Jenka
 
 
 /* --- Light Theme --- */
 
 /*   Desktop   */
-
 @media all {
   /* Page Content
   ––––––––––––––––––––––––––––––––– */
   .page-content {
-    min-width: 450px;
     display: flex;
     flex-direction: column;
+    min-width: 450px;
     //margin: 25px 0;
-    padding: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
-    h2, form, label, button, p {
-      margin-left: auto;
-      margin-right: auto;
-    }
+  }
+
+  .inside-padding {
+    padding: 50px calc((100vw / 25) * 1.563) 10px calc((100vw / 25) * 1.563);
   }
 
   main {
@@ -37,54 +47,75 @@
     font-weight: bold;
   }
 
+  .cursor-point {
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .question-sign {
+    font-size: 14px;
+    opacity: .77;
+  }
+
+  .question-sign:hover {
+    opacity: 1;
+  }
+
    /* Top Bar
   ––––––––––––––––––––––––––––––––– */
   #top-bar {
     position: sticky;
     top: 0;
     left: 0;
+    align-items: center;
     width: 100%;
     min-height: 100px;
-    padding: (-$scrinVerticalSpaceSize) (-$scrinHorizontalSpaceSize) 0 (-$scrinHorizontalSpaceSize);
-    opacity: 1;
-    z-index: 1;
-    align-items: center;
     min-width: 450px;
+    padding: (-$scrinVerticalSpaceSize) (-$scrinHorizontalSpaceSize) 0 (-$scrinHorizontalSpaceSize);
+    z-index: 10;
+    opacity: 1;
   }
 
   #big-top-bar {
-    height: 70px;
-    padding: 20px $scrinHorizontalSpaceSize;
-    background: $bigTopNavColor;
     display: flex;
     flex-direction: row;
     align-items: center;
-    transition: all ease-out .3s;
+    min-height: 70px;
+    padding: 20px $scrinHorizontalSpaceSize;
+    background: $bigTopNavColor;
+    transition: transform .3s ease 0;
   }
 
   #logo-title {
-    text-transform: capitalize;
     background: $logoTittleColor;
+    font-size: 45px;
+    text-transform: capitalize;
+    transition: transform .3s ease 0;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-size: 45px;
-    transition: all ease-out .3s;
   }
 
   #small-top-bar {
     height: 30px;
     background: $smallTopNavColor;
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
+  }
+
+  #top-bar-icon {
+    display: none;
   }
 
   img {
-    transition: all ease-out .3s;
+    transition: transform .3s ease 0;
   }
 
   nav {
     margin: 0;
-    padding: 0;
     margin-left:auto;
+    padding: 0;
     button {
       margin: 0;
     }
@@ -96,10 +127,12 @@
       justify-content: flex-end;
       align-content: flex-start;
       margin: 0 -5px;
-      //& > * {
-      //  margin: 10px 5px 0 10px;
-      //}
+      & > * {
+        margin: 0 10px 0 10px;
+      }
+
       li {
+        margin-bottom: 6px;
         list-style-type:none;
         a {
           text-decoration: none;
@@ -114,6 +147,9 @@
 
   header {
     user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
     a {
       display: flex;
       flex-direction: row;
@@ -138,27 +174,28 @@
   /* Top Bar Button
   ––––––––––––––––––––––––––––––––– */
   .navButton {
+    display: block;
     text-align: center;
     padding: 0.5rem 1.25rem;
-    margin: 0 0.5rem;
-    font-size: 1rem;
-    text-transform: capitalize;
     border-radius: 10px;
     background-color: $navButtonColor;
     border: 2px solid $navButtonColor;
     color: $navButtonTextColor;
-    text-decoration: none;
-    font-weight: bold;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: block;
     line-height: initial;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-decoration: none;
     transition: background-color 200ms ease-in-out, border 200ms ease-in-out,
       transform 200ms ease-in-out;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     -webkit-touch-callout: none;
-    -webkit-user-select: none;
     user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
   }
 
   .navButton {
@@ -181,9 +218,9 @@
 
   @media (hover: hover) {
   .navButton:hover {
-      cursor: pointer;
       background-color: $navButtonHoverColor;
       border-color: $navButtonHoverColor;
+      cursor: pointer;
     }
   }
 
@@ -202,23 +239,37 @@
   /* Display User Login
   ––––––––––––––––––––––––––––––––– */
   #userLogin {
-    text-transform: none;
-    color: $authTextColor;
-    margin-right: 4px;
-    word-wrap: normal;
     max-width: 100px;
+    margin-right: 4px;
+    color: $authTextColor;
+    word-wrap: normal;
+    text-transform: none;
     -webkit-line-clamp: 1;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
+  /* Sign Up and Log In
+  ––––––––––––––––––––––––––––––––– */
+  .center-page-align {
+    transition: transform .3s ease 0;
+    h1, h2, form, label, button, p, ul, li, a{
+      margin-left: auto;
+      margin-right: auto;
+      transition: transform .3s ease 0;
+    }
+  }
 }
 
-/*   Mobile   */
 
+/*   Mobile   */
 @media (max-width: 768px) {
+   /* Top Bar
+  ––––––––––––––––––––––––––––––––– */
   #big-top-bar {
     height: 110px;
   }
+
   #logo-title {
     font-size: 60px;
   }
@@ -230,14 +281,30 @@
     -moz-transform: scale(2);
     margin-right: 30px;
   }
+
+  nav {
+    a {
+      transform: scale(1.3);
+      -webkit-transform: scale(1.3);
+      -o-transform: scale(1.3);
+      -moz-transform: scale(1.3);
+    }
+  }
+
+  /* Sign Up and Log In
+  ––––––––––––––––––––––––––––––––– */
+  .sign-up-page, .log-in-page {
+    h2, button, p {
+      transform: scale(1.3);
+      -webkit-transform: scale(1.3);
+      -o-transform: scale(1.3);
+      -moz-transform: scale(1.3);
+    }
+  }
 }
 
 
-
 /* --- Dark Theme --- */
-
-
-
 @media (prefers-color-scheme: dark) {
   /* Top Bar
   ––––––––––––––––––––––––––––––––– */
@@ -255,7 +322,7 @@
       background-color: $navButtonColorDarkTheme;
       border-color: $navButtonColorDarkTheme;
       color: $navButtonTextColor;
-    }
+  }
 }
 
 

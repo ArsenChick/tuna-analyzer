@@ -18,7 +18,7 @@ function Signup() {
     );
 
   return (
-    <div className="page-content sign-up-page">
+    <div className="page-content sign-up-page center-page-align inside-padding">
       <h2>Sign up to Tuna</h2>
       <Formik
         initialValues={{

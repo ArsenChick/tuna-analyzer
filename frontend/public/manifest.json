@@ -1,6 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Tuna Analyzer",
+  "name": "Tuna Analyzer Web App",
+  "description": "Tuna is a web service for music composition analysis.",
+  "canonical": "https://bigtuna.live",
   "icons": [
     {
       "src": "facicon.ico",
@@ -21,5 +23,11 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "meta": {
+    "charset": "utf-8",
+    "name": {
+      "keywords": "react, meta, document, html, tags"
+    }
+  }
 }

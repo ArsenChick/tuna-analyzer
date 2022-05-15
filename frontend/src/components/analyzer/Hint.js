@@ -4,7 +4,7 @@ import "../../scss/analyzer/hint.scss";
 export const Hint = ({active, setActive}) => {
   return (
     <div className="hint-area">
-      <div className={active ? "hint-modal-window active" : "hint-modal-window"}
+      <div className={active ? "hint-modal-window _active" : "hint-modal-window"}
         onClick={e => e.stopPropagation()
       }>
         <ul className="hint-content">
@@ -34,6 +34,7 @@ export const Hint = ({active, setActive}) => {
             tempo stability, and overall tempo.
           </li>
         </ul>
+        <div className="triangle-down right-triangle-align"></div>
       </div>
       <button
         className="hint-button"

@@ -1,8 +1,8 @@
 @import './../_variables.scss';
 // Jenka
 
-/*   Desktop   */
 
+/*   Desktop   */
 @media all and (max-width: 1920px) {
   /* Positioning Elements
   ––––––––––––––––––––––––––––––––– */
@@ -17,15 +17,15 @@
   .flex-item {
     flex: 1 1 auto;
     margin: 0 10px;
-      transition: 300ms;
+    transition: 300ms;
   }
 
   /* Analysis History
   ––––––––––––––––––––––––––––––––– */
   .analysis-history {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    table{
+    table {
+      margin: 20px 0;
+      overflow: auto;
       tbody{
         border: 1px solid $recordColor;
         tr {
@@ -41,15 +41,56 @@
 
   .titles {
     th {
+      padding-left: 10px;
+      padding-right: 10px;
       border-color: $recordTitleColor;
       color: $recordTitleColor;
     }
   }
 
-  @media (max-width: 1570px) {
-    .description {
-      max-width: none;
+  .sub-title_list {
+    position: absolute;
+    margin-left: 0;
+    padding-left: 0;
+    padding: 2px 8px;
+    background: $hintBackgroundColor;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    opacity: 0;
+    z-index: 10;
+    visibility: hidden;
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.3s ease 0s;
+    transform: translate (0, 10%);
+    .sub-title{
+      margin: 4px 0;
+      list-style-type: none;
     }
+
+    &:first-child {
+      margin-top: -4px;
+    }
+
+    &:last-child {
+      margin-bottom: -4px;
+    }
+  }
+
+  .title:hover .sub-title_list {
+    opacity: 1;
+    z-index: 1;
+    opacity: $hintBackgroundOpacity;
+    visibility: visible;
+    pointer-events: auto;
+    user-select: auto;
+    -moz-user-select: auto;
+    -khtml-user-select: auto;
+    -webkit-user-select: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 
   /* Record
@@ -62,23 +103,22 @@
 }
 
 
-
-
+/*   Mobile   */
 @media (max-width: 768px) {
 
 }
 
 
-
 /* --- Dark Theme --- */
-
-
-
 @media (prefers-color-scheme: dark) {
   .titles {
     th {
       border-color: var(--gray-500);
       color: var(--gray-500);
     }
+  }
+
+  .sub-title_list {
+    background: $hintBackgroundColorDarkTheme;
   }
 }

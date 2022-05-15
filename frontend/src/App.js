@@ -1,12 +1,16 @@
+import React from "react";
 import { useState } from "react";
 import { NavLink, Link, Outlet, useNavigate } from "react-router-dom";
 import { useCookies, CookiesProvider } from "react-cookie";
+import { isMobile } from "./scripts/mobileDetect";
+
+//import "./scripts/hintInteraction";
+import "./scss/top_bar/burger_menu.scss";
+
 import "./scss/app.scss";
-
-
 import logo_icon from "./img/tuna_neon_logo.svg";
-
 import * as Icon from "react-feather";
+
 
 function App() {
   let [user, setUser] = useState(null);
@@ -15,11 +19,18 @@ function App() {
     "username"
   ]);
   const navigate = useNavigate();
+  const [menuActive, setMenuActive] = useState(false);
 
   if (cookies.username && user == null) {
     setUser(cookies.username);
     setCookie("username", cookies.username);
   }
+
+ const handleToggle = () => {
+  setMenuActive(!menuActive);
+  //console.log("changed");
+ };
+
 
   return (
     <div className="App">
@@ -31,7 +42,15 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-          <nav className="sections">
+            <div
+              className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
+              onClick={ handleToggle }
+            >
+              <span>
+              </span>
+            </div>
+          <nav className={`sections ${menuActive ? '_active' : ''}`
+          }>
             <ul>
               {user &&
                 <li>
