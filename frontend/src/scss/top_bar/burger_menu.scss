@@ -2,6 +2,21 @@
 // Jenka
 
 
+/*   Desktop   */
+@media all and (max-width: 1920px) {
+  .menu-title {
+    left: -100%;
+    opacity: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.3s ease 0s;
+  }
+}
+
+
+
 /* --- Light Theme --- */
 
 /*   Mobile   */
@@ -122,6 +137,30 @@
 
   .sections._active::before {
     opacity: 1;
+  }
+
+  .menu-title {
+    position: absolute;
+    left: 100%;
+    z-index: 10;
+    opacity: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .menu-title._active {
+    position: absolute;
+    left: 0;
+    margin-left: calc((100vw / 25) * 1.563);
+    margin-right: auto;
+    font-size: 50px;
+    z-index: 1;
+    opacity: 1;
+    margin-top: 0;
+    margin-bottom: 0;
+    transition: all 0.3s ease 0s;
   }
 }
 

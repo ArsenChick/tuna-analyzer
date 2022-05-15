@@ -42,14 +42,15 @@ function App() {
               <h1 id="logo-title">Tuna</h1>
             </Link>
           </header>
-            <div
-              className= { menuActive ? 'top-bar-icon _active' : 'top-bar-icon'}
-              onClick={ handleToggle }
-            >
-              <span>
-              </span>
-            </div>
-          <nav className={`sections ${menuActive ? '_active' : ''}`
+          <div
+            className = {`top-bar-icon ${ menuActive ? '_active' : '' }`}
+            onClick={ handleToggle }
+          >
+            <span>
+            </span>
+          </div>
+          <h2 className = {`menu-title ${ menuActive ? '_active' : '' }`}> Menu </h2>
+          <nav className = {`sections ${ menuActive ? '_active' : '' }`
           }>
             <ul>
               {user &&
