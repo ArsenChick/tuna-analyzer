@@ -358,7 +358,7 @@ class Analyzer extends React.Component {
               <tr className="titles">
                 <th className="title filename"><span>Filename </span></th>
                 <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Bits Per Minute</li></ul></th>
+                                    <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
                 <th className="title key"><span>Key </span></th>
                 <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
                                     <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
