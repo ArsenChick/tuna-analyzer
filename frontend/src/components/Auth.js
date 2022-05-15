@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useOutletContext } from 'react-router-dom';
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
