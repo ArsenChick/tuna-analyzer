@@ -1,11 +1,10 @@
 import React from "react";
 import Enzyme from "enzyme";
-import { shallow, mount } from "enzyme";
-import { act } from "@testing-library/react"
+import { mount } from "enzyme";
+import { act, waitFor } from "@testing-library/react"
 import Auth from "./Auth";
 import { BrowserRouter } from "react-router-dom";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
-import Cookies from "react-cookie";
 import { enableFetchMocks } from 'jest-fetch-mock';
 
 enableFetchMocks();
@@ -19,10 +18,11 @@ const mockedUsedNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
     ...jest.requireActual('react-router-dom'),
    useNavigate: () => mockedUsedNavigate,
+   useOutletContext: () => [0, jest.fn()]
  }));
 
 describe("Auth guest", () => {
-  const app = mount(
+  let app = mount(
     <BrowserRouter>
       <Auth />
     </BrowserRouter>
@@ -32,36 +32,122 @@ describe("Auth guest", () => {
     expect(app.find("#loginForm").exists()).toBeTruthy();
   });
 
-  it("Check history link", () => {
+  it("Check signup link", () => {
     expect(app.find("#signupLink").exists()).toBeTruthy();
   });
+
+
+  it("Check empty username", async () => {
+    app = mount(
+      <BrowserRouter>
+        <Auth />
+      </BrowserRouter>);
+    app.update();
+        
+    act(() => {
+      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: '' } });
+      app.find('form').first().simulate('submit', {
+        preventDefault: () => {},
+      });
+    });
+    await waitFor(() => {
+      app.update();
+      expect(app.html()).toContain('Enter the username');
+    });
+  });
+
+  it("Check long username", async () => {
+    app.unmount();
+    app = mount(
+      <BrowserRouter>
+        <Auth />
+      </BrowserRouter>);
+    app.update();
+        
+    act(async () => {
+      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: 'abcdefghijklmnopqrstuvwxyz' } });
+      await waitFor(() => {
+        expect(app.find("input[name='username']").html()).toMatch('abcdefghijklmnopqrstuvwxyz');
+      });
+      app.find('form').first().simulate('submit', {
+        preventDefault: () => {},
+      });
+    });
+    await waitFor(() => {
+      app.update();
+      expect(app.html()).toContain('Invalid username')
+    });
+
+  });
+
+  it("Check username with wrong chars", async () => {
+    app = mount(
+      <BrowserRouter>
+        <Auth />
+      </BrowserRouter>);
+    app.update();
+    act(async () => {
+      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: 'Россия!' } });
+      await waitFor(() => {
+        expect(app.find("input[name='username']").html()).toMatch('Россия!');
+      });
+      app.find('form').first().simulate('submit', {
+        preventDefault: () => {},
+      });
+    });
+    await waitFor(() => {
+      app.update();
+      expect(app.html()).toContain('Invalid username')
+    });
+  });
+
+  it("Check empty password", async () => {
+    app.unmount();
+    Object.defineProperty(document, "cookie", {
+      writable: true,
+      value: "username=; access_token=;"
+      });
+    app = mount(
+      <BrowserRouter>
+        <Auth />
+      </BrowserRouter>);
+    app.update();
+        
+    act(() => {
+      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: '' } });
+      app.find('form').first().simulate('submit', {
+        preventDefault: () => {},
+      });
+    });
+    await waitFor(() => {
+      app.update();
+      expect(app.html()).toContain('Enter the password');
+    });
+  });
+
 
   it("Check bad login", async() => {
     fetch.mockResponseOnce(JSON.stringify({ msg: "NOT OK"}));
     act(() => {
-      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: 'test' } });
-      app.find("input[name='password']").simulate('change', { persist: () => {}, target: { name: 'password', value: '1234' } });
+      app.find("input[name='username']").simulate('change', { persist: () => {}, target: { name: 'username', value: 'test1' } });
+      app.find("input[name='password']").simulate('change', { persist: () => {}, target: { name: 'password', value: '12345' } });
     });
-    await act(() => sleep(200));
+    await act(() => sleep(100));
     app.update();
 
-    expect(app.find("input[name='username']").html()).toMatch('test');
-    expect(app.find("input[name='password']").html()).toMatch('1234');
+    expect(app.find("input[name='username']").html()).toMatch('test1');
+    expect(app.find("input[name='password']").html()).toMatch('12345');
 
     act(() => {
         app.find('form').first().simulate('submit', {
           preventDefault: () => {},
       });
     });
-    console.log(app.html());
     const calls = mockedUsedNavigate.mock.calls
     expect(calls.length).toEqual(0);
   });
 
-  app.unmount();
-  app.mount(<BrowserRouter>
-    <Auth />
-  </BrowserRouter>);
+  
 
   it("Check good login", async () => {
     fetch.mockResponseOnce(JSON.stringify({ msg: "OK", "access_token": "token" }));
@@ -79,6 +165,8 @@ describe("Auth guest", () => {
     app.update();
     expect(calls.length).toBeGreaterThan(0);
   });
+
+  
 });
 
 describe("Auth authorized", () => {
