@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
 function Auth() {
-  const [user, setUser] = useOutletContext();
+  const [_, setUser] = useOutletContext();
   const [fail, setFail] = useState(null);
   const [cookies, setCookie] = useCookies(["access_token", "username"]);
   const navigate = useNavigate();
