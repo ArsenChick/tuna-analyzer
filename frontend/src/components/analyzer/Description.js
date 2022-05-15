@@ -14,8 +14,8 @@ export const Description = () => {
         <span className="special-word">tempo</span>,&nbsp;
         <span className="special-word">tonality</span> and
         evaluate several subjective characteristics:&nbsp;
-        <span className="special-word">energy</span>,&nbsp;
         <span className="special-word">happiness</span> and&nbsp;
+        <span className="special-word">energy</span>,&nbsp;
         <span className="special-word">danceability</span>.
       </p>
     </div>

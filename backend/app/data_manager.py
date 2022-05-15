@@ -188,11 +188,11 @@ def get_result():
     result: Result = Result.query.filter_by(id=idRes, isDeleted=False).first()
     if result == None:
         return {'msg': 'No such entry'}, 404
-    #tone: Tone = Tone.query.filter_by(id=result.idTone).first()
+    tone: Tone = Tone.query.filter_by(id=result.idTone).first()
     return {
         "msg": "Ok",
                "bpm": result.bpm,
-               "tone": result.idTone,
+               "tone": tone.tone,
                "dance": result.dance,
                "energy": result.energy,
                "happiness": result.happiness,

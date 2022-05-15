@@ -2,11 +2,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useOutletContext } from 'react-router-dom';
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
 function Auth() {
   const [_, setUser] = useOutletContext();
+
   const [fail, setFail] = useState(null);
   const [cookies, setCookie] = useCookies(["access_token", "username"]);
   const navigate = useNavigate();
@@ -19,7 +21,7 @@ function Auth() {
     );
 
   return (
-    <div className="page-content log-in-page">
+    <div className="page-content log-in-page center-page-align inside-padding">
       <h2>Log in</h2>
       <Formik
         initialValues={{

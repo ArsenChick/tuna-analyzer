@@ -1,0 +1,34 @@
+@import './../_variables.scss';
+
+/*   Desktop   */
+@media all and (max-width: 1920px) {
+  .not-found {
+    padding: calc((100vh / 25) * 1.563) calc((100vw / 25) * 1.563);
+    ul {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      li {
+        margin: 0 10px;
+        list-style-type:none;
+      }
+    }
+
+    a {
+      cursor: pointer;
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+
+
+}
+
+/*   Mobile   */
+@media (max-width: 768px) {
+
+}

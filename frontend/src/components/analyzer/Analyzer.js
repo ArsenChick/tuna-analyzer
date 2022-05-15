@@ -28,7 +28,6 @@ class Analyzer extends React.Component {
       hintActive: false,
       resultsView: []
     }
-
     const { cookies } = props;
     this.accessToken = cookies.get('access_token') || false;
     
@@ -65,12 +64,6 @@ class Analyzer extends React.Component {
     this.workers.featureExtraction.terminate();
     moodModelNames.forEach((mood) =>
       this.workers.moodInference[mood].terminate());
-  }
-  
-  setHintActive(state) {
-    this.setState({
-      hintActive: state
-    });
   }
 
   handleUpload(file) {    
@@ -346,9 +339,15 @@ class Analyzer extends React.Component {
     });
   }
 
+  setHintActive(state) {
+    this.setState({
+      hintActive: state
+    });
+  }
+
   render() {
     return (
-      <main className="page-content analyzer-page">
+      <main className="page-content analyzer-page inside-padding">
         <div className="in-line">
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
@@ -357,13 +356,17 @@ class Analyzer extends React.Component {
           <table>
             <thead>
               <tr className="titles">
-                <th>Filename</th>
-                <th>BPM</th>
-                <th>Key</th>
-                <th>Happiness</th>
-                <th>Energy</th>
-                <th>Danceability</th>
-                {this.accessToken && <th>Saved</th>}
+                <th className="title filename"><span>Filename </span></th>
+                <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
+                <th className="title key"><span>Key </span></th>
+                <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
+                <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
+                <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
+                {this.accessToken && <th className="title saved"><span>Saved </span></th>}
               </tr>
             </thead>
             <tbody>

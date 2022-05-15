@@ -2,18 +2,16 @@
 // Jenka
 
 
-
 /* --- Light Theme --- */
 
 /*   Desktop   */
-
 @media all and (max-width: 1920px) {
   /* Analyzer Info
   ––––––––––––––––––––––––––––––––– */
   .project-name {
+    color: $selectedWordColor;
     font-size: 30px;
     font-weight: bold;
-    color: $selectedWordColor;
   }
 
   .description {
@@ -25,30 +23,38 @@
     * {
       margin: 25px 0;
     };
+  }
 
+  @media (max-width: 1570px) {
+    .description {
+      max-width: none;
+    }
   }
 
   .project-info {
     margin: 0;
     padding: 10px 30px;
-    border-radius: 7px;
     background: rgba($dragAndDropZoneColor, $projectInfoOpacity);
+    border-radius: 7px;
   }
 }
 
 
 // Mobile
-
 @media (max-width: 768px) {
+  .project-name {
+    font-size: 34px;
+  }
 
+  .description {
+    p {
+      font-size: 22px;
+    }
+  }
 }
 
 
-
 /* --- Dark Theme --- */
-
-
-
 @media (prefers-color-scheme: dark) {
   .project-info {
     background: rgba($dragAndDropZoneColor, calc(1 - $projectInfoOpacity));

@@ -7,17 +7,18 @@ import "../scss/signup/sign_up.scss";
 function Signup() {
   const [_, setUser] = useOutletContext();
   const [cookies, setCookie] = useCookies(["access_token", "username"]);
+
   const navigate = useNavigate();
 
   if (cookies.username)
     return (
       <div>
-        <h2>You should logout first!</h2>
+        <h2 id="ErrorMessage">You should logout first!</h2>
       </div>
     );
 
   return (
-    <div className="page-content sign-up-page">
+    <div className="page-content sign-up-page center-page-align inside-padding">
       <h2>Sign up to Tuna</h2>
       <Formik
         initialValues={{
@@ -69,8 +70,8 @@ function Signup() {
             });
         }}
       >
-        {formik =>
-          <Form>
+        {formik => 
+          <Form id="signupForm">
             <label htmlFor="username">Username</label>
             <Field name="username" type="text" />
             <ErrorMessage

@@ -14,9 +14,9 @@ function Result(props) {
         <td>{props.name.slice(37)}</td>
         <td>{props.bpm}</td>
         <td>{props.tone}</td>
-        <td>{props.dance}</td>
-        <td>{props.energy}</td>
         <td>{props.happiness}</td>
+        <td>{props.energy}</td>
+        <td>{props.dance}</td>
         <td>{props.version}</td>
         <td>
           {
@@ -79,9 +79,9 @@ function DataList(props) {
         bpm={res.bpm}
         name={res.name}
         tone={res.tone}
-        dance={res.dance}
-        energy={res.energy}
         happiness={res.happiness}
+        energy={res.energy}
+        dance={res.dance}
         version={res.version}
         date={res.date}
         deleteRes={props.deleteRes}
@@ -103,11 +103,11 @@ function Table(props) {
         <tr>
           <th>Date</th>
           <th>Name</th>
-          <th>BPM</th>
+          <th>BPM <span className="add-info bpm">(?)</span></th>
           <th>Tone</th>
-          <th>Danceability</th>
-          <th>Energy</th>
-          <th>Happiness</th>
+          <th>H <span className="add-info happiness">(?)</span></th>
+          <th>E <span className="add-info energy">(?)</span></th>
+          <th>D <span className="add-info danceability">(?)</span></th>
           <th>Version</th>
 
           <th style={{ textAlign: "center" }}>Play</th>
@@ -357,9 +357,9 @@ export default function History() {
               name: name,
               bpm: data.bpm,
               tone: data.tone,
-              dance: data.dance,
-              energy: data.energy,
               happiness: data.happiness,
+              energy: data.energy,
+              dance: data.dance,
               version: data.version,
               date: data.date.slice(5, 16),
             });
@@ -383,14 +383,14 @@ export default function History() {
 
   if (mdata === null) {
     return (
-      <main className="page-content history-page">
+      <main className="page-content history-page center-page-align inside-padding">
         <h1 id="load">Loading...</h1>
       </main>
     );
   } else {
     pages = Math.ceil(ids.length / elementsPerPage);
     return (
-      <main className="page-content history-page">
+      <main className="page-content history-page inside-padding">
         <h2>History!</h2>
         <Table 
 		      data={mdata.data} 
