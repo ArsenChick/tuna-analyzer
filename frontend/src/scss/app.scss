@@ -19,23 +19,28 @@
 
 /*   Desktop   */
 @media all {
+  .body {
+    overflow: hidden;
+  }
+
   /* Page Content
   ––––––––––––––––––––––––––––––––– */
   .page-content {
     display: flex;
     flex-direction: column;
-    min-width: 450px;
+    min-width: 500px;
+    width: 100%;
     //margin: 25px 0;
-  }
-
-  .inside-padding {
-    padding: 50px calc((100vw / 25) * 1.563) 10px calc((100vw / 25) * 1.563);
   }
 
   main {
     content-item {
       margin: 25px 0;
     }
+  }
+
+  .inside-padding {
+    padding: 50px calc((100vw / 25) * 1.563) 10px calc((100vw / 25) * 1.563);
   }
 
   .sections {
@@ -72,8 +77,8 @@
     left: 0;
     align-items: center;
     width: 100%;
+    min-width: 500px;
     min-height: 100px;
-    min-width: 450px;
     padding: (-$scrinVerticalSpaceSize) (-$scrinHorizontalSpaceSize) 0 (-$scrinHorizontalSpaceSize);
     z-index: 10;
     opacity: 1;
