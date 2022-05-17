@@ -3,7 +3,18 @@
 /*   Desktop   */
 @media all and (max-width: 1920px) {
   #result-button {
-    textAlign: "center"
+    textAlign: "center";
+    display: "block";
+    margin: "auto";
+    opacity: 0.9;
+  }
+
+  #download-button {
+    background-color: $recordDownloadButtonColor;
+  }
+
+  #delete-button {
+    background-color: $recordDeleteButtonColor;
   }
 }
 

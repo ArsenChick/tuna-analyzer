@@ -287,13 +287,24 @@
     }
   }
 
-  .titles {
-    th {
-      padding-left: 10px;
-      padding-right: 10px;
-      border-color: $recordTitleColor;
-      color: $recordTitleColor;
-    }
+  .title {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-color: $recordTitleColor;
+    color: $recordTitleColor;
+  }
+
+  .title:hover .sub-title_list {
+    opacity: 1;
+    z-index: 1;
+    opacity: $hintBackgroundOpacity;
+    visibility: visible;
+    pointer-events: auto;
+    user-select: auto;
+    -moz-user-select: auto;
+    -khtml-user-select: auto;
+    -webkit-user-select: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 
   .sub-title_list {
@@ -326,19 +337,6 @@
     &:last-child {
       margin-bottom: -4px;
     }
-  }
-
-  .title:hover .sub-title_list {
-    opacity: 1;
-    z-index: 1;
-    opacity: $hintBackgroundOpacity;
-    visibility: visible;
-    pointer-events: auto;
-    user-select: auto;
-    -moz-user-select: auto;
-    -khtml-user-select: auto;
-    -webkit-user-select: auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
   }
 
   /* Record

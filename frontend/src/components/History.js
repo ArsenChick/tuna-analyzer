@@ -21,25 +21,8 @@ function Result(props) {
         <td>
           {
             <button
-              style={{
-                backgroundColor: "lightblue",
-                display: "block",
-                margin: "auto",
-              }}
-            >
-              <Icon.Play size={20} />
-            </button>
-          }
-        </td>
-        <td>
-          {
-            <button
               id={"download"+props.id}
-              style={{
-                backgroundColor: "lightgreen",
-                display: "block",
-                margin: "auto",
-              }}
+              className="result-button download-button"
               onClick={() => {
                 props.downloadFile(props.id);
               }}
@@ -52,11 +35,7 @@ function Result(props) {
           {
             <button
               id={"delete"+props.id}
-              style={{
-                backgroundColor: "red",
-                display: "block",
-                margin: "auto",
-              }}
+              className="result-button delete-button"
               onClick={() => {
                 props.deleteRes(props.id);
               }}
@@ -102,6 +81,7 @@ function Table(props) {
       <table id="resultTable" className="results-history">
         <thead>
           <tr className="titles">
+            <th className="title date"><span>Date </span></th>
             <th className="title filename"><span>Filename </span></th>
             <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
                                 <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
@@ -114,9 +94,8 @@ function Table(props) {
                                 <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
             <th className="title version">Version</th>
 
-            <th className="result-button play-button">Play</th>
-            <th className="result-button download-button">Download</th>
-            <th className="result-button delete-button">Delete</th>
+            <th className="title download">Download</th>
+            <th className="title delete">Delete</th>
           </tr>
         </thead>
         <tbody>
