@@ -21,25 +21,8 @@ function Result(props) {
         <td>
           {
             <button
-              style={{
-                backgroundColor: "lightblue",
-                display: "block",
-                margin: "auto",
-              }}
-            >
-              <Icon.Play size={20} />
-            </button>
-          }
-        </td>
-        <td>
-          {
-            <button
               id={"download"+props.id}
-              style={{
-                backgroundColor: "lightgreen",
-                display: "block",
-                margin: "auto",
-              }}
+              className="result-button download-button"
               onClick={() => {
                 props.downloadFile(props.id);
               }}
@@ -52,11 +35,7 @@ function Result(props) {
           {
             <button
               id={"delete"+props.id}
-              style={{
-                backgroundColor: "red",
-                display: "block",
-                margin: "auto",
-              }}
+              className="result-button delete-button"
               onClick={() => {
                 props.deleteRes(props.id);
               }}
@@ -99,26 +78,33 @@ function DataList(props) {
 function Table(props) {
   return (
     <div>
-      <table id="resultTable">
-        <tr>
-          <th>Date</th>
-          <th>Name</th>
-          <th>BPM <span className="add-info bpm">(?)</span></th>
-          <th>Tone</th>
-          <th>H <span className="add-info happiness">(?)</span></th>
-          <th>E <span className="add-info energy">(?)</span></th>
-          <th>D <span className="add-info danceability">(?)</span></th>
-          <th>Version</th>
+      <table id="resultTable" className="results-history">
+        <thead>
+          <tr className="titles">
+            <th className="title date"><span>Date </span></th>
+            <th className="title filename"><span>Filename </span></th>
+            <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
+            <th className="title key"><span>Key </span></th>
+            <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
+            <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
+            <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
+            <th className="title version">Version</th>
 
-          <th style={{ textAlign: "center" }}>Play</th>
-          <th style={{ textAlign: "center" }}>Download</th>
-          <th style={{ textAlign: "center" }}>Delete</th>
-        </tr>
-        <DataList 
-          data={props.data} 
-          deleteRes={props.deleteRes}
-          downloadFile={props.downloadFile}
-        />
+            <th className="title download">Download</th>
+            <th className="title delete">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <DataList
+            data={props.data}
+            deleteRes={props.deleteRes}
+            downloadFile={props.downloadFile}
+          />
+        </tbody>
       </table>
     </div>
   );
@@ -129,7 +115,7 @@ function PageButton(props) {
     return (
       <>
         <button
-          style={{ backgroundColor: "lightgrey", display: "inline-block" }}
+          className="page-button num-page"
           onClick={() => {
             props.handler(props.id);
           }}
@@ -143,7 +129,7 @@ function PageButton(props) {
     <>
       <button
         id={"page"+props.id}
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.id);
         }}
@@ -179,9 +165,9 @@ function Footer(props) {
   return(
   <div id="paginationFooter">
   {pageList.length > 0 &&
-    <div style={{ width: "100%", textAlign: "center" }}>
+    <div className="page-buttons">
       <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(1);
         }}
@@ -189,7 +175,7 @@ function Footer(props) {
 	    {'<<'}
       </button>
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.curPage - 1);
         }}
@@ -198,7 +184,7 @@ function Footer(props) {
       </button>
       {buttons}
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.curPage + 1);
         }}
@@ -206,7 +192,7 @@ function Footer(props) {
 	    {'>'}
       </button>
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.pages);
         }}

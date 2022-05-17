@@ -1,8 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useOutletContext } from 'react-router-dom';
 import * as Yup from "yup";
 import "../scss/auth/auth.scss";
 
@@ -15,7 +14,7 @@ function Auth() {
 
   if (cookies.username)
     return (
-      <div id="authError">
+      <div id="authError" className="page-content not-found center-page-align inside-padding">
         <h2>You should logout first!</h2>
       </div>
     );
