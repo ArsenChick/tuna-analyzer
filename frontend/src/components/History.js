@@ -115,7 +115,7 @@ function PageButton(props) {
     return (
       <>
         <button
-          style={{ backgroundColor: "lightgrey", display: "inline-block" }}
+          className="page-button num-page"
           onClick={() => {
             props.handler(props.id);
           }}
@@ -129,7 +129,7 @@ function PageButton(props) {
     <>
       <button
         id={"page"+props.id}
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.id);
         }}
@@ -165,9 +165,9 @@ function Footer(props) {
   return(
   <div id="paginationFooter">
   {pageList.length > 0 &&
-    <div style={{ width: "100%", textAlign: "center" }}>
+    <div className="page-buttons">
       <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(1);
         }}
@@ -175,7 +175,7 @@ function Footer(props) {
 	    {'<<'}
       </button>
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.curPage - 1);
         }}
@@ -184,7 +184,7 @@ function Footer(props) {
       </button>
       {buttons}
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.curPage + 1);
         }}
@@ -192,7 +192,7 @@ function Footer(props) {
 	    {'>'}
       </button>
 	  <button
-        style={{ display: "inline-block" }}
+        className="page-button"
         onClick={() => {
           props.handler(props.pages);
         }}

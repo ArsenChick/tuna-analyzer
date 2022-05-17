@@ -2,23 +2,59 @@
 
 /*   Desktop   */
 @media all and (max-width: 1920px) {
-  #result-button {
-    textAlign: "center";
-    display: "block";
-    margin: "auto";
-    opacity: 0.9;
+  .result-button {
+    text-align: center;
+    display: block;
+    margin: auto;
+    opacity: 0.87;
   }
 
-  #download-button {
-    background-color: $recordDownloadButtonColor;
+  .download-button {
+    background: $recordDownloadButtonColor;
   }
 
-  #delete-button {
-    background-color: $recordDeleteButtonColor;
+  .delete-button {
+    background: $recordDeleteButtonColor;
+  }
+
+  .page-buttons {
+    width: 100%;
+    text-align: center;
+  }
+
+  .page-button {
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    color: $pageNumColor;
+    background: $pageButtonColor;
+    opacity: $pageNumOpacity;
+  }
+
+ .num-page + .page-button:hover {
+    opacity: $pageNumOpacity;
+  }
+
+  .page-button:hover {
+    opacity: calc($pageNumOpacity + 0.1);
+  }
+
+  .num-page {
+    color: $currentPageNumColor;
+  }
+
+  .current-num-page {
+
   }
 }
 
+
+
 /*   Mobile   */
 @media (max-width: 768px) {
-
+  .page-button {
+    color: $pageNumColorDarkTheme;
+    background: $pageButtonColorDarkTheme;
+  }
 }
