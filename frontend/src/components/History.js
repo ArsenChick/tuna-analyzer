@@ -99,26 +99,33 @@ function DataList(props) {
 function Table(props) {
   return (
     <div>
-      <table id="resultTable">
-        <tr>
-          <th>Date</th>
-          <th>Name</th>
-          <th>BPM <span className="add-info bpm">(?)</span></th>
-          <th>Tone</th>
-          <th>H <span className="add-info happiness">(?)</span></th>
-          <th>E <span className="add-info energy">(?)</span></th>
-          <th>D <span className="add-info danceability">(?)</span></th>
-          <th>Version</th>
+      <table id="resultTable" className="results-history">
+        <thead>
+          <tr className="titles">
+            <th className="title filename"><span>Filename </span></th>
+            <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
+            <th className="title key"><span>Key </span></th>
+            <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
+            <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
+                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
+            <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
+                                <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
+            <th className="title version">Version</th>
 
-          <th style={{ textAlign: "center" }}>Play</th>
-          <th style={{ textAlign: "center" }}>Download</th>
-          <th style={{ textAlign: "center" }}>Delete</th>
-        </tr>
-        <DataList 
-          data={props.data} 
-          deleteRes={props.deleteRes}
-          downloadFile={props.downloadFile}
-        />
+            <th className="result-button play-button">Play</th>
+            <th className="result-button download-button">Download</th>
+            <th className="result-button delete-button">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <DataList
+            data={props.data}
+            deleteRes={props.deleteRes}
+            downloadFile={props.downloadFile}
+          />
+        </tbody>
       </table>
     </div>
   );

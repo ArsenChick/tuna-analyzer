@@ -347,7 +347,7 @@ class Analyzer extends React.Component {
 
   HistoryTable() {
     return (
-          <table className="analysis-history">
+          <table className="results-history">
             <thead>
               <tr className="titles">
                 <th className="title filename"><span>Filename </span></th>
@@ -377,7 +377,7 @@ class Analyzer extends React.Component {
           <div className="flex-item"> <Description/> </div>
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
-        <div>
+        <div className="analysis-history">
           { this.state.resultsView == "" ?  null : this.HistoryTable() }
         </div>    
         <Hint
