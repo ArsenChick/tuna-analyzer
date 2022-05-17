@@ -378,7 +378,7 @@ class Analyzer extends React.Component {
           <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
         </div>
         <div className="analysis-history">
-          { this.state.resultsView == "" ?  null : this.HistoryTable() }
+          { this.state.resultsView === [] ?  null : this.HistoryTable() }
         </div>    
         <Hint
           active={this.state.hintActive}
