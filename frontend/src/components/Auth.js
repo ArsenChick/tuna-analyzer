@@ -14,7 +14,7 @@ function Auth() {
 
   if (cookies.username)
     return (
-      <div id="authError">
+      <div id="authError" className="page-content not-found center-page-align inside-padding">
         <h2>You should logout first!</h2>
       </div>
     );
