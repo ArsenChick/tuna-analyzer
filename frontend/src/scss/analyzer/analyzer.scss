@@ -26,6 +26,7 @@
     table {
       margin: 20px 0;
       overflow: auto;
+      display: none;
       tbody{
         border: 1px solid $recordColor;
         tr {
@@ -37,6 +38,10 @@
         }
       }
     }
+  }
+
+  .analysis-history._active {
+    display: block;
   }
 
   .titles {

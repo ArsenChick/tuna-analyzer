@@ -345,15 +345,9 @@ class Analyzer extends React.Component {
     });
   }
 
-  render() {
+  HistoryTable() {
     return (
-      <main className="page-content analyzer-page inside-padding">
-        <div className="in-line">
-          <div className="flex-item"> <Description/> </div>
-          <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
-        </div>
-        <div className="analysis-history">
-          <table>
+          <table className="analysis-history">
             <thead>
               <tr className="titles">
                 <th className="title filename"><span>Filename </span></th>
@@ -373,6 +367,18 @@ class Analyzer extends React.Component {
               {this.state.resultsView}
             </tbody>
           </table>
+    )
+  }
+
+  render() {
+    return (
+      <main className="page-content analyzer-page inside-padding">
+        <div className="in-line">
+          <div className="flex-item"> <Description/> </div>
+          <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
+        </div>
+        <div>
+          { this.state.resultsView == "" ?  null : this.HistoryTable() }
         </div>    
         <Hint
           active={this.state.hintActive}
