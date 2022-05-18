@@ -166,6 +166,7 @@
     margin-bottom: 0;
     margin-left: calc((100vw / 25) * 1.563);
     margin-right: auto;
+    color: #ffffff;
     font-size: 50px;
     z-index: 10;
     opacity: 1;
@@ -176,6 +177,10 @@
 
 /* --- Dark Theme --- */
 @media (prefers-color-scheme: dark) {
+  .menu-title {
+    color: #ffffff;
+  }
+
   .sections::before {
     background-color: $bigTopNavColorDarkTheme;
     border-bottom-color: $smallTopNavColorDarkTheme;
