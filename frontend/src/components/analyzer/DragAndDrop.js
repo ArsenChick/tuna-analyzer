@@ -107,8 +107,7 @@ export function DragAndDrop(props) {
         files.map((file) => {
           props.dropFunction(file);
           return 1;
-        }
-        )
+        });
       }
     });
   }
@@ -135,7 +134,7 @@ export function DragAndDrop(props) {
       className="dnd-container"
       onDragEnter={(event) => handleDragEnter(event)}
     >
-      <p className="dnd-unselectable-p">Drag&drop file here</p>
+      <p className="dnd-unselectable-p">Drag & drop files here</p>
       <p className="dnd-unselectable-p" style={{ fontSize: 28 }}>
         or
       </p>
