@@ -26,10 +26,16 @@ function App() {
     setCookie("username", cookies.username);
   }
 
- const handleToggle = () => {
-  setMenuActive(!menuActive);
-  //console.log("changed");
- };
+  const handleToggle = () => {
+   setMenuActive(!menuActive);
+   //console.log("changed");
+  };
+
+  const closeMenu = () => {
+    if (menuActive) {
+      setMenuActive(false);
+    }
+  };
 
 
   return (
@@ -62,6 +68,7 @@ function App() {
                     style={({ isActive }) => {
                       return { color: isActive ? "#f48a9a" : "" };
                     }}
+                    onClick={ closeMenu }
                     to="/history"
                   >
                     <span>My History</span>
@@ -73,7 +80,7 @@ function App() {
                   ? <button
                       className="navButton"
                       id="logoutButton"
-                      onClick={() => {
+                      onClick={(closeMenu) => {
                         removeCookie("access_token");
                         removeCookie("username");
                         setUser(null);
@@ -92,6 +99,7 @@ function App() {
                       style={({ isActive }) => {
                         return { color: isActive ? "#f48a9a" : "" };
                       }}
+                      onClick = { closeMenu }
                       to="/login"
                     >
                       <span>Log in</span>

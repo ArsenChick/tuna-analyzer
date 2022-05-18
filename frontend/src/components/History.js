@@ -69,7 +69,7 @@ function DataList(props) {
     );
   });
   if (results.length < 1) {
-    return <div id="noSaves">No results were yet saved</div>;
+    return <div id="noSaves" className="center-page-align inside-padding">No results were yet saved</div>;
   }
 
   return <>{results}</>;
