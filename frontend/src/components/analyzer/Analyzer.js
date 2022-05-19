@@ -3,17 +3,18 @@ import { withCookies, Cookies } from 'react-cookie';
 import { instanceOf } from 'prop-types';
 import { preprocess, shortenAudio } from "../../scripts/audioUtils";
 import { toBase64 } from "../../scripts/fileUtils";
+import vars from "../../variables";
 
 import { Description } from "./Description";
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
 import "../../scss/analyzer/analyzer.scss";
 
-const moodModelNames = ["mood_happy", "mood_aggressive", "danceability"];
+const moodModelNames = vars.moodModelNames;
 
-const keyBPMWorkerPath = "./workers/core_extractor.worker.js";
-const extractorWorkerPath = "./workers/model_extractor.worker.js";
-const moodWorkerPath = "./workers/mood_inference.worker.js";
+const keyBPMWorkerPath = vars.keyBPMWorkerPath;
+const extractorWorkerPath = vars.extractorWorkerPath;
+const moodWorkerPath = vars.moodWorkerPath;
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
 
 
@@ -183,9 +184,9 @@ class Analyzer extends React.Component {
           resolve(msg.data);
         }
       }
-    });
-    this.workers.keyBpm.postMessage({
-      audio: audioData.buffer
+      this.workers.keyBpm.postMessage({
+        audio: audioData.buffer
+      });
     });
     return keyBpm;
   }
@@ -197,9 +198,9 @@ class Analyzer extends React.Component {
           resolve(msg.data.features);
         }
       };
-    });
-    this.workers.featureExtraction.postMessage({
-      audio: audioData.buffer
+      this.workers.featureExtraction.postMessage({
+        audio: audioData.buffer
+      });
     });
     return features;
   }
@@ -211,9 +212,9 @@ class Analyzer extends React.Component {
           resolve(msg.data.predictions);
         }
       };
-    });
-    this.workers.moodInference[mood].postMessage({
-      features: features
+      this.workers.moodInference[mood].postMessage({
+        features: features
+      });
     });
     return moodPreds;
   }
