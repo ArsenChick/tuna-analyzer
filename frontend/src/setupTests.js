@@ -3,4 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
-require('jest-fetch-mock').enableMocks()
+import Worker from './mocks/mockWorker';
+require('jest-fetch-mock').enableMocks();
+window.Worker = Worker;
