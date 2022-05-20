@@ -4,8 +4,11 @@ class Worker {
   constructor(url, options) {
     this.url = url;
     this.onmessage = () => {};
-    this.terminate = () => {};
   }
+
+  terminate() {
+    return true;
+  };
 
   postMessage(data) {
     setTimeout(() => {
@@ -31,7 +34,7 @@ class Worker {
         default:
           this.onmessage({ data: "hello" });
       }
-    }, 2000);
+    }, 50);
   }
 }
 

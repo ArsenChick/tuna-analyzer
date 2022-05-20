@@ -122,7 +122,7 @@ export function DragAndDrop(props) {
         onDragLeave={event => handleDragLeave(event)}
         onDragEnter={event => handleDragEnter(event)}
       >
-      <p className="dnd-unselectable-p">Drag&drop file here</p>
+      <p className="dnd-unselectable-p">Drag & drop files here</p>
 
       </div>
     );

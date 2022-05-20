@@ -1,6 +1,6 @@
 import React from "react";
-import { withCookies, Cookies } from 'react-cookie';
-import { instanceOf } from 'prop-types';
+import { withCookies, Cookies } from "react-cookie";
+import { instanceOf } from "prop-types";
 import { preprocess, shortenAudio } from "../../scripts/audioUtils";
 import { toBase64 } from "../../scripts/fileUtils";
 import vars from "../../variables";
@@ -17,24 +17,23 @@ const extractorWorkerPath = vars.extractorWorkerPath;
 const moodWorkerPath = vars.moodWorkerPath;
 // const energyWorkerPath = "./workers/energy_inference.worker.js";
 
-
 class Analyzer extends React.Component {
   static propTypes = {
-    cookies: instanceOf(Cookies).isRequired
+    cookies: instanceOf(Cookies).isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
       hintActive: false,
-      resultsView: []
-    }
+      resultsView: [],
+    };
     const { cookies } = props;
-    this.accessToken = cookies.get('access_token') || false;
-    
+    this.accessToken = cookies.get("access_token") || false;
+
     this.handleUpload = this.handleUpload.bind(this);
     this.setHintActive = this.setHintActive.bind(this);
-    
+
     this.actx = null;
     this.resultsData = [];
     this.audioFiles = [];
@@ -46,15 +45,17 @@ class Analyzer extends React.Component {
       keyBpm: null,
       featureExtraction: null,
       moodInference: {},
-      energyInference: null
+      energyInference: null,
     };
   }
 
   componentDidMount() {
-    this.workers.keyBpm = new Worker(keyBPMWorkerPath, { type: 'module' });
-    this.workers.featureExtraction = new Worker(extractorWorkerPath, { type: 'module' });
+    this.workers.keyBpm = new Worker(keyBPMWorkerPath, { type: "module" });
+    this.workers.featureExtraction = new Worker(extractorWorkerPath, {
+      type: "module",
+    });
 
-    moodModelNames.forEach((mood) => { 
+    moodModelNames.forEach((mood) => {
       this.workers.moodInference[mood] = new Worker(moodWorkerPath);
       this.workers.moodInference[mood].postMessage({ name: mood });
     });
@@ -64,16 +65,20 @@ class Analyzer extends React.Component {
     this.workers.keyBpm.terminate();
     this.workers.featureExtraction.terminate();
     moodModelNames.forEach((mood) =>
-      this.workers.moodInference[mood].terminate());
+      this.workers.moodInference[mood].terminate()
+    );
   }
 
-  handleUpload(file) {    
+  handleUpload(file) {
     if (!this.actx) {
       try {
-        console.log('New context instantiated');
+        console.log("New context instantiated");
         this.actx = new (window.AudioContext || window.webkitAudioContext)();
       } catch (e) {
-        console.log(`Sorry, but your browser doesn't support the Web Audio API!`, e);
+        console.log(
+          `Sorry, but your browser doesn't support the Web Audio API!`,
+          e
+        );
       }
     }
 
@@ -82,33 +87,35 @@ class Analyzer extends React.Component {
     this.audioFiles.push({ file: file, ticket: queueNo });
     this.showQueued(file.name);
 
-    this.analyzesInQueue.push(new Promise(async (resolve) => {
-      if (this.analyzesInQueue.length !== 0) {
-        await this.analyzesInQueue[this.analyzesInQueue.length - 1];
-        this.analyzesInQueue.shift();
-      }
+    this.analyzesInQueue.push(
+      new Promise(async (resolve) => {
+        if (this.analyzesInQueue.length !== 0) {
+          await this.analyzesInQueue[this.analyzesInQueue.length - 1];
+          this.analyzesInQueue.shift();
+        }
 
-      this.showAnalyzing(queueNo, file.name);
-      const audioFile = file;
-      audioFile.arrayBuffer()
-        .then((ab) => this.analyzeFile(ab)
-          .then((results) => {
+        this.showAnalyzing(queueNo, file.name);
+        const audioFile = file;
+        audioFile.arrayBuffer().then((ab) =>{
+          console.log("hello");
+          this.analyzeFile(ab).then((results) => {
             this.saveResults(queueNo, ...results);
             this.outputResults(queueNo);
 
             if (this.accessToken) {
               this.currentInSend = new Promise((resolve) => {
-                this.sendResults(queueNo)
-                  .then((response) => {
-                    this.showServerSaved(queueNo, response);
-                    resolve(response);
-                  });
+                this.sendResults(queueNo).then((response) => {
+                  this.showServerSaved(queueNo, response);
+                  resolve(response);
+                });
               });
             }
 
             resolve(this.analyzesInQueue.length);
-          }));
-    }));
+          })
+      }).catch((error) => console.log("fucku", error));
+      })
+    );
   }
 
   showQueued(filename) {
@@ -116,15 +123,15 @@ class Analyzer extends React.Component {
     const tableRow = (
       <tr key={prevState.length} className="record-row waiting">
         <td>{filename}</td>
-        {[...Array(5).keys()].map((num) =>
+        {[...Array(5).keys()].map((num) => (
           <td key={num}>Waiting...</td>
-        )}
-        {this.accessToken && <td>Waiting...</td>}
+        ))}
+        {this.accessToken && <td className="record-saved">Waiting...</td>}
       </tr>
     );
 
     this.setState({
-      resultsView: [...prevState, tableRow]
+      resultsView: [...prevState, tableRow],
     });
   }
 
@@ -133,47 +140,48 @@ class Analyzer extends React.Component {
     const tableRow = (
       <tr key={queueNo} className="record-row loading">
         <td>{filename}</td>
-        {[...Array(5).keys()].map((num) =>
+        {[...Array(5).keys()].map((num) => (
           <td key={num}>Loading...</td>
-        )}
-        {this.accessToken && <td>Waiting...</td>}
+        ))}
+        {this.accessToken && <td className="record-saved">Waiting...</td>}
       </tr>
     );
-    
+
     prevState[queueNo] = tableRow;
     this.setState({
-      resultsView: prevState
+      resultsView: prevState,
     });
   }
 
   analyzeFile(arrayBuffer) {
     return this.actx.resume().then(async () => {
-      return await this.actx.decodeAudioData(arrayBuffer)
+      return await this.actx
+        .decodeAudioData(arrayBuffer)
         .then(async (audioBuffer) => {
-        console.info("Done decoding audio!");
-        let analyzePromises = [];
+          console.info("Done decoding audio!");
+          let analyzePromises = [];
 
-        const prepocessedAudio = preprocess(audioBuffer);
-        await this.actx.suspend();
-        const keyBpmPromise = this.getKeyBpm(prepocessedAudio);
-        analyzePromises.push(keyBpmPromise);
+          const prepocessedAudio = preprocess(audioBuffer);
+          await this.actx.suspend();
+          const keyBpmPromise = this.getKeyBpm(prepocessedAudio);
+          analyzePromises.push(keyBpmPromise);
 
-        let audioData = shortenAudio(prepocessedAudio, 0.15, true);
-        const featuresPromise = this.extractFeatures(audioData);
-        analyzePromises.push(featuresPromise);
+          let audioData = shortenAudio(prepocessedAudio, 0.15, true);
+          const featuresPromise = this.extractFeatures(audioData);
+          analyzePromises.push(featuresPromise);
 
-        let features = await featuresPromise;
-        for (const mood of moodModelNames) {
-          const promise = this.getMoodPredictions(mood, features);
-          analyzePromises.push(promise);
-          await promise;
-        }
+          let features = await featuresPromise;
+          for (const mood of moodModelNames) {
+            const promise = this.getMoodPredictions(mood, features);
+            analyzePromises.push(promise);
+            await promise;
+          }
 
-        return await Promise.all(analyzePromises).then((results) => {
-          results.splice(1, 1);
-          return results;
+          return await Promise.all(analyzePromises).then((results) => {
+            results.splice(1, 1);
+            return results;
+          });
         });
-      });
     });
   }
 
@@ -183,9 +191,9 @@ class Analyzer extends React.Component {
         if (msg.data.keyData && msg.data.bpm) {
           resolve(msg.data);
         }
-      }
+      };
       this.workers.keyBpm.postMessage({
-        audio: audioData.buffer
+        audio: audioData.buffer,
       });
     });
     return keyBpm;
@@ -199,7 +207,7 @@ class Analyzer extends React.Component {
         }
       };
       this.workers.featureExtraction.postMessage({
-        audio: audioData.buffer
+        audio: audioData.buffer,
       });
     });
     return features;
@@ -213,7 +221,7 @@ class Analyzer extends React.Component {
         }
       };
       this.workers.moodInference[mood].postMessage({
-        features: features
+        features: features,
       });
     });
     return moodPreds;
@@ -241,19 +249,21 @@ class Analyzer extends React.Component {
         <td className="record-happiness">{specificResult.happy}</td>
         <td className="record-aggressiveness">{specificResult.energy}</td>
         <td className="record-danceability">{specificResult.dance}</td>
-        {this.accessToken && <td>Waiting...</td>}
+        {this.accessToken && <td className="record-saved">Waiting...</td>}
       </tr>
     );
     prevState[queueNo] = tableRow;
     this.setState({
-      resultsView: prevState
+      resultsView: prevState,
     });
   }
 
   async sendResults(queueNo) {
     this.showSending(queueNo);
 
-    const fileRecord = this.audioFiles.find((record) => record.ticket === queueNo);
+    const fileRecord = this.audioFiles.find(
+      (record) => record.ticket === queueNo
+    );
     const base64 = await toBase64(fileRecord.file);
     const jsonBody = this.getResultJSON(queueNo, base64);
 
@@ -265,9 +275,9 @@ class Analyzer extends React.Component {
         Authorization: "Bearer " + this.accessToken,
         "Content-Type": "application/json",
       },
-      body: jsonBody
+      body: jsonBody,
     };
-    
+
     return await fetch("/api/save_results", requestOptions)
       .then((response) => response.json())
       .then((json) => {
@@ -288,8 +298,8 @@ class Analyzer extends React.Component {
       version: "0",
       file: {
         filename: resultToSend.filename,
-        content: base64File
-      }
+        content: base64File,
+      },
     };
     return JSON.stringify(jsonObj);
   }
@@ -307,13 +317,13 @@ class Analyzer extends React.Component {
         <td className="record-happiness">{specificResult.happy}</td>
         <td className="record-aggressiveness">{specificResult.energy}</td>
         <td className="record-danceability">{specificResult.dance}</td>
-        <td>Saving...</td>
+        <td className="record-saved">Saving...</td>
       </tr>
     );
 
     prevState[queueNo] = tableRow;
     this.setState({
-      resultsView: prevState
+      resultsView: prevState,
     });
   }
 
@@ -330,65 +340,93 @@ class Analyzer extends React.Component {
         <td className="record-happiness">{specificResult.happy}</td>
         <td className="record-aggressiveness">{specificResult.energy}</td>
         <td className="record-danceability">{specificResult.dance}</td>
-        <td>{response ? "Saved" : "Error"}</td>
+        <td className="record-saved">{response ? "Saved" : "Error"}</td>
       </tr>
     );
 
     prevState[queueNo] = tableRow;
     this.setState({
-      resultsView: prevState
+      resultsView: prevState,
     });
   }
 
   setHintActive(state) {
     this.setState({
-      hintActive: state
+      hintActive: state,
     });
   }
 
   HistoryTable() {
     return (
-          <table className="results-history">
-            <thead>
-              <tr className="titles">
-                <th className="title filename"><span>Filename </span></th>
-                <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
-                <th className="title key"><span>Key </span></th>
-                <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
-                <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
-                <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
-                {this.accessToken && <th className="title saved"><span>Saved </span></th>}
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.resultsView}
-            </tbody>
-          </table>
-    )
+      <table className="results-history">
+        <thead>
+          <tr className="titles">
+            <th className="title filename">
+              <span>Filename </span>
+            </th>
+            <th className="title bpm">
+              <span>BPM </span>
+              <span className="question-sign cursor-point">(?)</span>
+              <ul className="sub-title_list">
+                <li className="sub-title">Beats per Minute</li>
+              </ul>
+            </th>
+            <th className="title key">
+              <span>Key </span>
+            </th>
+            <th className="title happiness">
+              <span>H </span>
+              <span className="question-sign cursor-point">(?)</span>
+              <ul className="sub-title_list">
+                <li className="sub-title">Happiness</li>
+              </ul>
+            </th>
+            <th className="title energy">
+              <span>E </span>
+              <span className="question-sign cursor-point">(?)</span>
+              <ul className="sub-title_list">
+                <li className="sub-title">Energy</li>
+              </ul>
+            </th>
+            <th className="title danceability">
+              <span>D </span>
+              <span className="question-sign cursor-point">(?)</span>
+              <ul className="sub-title_list">
+                <li className="sub-title">Danceability</li>
+              </ul>
+            </th>
+            {this.accessToken && (
+              <th className="title saved">
+                <span>Saved </span>
+              </th>
+            )}
+          </tr>
+        </thead>
+        <tbody>{this.state.resultsView}</tbody>
+      </table>
+    );
   }
 
   render() {
     return (
       <main className="page-content analyzer-page inside-padding">
         <div className="in-line">
-          <div className="flex-item"> <Description/> </div>
-          <div className="flex-item"> <DragAndDrop dropFunction={this.handleUpload} /> </div>
+          <div className="flex-item">
+            {" "}
+            <Description />{" "}
+          </div>
+          <div className="flex-item">
+            {" "}
+            <DragAndDrop dropFunction={this.handleUpload} />{" "}
+          </div>
         </div>
         <div className="analysis-history">
-          { this.state.resultsView === [] ?  null : this.HistoryTable() }
-        </div>    
-        <Hint
-          active={this.state.hintActive}
-          setActive={this.setHintActive}
-        />
+          {this.state.resultsView.length === 0 ? null : this.HistoryTable()}
+        </div>
+        <Hint active={this.state.hintActive} setActive={this.setHintActive} />
       </main>
     );
   }
 }
 
 export default withCookies(Analyzer);
-
