@@ -86,7 +86,7 @@
     border-bottom-style: solid;
     border-bottom-color: $smallTopNavColor;
     content: "";
-    z-index: 2;
+    z-index: 10;
     opacity: 0;
   }
 
@@ -148,7 +148,6 @@
 
   .menu-title {
     position: absolute;
-    left: 100%;
     margin-top: 0;
     margin-bottom: 0;
     z-index: 10;
