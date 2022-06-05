@@ -12,6 +12,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from datetime import datetime
+from sqlalchemy import desc
 import os
 from uuid import uuid4
 import json
@@ -116,17 +117,31 @@ def get_saves_ids():
     current_username: str = get_jwt_identity()
     user: User = User.query.filter_by(username=current_username).first()
     current_idUser = user.id
-
-    results = Result.query.filter_by(
-        idUser=current_idUser,
-        isDeleted=False
-    ).with_entities(Result.id).all()
-
+    search_by = request.args.get("sort")
+    if search_by == None:
+        results = Result.query.filter_by(
+            idUser=current_idUser,
+            isDeleted=False
+        ).with_entities(Result.id).all()
+    else:
+        results = Result.query.filter_by(
+            idUser=current_idUser,
+            isDeleted=False
+        ).order_by(getattr(Result, search_by).desc()).with_entities(Result.id).all()
     ids = [id[0] for id in results]
-    return {
-        "msg": "Request done",
-               "ids": ids
-    }, 200
+    order = request.args.get("order")
+    if order == "asc":
+        ids.reverse()
+        return {
+            "msg": "Request done",
+                "ids": ids
+        }, 200
+    else:
+        return {
+            "msg": "Request done",
+                "ids": ids
+        }, 200
+    
 
 ## Функция получения загруженного аудиофайла.
 #
