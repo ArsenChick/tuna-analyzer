@@ -118,13 +118,25 @@ def get_saves_ids():
     user: User = User.query.filter_by(username=current_username).first()
     current_idUser = user.id
     search_by = request.args.get("sort")
+    after = request.args.get("from")
+    until = request.args.get("until")
+    if after == None:
+        after = "2000-01-01"
+    if until == None:
+        until = "3000-12-31"
     if search_by == None:
-        results = Result.query.filter_by(
+        results = Result.query.filter(
+            Result.date > after,
+            Result.date < until
+        ).filter_by(
             idUser=current_idUser,
             isDeleted=False
         ).with_entities(Result.id).all()
     else:
-        results = Result.query.filter_by(
+        results = Result.query.filter(
+            date > after,
+            date < until
+        ).filter_by(
             idUser=current_idUser,
             isDeleted=False
         ).order_by(getattr(Result, search_by).desc()).with_entities(Result.id).all()
