@@ -32,20 +32,35 @@
     opacity: $pageNumOpacity;
   }
 
- .num-page + .page-button:hover {
-    opacity: $pageNumOpacity;
+  .question-sign {
+    margin-right: 5px;
+  }
+
+  .filename {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .title > span:nth-of-type(1) {
+    margin-right: 5px;
+  }
+
+  .sortable > span:nth-of-type(1) {
+    cursor: pointer;
+  }
+
+  .sortable > span:nth-of-type(1):hover {
+    text-decoration: underline;
   }
 
   .page-button:hover {
     opacity: calc($pageNumOpacity + 0.1);
   }
 
-  .num-page {
+  .num-page.active {
     color: $currentPageNumColor;
-  }
-
-  .current-num-page {
-
+    opacity: calc($pageNumOpacity + 0.2);
   }
 }
 

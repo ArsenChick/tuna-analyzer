@@ -1,48 +1,41 @@
 import "../scss/history/history.scss";
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo} from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 import * as Icon from "react-feather";
+import { headerProps } from "./constants";
 
 
 function Result(props) {
   return (
     <>
       <tr>
-        <td>{props.date}</td>
-        <td>{props.name.slice(37)}</td>
-        <td>{props.bpm}</td>
-        <td>{props.tone}</td>
-        <td>{props.happiness}</td>
-        <td>{props.energy}</td>
-        <td>{props.dance}</td>
-        <td>{props.version}</td>
+        <td>{props.data.date}</td>
+        <td>{props.data.name}</td>
+        <td>{props.data.bpm}</td>
+        <td>{props.data.tone}</td>
+        <td>{props.data.happiness}</td>
+        <td>{props.data.energy}</td>
+        <td>{props.data.dance}</td>
+        <td>{props.data.version}</td>
         <td>
-          {
-            <button
-              id={"download"+props.id}
-              className="result-button download-button"
-              onClick={() => {
-                props.downloadFile(props.id);
-              }}
-            >
-              <Icon.Download size={20} />
-            </button>
-          }
+          <button
+            id={"download" + props.data.id}
+            className="result-button download-button"
+            onClick={() => props.downloadFile(props.data.id)}
+          >
+            <Icon.Download size={20} />
+          </button>
         </td>
         <td>
-          {
-            <button
-              id={"delete"+props.id}
-              className="result-button delete-button"
-              onClick={() => {
-                props.deleteRes(props.id);
-              }}
-            >
-              <Icon.Trash2 size={20} />
-            </button>
-          }
+          <button
+            id={"delete" + props.data.id}
+            className="result-button delete-button"
+            onClick={() => props.deleteRes(props.data.id)}
+          >
+            <Icon.Trash2 size={20} />
+          </button>
         </td>
       </tr>
     </>
@@ -54,25 +47,40 @@ function DataList(props) {
     return (
       <Result
         key={i}
-		    id={res.id}
-        bpm={res.bpm}
-        name={res.name}
-        tone={res.tone}
-        happiness={res.happiness}
-        energy={res.energy}
-        dance={res.dance}
-        version={res.version}
-        date={res.date}
+        data={res}
         deleteRes={props.deleteRes}
 	    	downloadFile={props.downloadFile}
       />
     );
   });
-  if (results.length < 1) {
-    return <div id="noSaves" className="center-page-align inside-padding">No results were yet saved</div>;
-  }
+  if (results.length < 1)
+    return (<div id="noSaves" className="center-page-align inside-padding">No results saved</div>);
+  return (<>{results}</>);
+}
 
-  return <>{results}</>;
+function TableHeader(props) {
+  let icon = null;
+  if (props.order === "desc") icon = <Icon.ArrowDown size={20} />
+  else if (props.order === "asc") icon = <Icon.ArrowUp size={20} />
+
+  return (
+    <th className={`title ${props.className}`}>
+      <span onClick={() => {
+        if (props.sortHandler) props.sortHandler(props.bdParamName)
+      }}>
+        {props.metric}
+      </span>
+      {props.subtitle &&
+        <>
+          <span className="question-sign cursor-point">(?)</span>
+          <ul className="sub-title_list">
+            <li className="sub-title">{props.subtitle}</li>
+          </ul>
+        </>
+      }
+      {props.active && icon}
+    </th>
+  );
 }
 
 function Table(props) {
@@ -81,21 +89,18 @@ function Table(props) {
       <table id="resultTable" className="results-history">
         <thead>
           <tr className="titles">
-            <th className="title date"><span>Date </span></th>
-            <th className="title filename"><span>Filename </span></th>
-            <th className="title bpm"><span>BPM </span><span className="question-sign cursor-point">(?)</span>
-                                <ul className="sub-title_list"><li className="sub-title">Beats per Minute</li></ul></th>
-            <th className="title key"><span>Key </span></th>
-            <th className="title happiness"><span>H </span><span className="question-sign cursor-point">(?)</span>
-                                <ul className="sub-title_list"><li className="sub-title">Happiness</li></ul></th>
-            <th className="title energy"><span>E </span><span className="question-sign cursor-point">(?)</span>
-                                    <ul className="sub-title_list"><li className="sub-title">Energy</li></ul></th>
-            <th className="title danceability"><span>D </span><span className="question-sign cursor-point">(?)</span>
-                                <ul className="sub-title_list"><li className="sub-title">Danceability</li></ul></th>
-            <th className="title version">Version</th>
-
-            <th className="title download">Download</th>
-            <th className="title delete">Delete</th>
+            {headerProps.map((header, index) => 
+              <TableHeader
+                key={`${header.metric} ${index}`}
+                metric={header.metric}
+                className={header.className}
+                subtitle={header.subtitle}
+                bdParamName={header.bdParamName}
+                active={props.activeSort === header.bdParamName}
+                order={props.sortOrder}
+                sortHandler={header.sortable ? props.sortHandler : undefined}
+              />
+            )}
           </tr>
         </thead>
         <tbody>
@@ -111,34 +116,17 @@ function Table(props) {
 }
 
 function PageButton(props) {
-  if (props.curPage === props.id) {
-    return (
-      <>
-        <button
-          className="page-button num-page"
-          onClick={() => {
-            props.handler(props.id);
-          }}
-        >
-          {props.id}
-        </button>
-      </>
-    );
-  }
   return (
-    <>
-      <button
-        id={"page"+props.id}
-        className="page-button"
-        onClick={() => {
-          props.handler(props.id);
-        }}
-      >
-        {props.id}
-      </button>
-    </>
+    <button
+      id={"page" + props.id}
+      className={`page-button num-page ${props.active ? "active" : ""}`}
+      onClick={() => props.handler(props.id)}
+    >
+      {props.id}
+    </button>
   );
 }
+
 function Footer(props) {
   var pageList = [];
   var i = 0;
@@ -159,49 +147,43 @@ function Footer(props) {
   }
   let buttons = pageList.map((i) => {
     return (
-      <PageButton id={i} handler={props.handler} curPage={props.curPage} />
+      <PageButton id={i} handler={props.handler} active={i === props.curPage} />
     );
   });
-  return(
-  <div id="paginationFooter">
-  {pageList.length > 0 &&
-    <div className="page-buttons">
-      <button
-        className="page-button"
-        onClick={() => {
-          props.handler(1);
-        }}
-      >
-	    {'<<'}
-      </button>
-	  <button
-        className="page-button"
-        onClick={() => {
-          props.handler(props.curPage - 1);
-        }}
-      >
-	    {'<'}
-      </button>
-      {buttons}
-	  <button
-        className="page-button"
-        onClick={() => {
-          props.handler(props.curPage + 1);
-        }}
-      >
-	    {'>'}
-      </button>
-	  <button
-        className="page-button"
-        onClick={() => {
-          props.handler(props.pages);
-        }}
-      >
-	    {'>>'}
-      </button>
+
+  return (
+    <div id="paginationFooter">
+    {pageList.length > 0 &&
+      <div className="page-buttons">
+        <button
+          className="page-button"
+          onClick={() =>  props.handler(1)}
+        >
+          {'<<'}
+        </button>
+        <button
+          className="page-button"
+          onClick={() => props.handler(props.curPage - 1)}
+        >
+          {'<'}
+        </button>
+        {buttons}
+        <button
+          className="page-button"
+          onClick={() => props.handler(props.curPage + 1)}
+        >
+          {'>'}
+        </button>
+        <button
+          className="page-button"
+          onClick={() => props.handler(props.pages)}
+        >
+          {'>>'}
+        </button>
+      </div>
+    }
     </div>
-  }
-  </div>);
+  );
 }
 
 export default function History() {
@@ -209,27 +191,73 @@ export default function History() {
     "access_token",
     "username",
   ]);
+  const navigate = useNavigate();
+
   const [mdata, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [ids, setIds] = useState(null);
-  const elementsPerPage = 5;
+  const [searchParams, setSearchParams] = useState({
+    sort: "date",
+    order: "desc",
+    from: null,
+    until: null,
+  });
+
+  const [dateFrom, setDateFrom] = useState(null);
+  const [dateUntil, setDateUntil] = useState(null);
+
+  const elementsPerPage = 2;
   const maxPages = 5;
   var pages = 1;
-  const navigate = useNavigate();
 
-  if (cookies.access_token == null) {
-    navigate("/login");
-  }
-  const updateState = (val) => {
-	if (val < 1) {
-		setPage(1);
-	} else if (val > pages) {
-		setPage(pages);
-	}
-    else {
-		setPage(val);
-	}
+  const updatePage = (val) => {
+    if (val < 1) setPage(1);
+    else if (val > pages) setPage(pages);
+    else setPage(val);
   };
+
+  const wrongDates = useMemo(() => {
+    if (dateFrom !== null && dateUntil !== null) {
+      const from = new Date(dateFrom);
+      const until = new Date(dateUntil);
+      return from > until;
+    }
+    return false;
+  }, [dateFrom, dateUntil]);
+
+  const updateSortOrder = useCallback((newSortMetric) => {
+    setPage(1);
+    if (newSortMetric === searchParams.sort) {
+      const newOrder = searchParams.order === "desc" ? "asc" : "desc";
+      setSearchParams({...searchParams, order: newOrder});
+    } else {
+      setSearchParams({...searchParams, sort: newSortMetric, order: "desc"});
+    }
+  }, [searchParams]);
+
+  const updateDateFilter = useCallback(() => {
+    if (dateFrom === searchParams.from
+      && dateUntil === searchParams.until) 
+      return;
+    setPage(1);
+    setSearchParams({
+      ...searchParams,
+      from: dateFrom,
+      until: dateUntil,
+    });
+  }, [dateFrom, dateUntil, searchParams]);
+
+  const resetDateFilter = useCallback(() => {
+    if (searchParams.from !== null || searchParams.until !== null) {
+      setPage(1);
+      setSearchParams(prevSearchParams => {
+        return { ...prevSearchParams, from: null, until: null }
+      });
+    }
+    setDateFrom(null);
+    setDateUntil(null);
+  }, [searchParams]);
+  
   const deleteRes = async function (id) {
     var requestOptions = {
       mode: "cors",
@@ -241,16 +269,14 @@ export default function History() {
     };
     await fetch("/api/delete_result?id=" + id, requestOptions)
       .then((response) => response.json())
-      .then((data) => {
+      .then((_) => {
         var bid = [...ids];
         var index = bid.indexOf(id)
-        if (index !== -1) {
-          bid.splice(index, 1);
-        }
+        if (index !== -1) bid.splice(index, 1);
+        const newPages = Math.ceil(bid.length / elementsPerPage);
+        pages = newPages;
+        if (page > newPages) updatePage(page - 1);
         setIds(bid);
-        pages = Math.ceil(ids.length / elementsPerPage);
-        if (page > Math.ceil(bid.length / elementsPerPage))
-          updateState(page - 1);
       });
   }
 
@@ -290,7 +316,11 @@ export default function History() {
   }
 
   useEffect(() => {
-    async function GI() {
+    if (cookies.access_token == null) navigate("/login");
+  }, [cookies.access_token, navigate]);
+
+  useEffect(() => {
+    async function getIdsFromBackend() {
       var requestOptions = {
         mode: "cors",
         method: "GET",
@@ -300,72 +330,78 @@ export default function History() {
           "Content-Type": "application/json",
         },
       };
-      await fetch("/api/get_saves", requestOptions)
+
+      let reqSearchParams = new URLSearchParams(searchParams);
+      let keysForDeletion = [];
+      reqSearchParams.forEach((value, key) => {
+        if (value === "null") {
+          keysForDeletion.push(key);
+        }
+      });
+      keysForDeletion.forEach(key => {
+        reqSearchParams.delete(key);
+      });
+
+      console.log(reqSearchParams.toString());
+
+      await fetch("/api/get_saves?" + reqSearchParams, requestOptions)
         .then((response) => response.json())
-        .then((data) => {
-          var bId = data.ids.sort(function (a, b) {
-            return b - a;
-          });
-          setIds(bId);
-        });
+        .then((data) => setIds(data.ids));
     }
+    console.log("getting ids");
+    getIdsFromBackend();
+  }, [
+    cookies.access_token,
+    searchParams,
+  ]);
 
-    async function GR() {
-      var curIds = ids.slice(
-        (page - 1) * elementsPerPage,
-        page * elementsPerPage
-      );
-      var resData = { data: [] };
+  useEffect(() => {
+    async function getResultsFromBackend() {
+      if (ids !== null) {
+        if (ids.length === 0) {
+          setData([]);
+          return;
+        }
 
-      var requestOptions = {
-        mode: "cors",
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: "Bearer " + cookies.access_token,
-          "Content-Type": "application/json",
-        },
-      };
+        var curIds = ids.slice(
+          (page - 1) * elementsPerPage,
+          page * elementsPerPage
+        );
 
-      const requests = curIds.map(async (id) => {
-        var name;
+        var requestOptions = {
+          mode: "cors",
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            Authorization: "Bearer " + cookies.access_token,
+            "Content-Type": "application/json",
+          },
+        };
 
-        await fetch("/api/get_file_name?id=" + id, requestOptions)
-          .then((response) => response.json())
-          .then((data) => {
-            name = data.filename;
-          });
-        await fetch("/api/get_result?id=" + id, requestOptions)
-          .then((response) => response.json())
-          .then((data) => {
-            resData.data.push({
-              id: id,
-              name: name,
-              bpm: data.bpm,
-              tone: data.tone,
-              happiness: data.happiness,
-              energy: data.energy,
-              dance: data.dance,
-              version: data.version,
-              date: data.date.slice(5, 16),
+        const requests = curIds.map(async (id) => {
+          return fetch("/api/get_result?id=" + id, requestOptions)
+            .then((response) => response.json())
+            .then((data) => {
+              return {
+                id: id,
+                name: data.filename,
+                bpm: data.bpm,
+                tone: data.tone,
+                happiness: data.happiness,
+                energy: data.energy,
+                dance: data.dance,
+                version: data.version,
+                date: data.date.slice(5, 16),
+              };
             });
-          });
-      });
-      Promise.all(requests).then(() => {
-        resData.data.sort(function (a, b) {
-          return b.id - a.id;
         });
-        setData(resData);
-      });
+        Promise.all(requests).then((results) => {
+          setData(results);
+        });
+      }
     }
-    if (cookies.access_token == null) {
-      navigate("/login");
-    } else if (ids === null) {
-      GI();
-    } else {
-      GR();
-    }
-  }, [page, ids, cookies.access_token, navigate]);
+    getResultsFromBackend();
+  }, [cookies.access_token, ids, page]);
 
   if (mdata === null) {
     return (
@@ -377,14 +413,50 @@ export default function History() {
     pages = Math.ceil(ids.length / elementsPerPage);
     return (
       <main className="page-content history-page inside-padding">
-        <h2>History!</h2>
+        <h2>History</h2>
+        <div className="date-search">
+          <label for="dateFrom">From:</label>
+          <input
+            type="date"
+            id="dateFrom"
+            value={dateFrom ? dateFrom : ""}
+            onChange={(e) => setDateFrom(e.target.value)}
+          />
+          <label for="dateTo">To:</label>
+          <input
+            type="date"
+            id="dateTo"
+            value={dateUntil ? dateUntil : ""}
+            onChange={(e) => setDateUntil(e.target.value)}
+          />
+          {wrongDates &&
+            <span>Beginning of the date span from must be lesser or equal than its end!</span>
+          }
+          <button
+            disabled={ dateFrom === null && dateUntil === null }
+            className="result-button"
+            onClick={resetDateFilter}
+          >
+            <Icon.X size={20} />
+          </button>
+          <button
+            disabled={wrongDates}
+            className="result-button"
+            onClick={updateDateFilter}
+          >
+            <Icon.Search size={20} />
+          </button>
+        </div>
         <Table 
-		      data={mdata.data} 
+		      data={mdata} 
           deleteRes={deleteRes}
           downloadFile={downloadFile}
+          activeSort={searchParams.sort}
+          sortOrder={searchParams.order}
+          sortHandler={updateSortOrder}
 		    />
         <Footer 
-          handler={updateState}
+          handler={updatePage}
           curPage={page}
           elems={elementsPerPage}
           pages={pages}

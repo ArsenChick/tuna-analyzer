@@ -13,7 +13,7 @@ function PageNotFound() {
       <p> In the meantime, try these links: </p>
       <ul>
         <li>
-          <Link to="/" className="page-link"> Amogus  </Link>
+          <Link to="/" className="page-link"> To Main Page </Link>
         </li>
       </ul>
     </div>

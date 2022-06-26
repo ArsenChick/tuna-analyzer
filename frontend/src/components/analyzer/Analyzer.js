@@ -124,9 +124,21 @@ class Analyzer extends React.Component {
       <tr key={prevState.length} className="record-row waiting">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) => (
-          <td key={num}>Waiting...</td>
+          <td key={num}>Waiting
+            <div className="anim-ellipsis">
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </div>
+          </td>
         ))}
-        {this.accessToken && <td className="record-saved">Waiting...</td>}
+        {this.accessToken && <td className="record-saved">Waiting
+          <div className="anim-ellipsis">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+        </td>}
       </tr>
     );
 
@@ -141,9 +153,20 @@ class Analyzer extends React.Component {
       <tr key={queueNo} className="record-row loading">
         <td>{filename}</td>
         {[...Array(5).keys()].map((num) => (
-          <td key={num}>Loading...</td>
+          <td key={num}>Loading
+            <div className="anim-ellipsis">
+              <span>.</span>
+              <span>.</span>
+              <span>.</span>
+            </div></td>
         ))}
-        {this.accessToken && <td className="record-saved">Waiting...</td>}
+        {this.accessToken && <td className="record-saved">Waiting
+          <div className="anim-ellipsis">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+        </td>}
       </tr>
     );
 
@@ -249,7 +272,13 @@ class Analyzer extends React.Component {
         <td className="record-happiness">{specificResult.happy}</td>
         <td className="record-aggressiveness">{specificResult.energy}</td>
         <td className="record-danceability">{specificResult.dance}</td>
-        {this.accessToken && <td className="record-saved">Waiting...</td>}
+        {this.accessToken && <td className="record-saved">Waiting
+          <div className="anim-ellipsis">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+        </td>}
       </tr>
     );
     prevState[queueNo] = tableRow;
@@ -317,7 +346,13 @@ class Analyzer extends React.Component {
         <td className="record-happiness">{specificResult.happy}</td>
         <td className="record-aggressiveness">{specificResult.energy}</td>
         <td className="record-danceability">{specificResult.dance}</td>
-        <td className="record-saved">Saving...</td>
+        <td className="record-saved">Saving
+          <div className="anim-ellipsis">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </div>
+        </td>
       </tr>
     );
 

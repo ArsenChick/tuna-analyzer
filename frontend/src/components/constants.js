@@ -1,0 +1,51 @@
+export const headerProps = [
+  {
+    metric: "Date",
+    className: "date sortable",
+    bdParamName: "date",
+    sortable: true,
+  },
+  {
+    metric: "Filename",
+    className: "filename sortable",
+    bdParamName: "file",
+    sortable: true,
+  },
+  {
+    metric: "BPM",
+    className: "bpm sortable",
+    subtitle: "Beats per Minute",
+    bdParamName: "bpm",
+    sortable: true,
+  },
+  { 
+    metric: "Key",
+    className: "key sortable",
+    bdParamName: "idTone",
+    sortable: true,
+  },
+  {
+    metric: "H",
+    className: "happiness sortable",
+    subtitle: "Happiness",
+    bdParamName: "happiness",
+    sortable: true,
+  },
+  {
+    metric: "E",
+    className: "energy sortable",
+    subtitle: "Energy",
+    bdParamName: "energy",
+    sortable: true,
+  },
+  {
+    metric: "D",
+    className: "danceability sortable",
+    subtitle: "Danceability",
+    bdParamName: "dance",
+    sortable: true,
+  },
+  { metric: "Version", className: "version", sortable: false },
+  { metric: "Download", className: "download", sortable: false },
+  { metric: "Delete", className: "delete", sortable: false },
+];

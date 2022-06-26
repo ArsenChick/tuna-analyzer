@@ -112,7 +112,7 @@ function App() {
         <div id="small-top-bar" />
       </div>
       <CookiesProvider>
-        <Outlet context={[user, setUser]} />
+        <Outlet context={[user, setUser, removeCookie]} />
       </CookiesProvider>
     </div>
   );

@@ -5,15 +5,24 @@ import * as Yup from "yup";
 import "../scss/signup/sign_up.scss";
 
 function Signup() {
-  const [_, setUser] = useOutletContext();
-  const [cookies, setCookie] = useCookies(["access_token", "username"]);
-
+  const [_, setUser, removeParentCookie] = useOutletContext();
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token", "username"]);
   const navigate = useNavigate();
+
+  const onLogoutButtonClick = () => {
+    removeCookie("access_token");
+    removeCookie("username");
+    removeParentCookie("access_token");
+    removeParentCookie("username");
+    setUser(null);
+  };
 
   if (cookies.username)
     return (
-      <div>
-        <h2 id="ErrorMessage">You should logout first!</h2>
+      <div id="signupError" className="page-content logged-in center-page-align inside-padding">
+        <h2>You are logged in as {cookies.username}</h2>
+        <p>Press the button below or the one in the toolbar to log out and access this page</p>
+        <button onClick={onLogoutButtonClick}>Log Out</button>
       </div>
     );
 

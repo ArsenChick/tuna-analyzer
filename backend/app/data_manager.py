@@ -11,8 +11,8 @@ from flask import Blueprint, flash, redirect, render_template, request, url_for,
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from flask_jwt_extended import jwt_required, get_jwt_identity
-from datetime import datetime
-from sqlalchemy import desc
+from datetime import datetime, timedelta
+from sqlalchemy import desc, func
 import os
 from uuid import uuid4
 import json
@@ -124,18 +124,31 @@ def get_saves_ids():
         after = "2000-01-01"
     if until == None:
         until = "3000-12-31"
+    else:
+        until_date = datetime.strptime(until, "%Y-%m-%d")
+        until_date = until_date + timedelta(days=1)
+        until = until_date.strftime("%Y-%m-%d")
     if search_by == None:
         results = Result.query.filter(
-            Result.date > after,
-            Result.date < until
+            Result.date >= after,
+            Result.date <= until
         ).filter_by(
             idUser=current_idUser,
             isDeleted=False
         ).with_entities(Result.id).all()
+    elif search_by == "file":
+        results = Result.query.filter(
+            Result.date >= after,
+            Result.date <= until
+        ).filter_by(
+            idUser=current_idUser,
+            isDeleted=False
+        ).order_by(func.substr(Result.file, len(current_app.config['UPLOAD_FOLDER']) + 39).desc()
+        ).with_entities(Result.id).all()
     else:
         results = Result.query.filter(
-            date > after,
-            date < until
+            Result.date >= after,
+            Result.date <= until
         ).filter_by(
             idUser=current_idUser,
             isDeleted=False
@@ -146,12 +159,12 @@ def get_saves_ids():
         ids.reverse()
         return {
             "msg": "Request done",
-                "ids": ids
+            "ids": ids,
         }, 200
     else:
         return {
             "msg": "Request done",
-                "ids": ids
+            "ids": ids,
         }, 200
     
 
@@ -175,10 +188,10 @@ def get_file():
     file_name = os.path.basename(result.file)
     return {
         "msg": "Request done",
-               "file": {
-                   "filename": file_name,
-                   "content": file_content
-               }
+            "file": {
+                "filename": file_name,
+                "content": file_content
+            }
     }, 200
 
 ## Функция получения имени загруженного аудиофайла.
@@ -216,15 +229,17 @@ def get_result():
     if result == None:
         return {'msg': 'No such entry'}, 404
     tone: Tone = Tone.query.filter_by(id=result.idTone).first()
+    file_name = os.path.basename(result.file)[37:]
     return {
         "msg": "Ok",
-               "bpm": result.bpm,
-               "tone": tone.tone,
-               "dance": result.dance,
-               "energy": result.energy,
-               "happiness": result.happiness,
-               "version": result.version,
-               "date": result.date
+        "bpm": result.bpm,
+        "tone": tone.tone,
+        "dance": result.dance,
+        "energy": result.energy,
+        "happiness": result.happiness,
+        "version": result.version,
+        "filename": file_name,
+        "date": result.date
     }, 200
 
 ## Функция получения результатов анализа.

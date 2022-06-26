@@ -2,7 +2,11 @@
 
 /*   Desktop   */
 @media all and (max-width: 1920px) {
-
+  .logged-in {
+    p {
+      text-align: center;
+    }
+  }
 }
 
 /*   Mobile   */
