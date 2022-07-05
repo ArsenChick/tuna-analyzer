@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 
 import * as Icon from "react-feather";
 import { headerProps } from "./constants";
+import { MetricBar } from "./ui/MetricBar";
 
 
 function Result(props) {
@@ -15,9 +16,9 @@ function Result(props) {
         <td>{props.data.name}</td>
         <td>{props.data.bpm}</td>
         <td>{props.data.tone}</td>
-        <td>{props.data.happiness}</td>
-        <td>{props.data.energy}</td>
-        <td>{props.data.dance}</td>
+        <td><MetricBar value={props.data.happiness} /></td>
+        <td><MetricBar value={props.data.energy} /></td>
+        <td><MetricBar value={props.data.dance} /></td>
         <td>{props.data.version}</td>
         <td>
           <button
@@ -54,7 +55,10 @@ function DataList(props) {
     );
   });
   if (results.length < 1)
-    return (<div id="noSaves" className="center-page-align inside-padding">No results saved</div>);
+    return (
+      <div id="noSaves" className="center-page-align inside-padding">
+        No results saved or matching your search query
+      </div>);
   return (<>{results}</>);
 }
 
@@ -206,7 +210,7 @@ export default function History() {
   const [dateFrom, setDateFrom] = useState(null);
   const [dateUntil, setDateUntil] = useState(null);
 
-  const elementsPerPage = 2;
+  const elementsPerPage = 5;
   const maxPages = 5;
   var pages = 1;
 
@@ -342,13 +346,10 @@ export default function History() {
         reqSearchParams.delete(key);
       });
 
-      console.log(reqSearchParams.toString());
-
       await fetch("/api/get_saves?" + reqSearchParams, requestOptions)
         .then((response) => response.json())
         .then((data) => setIds(data.ids));
     }
-    console.log("getting ids");
     getIdsFromBackend();
   }, [
     cookies.access_token,
@@ -413,39 +414,45 @@ export default function History() {
     pages = Math.ceil(ids.length / elementsPerPage);
     return (
       <main className="page-content history-page inside-padding">
-        <h2>History</h2>
-        <div className="date-search">
-          <label for="dateFrom">From:</label>
-          <input
-            type="date"
-            id="dateFrom"
-            value={dateFrom ? dateFrom : ""}
-            onChange={(e) => setDateFrom(e.target.value)}
-          />
-          <label for="dateTo">To:</label>
-          <input
-            type="date"
-            id="dateTo"
-            value={dateUntil ? dateUntil : ""}
-            onChange={(e) => setDateUntil(e.target.value)}
-          />
-          {wrongDates &&
-            <span>Beginning of the date span from must be lesser or equal than its end!</span>
-          }
-          <button
-            disabled={ dateFrom === null && dateUntil === null }
-            className="result-button"
-            onClick={resetDateFilter}
-          >
-            <Icon.X size={20} />
-          </button>
-          <button
-            disabled={wrongDates}
-            className="result-button"
-            onClick={updateDateFilter}
-          >
-            <Icon.Search size={20} />
-          </button>
+        <div className="history-headbar">
+          <h2>History</h2>
+          <div className="date-search">
+            <div className="pickers">
+              <label for="dateFrom">From:</label>
+              <input
+                type="date"
+                id="dateFrom"
+                value={dateFrom ? dateFrom : ""}
+                onChange={(e) => setDateFrom(e.target.value)}
+              />
+              <label for="dateTo">To:</label>
+              <input
+                type="date"
+                id="dateTo"
+                value={dateUntil ? dateUntil : ""}
+                onChange={(e) => setDateUntil(e.target.value)}
+              />
+              {wrongDates &&
+                <span className="error">
+                  Beginning of the date span from must be lesser or equal than its end!
+                </span>
+              }
+            </div>
+            <button
+              disabled={ dateFrom === null && dateUntil === null }
+              className="result-button search-button"
+              onClick={resetDateFilter}
+            >
+              <Icon.X size={20} />
+            </button>
+            <button
+              disabled={wrongDates}
+              className="result-button search-button"
+              onClick={updateDateFilter}
+            >
+              <Icon.Search size={20} />
+            </button>
+          </div>
         </div>
         <Table 
 		      data={mdata} 

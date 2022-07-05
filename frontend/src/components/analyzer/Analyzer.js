@@ -9,6 +9,7 @@ import { Description } from "./Description";
 import { DragAndDrop } from "./DragAndDrop";
 import { Hint } from "./Hint";
 import "../../scss/analyzer/analyzer.scss";
+import { MetricBar } from "../ui/MetricBar";
 
 const moodModelNames = vars.moodModelNames;
 
@@ -126,17 +127,13 @@ class Analyzer extends React.Component {
         {[...Array(5).keys()].map((num) => (
           <td key={num}>Waiting
             <div className="anim-ellipsis">
-              <span>.</span>
-              <span>.</span>
-              <span>.</span>
+              <span>.</span><span>.</span><span>.</span>
             </div>
           </td>
         ))}
         {this.accessToken && <td className="record-saved">Waiting
           <div className="anim-ellipsis">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
+            <span>.</span><span>.</span><span>.</span>
           </div>
         </td>}
       </tr>
@@ -155,16 +152,12 @@ class Analyzer extends React.Component {
         {[...Array(5).keys()].map((num) => (
           <td key={num}>Loading
             <div className="anim-ellipsis">
-              <span>.</span>
-              <span>.</span>
-              <span>.</span>
+              <span>.</span><span>.</span><span>.</span>
             </div></td>
         ))}
         {this.accessToken && <td className="record-saved">Waiting
           <div className="anim-ellipsis">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
+            <span>.</span><span>.</span><span>.</span>
           </div>
         </td>}
       </tr>
@@ -269,14 +262,18 @@ class Analyzer extends React.Component {
         <td className="record-name">{filename}</td>
         <td className="record-tone">{specificResult.bpm}</td>
         <td className="record-key">{specificResult.key}</td>
-        <td className="record-happiness">{specificResult.happy}</td>
-        <td className="record-aggressiveness">{specificResult.energy}</td>
-        <td className="record-danceability">{specificResult.dance}</td>
+        <td className="record-happiness">
+          <MetricBar value={specificResult.happy} />
+        </td>
+        <td className="record-aggressiveness">
+          <MetricBar value={specificResult.energy} />
+        </td>
+        <td className="record-danceability">
+          <MetricBar value ={specificResult.dance} />
+        </td>
         {this.accessToken && <td className="record-saved">Waiting
           <div className="anim-ellipsis">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
+            <span>.</span> <span>.</span> <span>.</span>
           </div>
         </td>}
       </tr>
@@ -343,14 +340,18 @@ class Analyzer extends React.Component {
         <td className="record-name">{filename}</td>
         <td className="record-tone">{specificResult.bpm}</td>
         <td className="record-key">{specificResult.key}</td>
-        <td className="record-happiness">{specificResult.happy}</td>
-        <td className="record-aggressiveness">{specificResult.energy}</td>
-        <td className="record-danceability">{specificResult.dance}</td>
+        <td className="record-happiness">
+          <MetricBar value={specificResult.happy} />
+        </td>
+        <td className="record-aggressiveness">
+          <MetricBar value={specificResult.energy} />
+        </td>
+        <td className="record-danceability">
+          <MetricBar value ={specificResult.dance} />
+        </td>
         <td className="record-saved">Saving
           <div className="anim-ellipsis">
-            <span>.</span>
-            <span>.</span>
-            <span>.</span>
+            <span>.</span><span>.</span><span>.</span>
           </div>
         </td>
       </tr>
@@ -372,9 +373,9 @@ class Analyzer extends React.Component {
         <td className="record-name">{filename}</td>
         <td className="record-tone">{specificResult.bpm}</td>
         <td className="record-key">{specificResult.key}</td>
-        <td className="record-happiness">{specificResult.happy}</td>
-        <td className="record-aggressiveness">{specificResult.energy}</td>
-        <td className="record-danceability">{specificResult.dance}</td>
+        <td className="record-happiness"><MetricBar value={specificResult.happy} /></td>
+        <td className="record-aggressiveness"><MetricBar value={specificResult.energy} /></td>
+        <td className="record-danceability"><MetricBar value ={specificResult.dance} /></td>
         <td className="record-saved">{response ? "Saved" : "Error"}</td>
       </tr>
     );

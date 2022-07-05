@@ -6,7 +6,60 @@
     text-align: center;
     display: block;
     margin: auto;
+    margin-bottom: 0;
     opacity: 0.87;
+  }
+
+  .history-headbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 1em;
+  }
+
+  .date-search {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+
+    .pickers {
+      display: inherit;
+      justify-content: inherit;
+      align-items: inherit;
+      position: relative;
+
+      .error {
+        position: absolute;
+        font-size: 12px;
+        width: max-content;
+        left: 50%;
+        transform: translate(-50%, 100%);
+        bottom: -5px;
+      }
+    }
+
+    label {
+      margin: 0 1em;
+    }
+
+    label:nth-of-type(1) {
+      margin-left: 0;
+    }
+
+    .search-button {
+      margin: 0;
+      margin-left: 1em;
+    }
+
+    input[type="date"] {
+      height: 44px;
+      padding: 0 15px;
+      font-family: "Roboto Mono", monospace;
+      font-size: 12px;
+      outline: none;
+      border-radius: 5px;
+    }
   }
 
   .download-button {
@@ -64,12 +117,22 @@
   }
 }
 
-
+::webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
 
 /*   Mobile   */
 @media (max-width: 768px) {
   .page-button {
     color: $pageNumColorDarkTheme;
     background: $pageButtonColorDarkTheme;
+  }
+
+  .history-headbar {
+    display: block;
+
+    .date-search {
+      justify-content: flex-start;
+    }
   }
 }
